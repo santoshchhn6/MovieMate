@@ -23,7 +23,9 @@ const PopularMovies = () => {
 
   useEffect(() => {
     fetch(
-      "https://api.themoviedb.org/3/movie/popular?api_key=fd94b9ae90f9731350633c678688c966"
+      `https://api.themoviedb.org/3/movie/popular?api_key=${
+        import.meta.env.VITE_API_KEY
+      }`
     )
       .then((response) => response.json())
       .then((data) => setMovies(data.results));
@@ -71,7 +73,11 @@ const PopularMovies = () => {
               <img
                 src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
                 alt={`${movie.title} poster`}
-                className={`min-w-[${poster_width}px] min-h-[${poster_height}px] object-cover`}
+                className={`object-cover`}
+                style={{
+                  minWidth: `${poster_width}px`,
+                  minHeight: `${poster_height}px`,
+                }}
               />
               <h3>{movie.title}</h3>
               <p>{movie.release_date}</p>
@@ -80,7 +86,8 @@ const PopularMovies = () => {
         </ul>
 
         <div
-          className={`border-2 border-red-600 w-[100%] h-[${poster_height}px] absolute flex justify-between items-center p-2`}
+          className={`border-2 border-red-600 w-[100%]  absolute flex justify-between items-center p-2`}
+          style={{ height: `${poster_height}px` }}
         >
           <Arrow
             direction="left"
