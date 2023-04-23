@@ -10,11 +10,19 @@ interface Movie {
   release_date: string;
 }
 
-const PopularMovies = () => {
+interface Props {
+  width: number;
+  type: string;
+  title: string;
+}
+
+const Slider = ({ width, type, title }: Props) => {
   const [movies, setMovies] = useState<Movie[]>([]);
+  const [totalPages, setTotalPages] = useState<number>(1);
+  const [currentPage, setCurrentPage] = useState<number>(1);
   const [disableLeftArrow, setDisableLeftArrow] = useState<boolean>(true);
   const [disableRightArrow, setDisableRightArrow] = useState<boolean>(false);
-  const { width } = useWindowSize();
+  //   const { width } = useWindowSize();
   const [translateX, setTranslateX] = useState<number>(0);
   const poster_width = 200;
   const poster_height = 300;
@@ -23,13 +31,16 @@ const PopularMovies = () => {
 
   useEffect(() => {
     fetch(
-      `https://api.themoviedb.org/3/movie/popular?api_key=${
+      `https://api.themoviedb.org/3/movie/${type}?api_key=${
         import.meta.env.VITE_API_KEY
-      }`
+      }&page=${currentPage}`
     )
       .then((response) => response.json())
-      .then((data) => setMovies(data.results));
-  }, []);
+      .then((data) => {
+        setMovies((prev) => [...prev, ...data.results]);
+        setTotalPages(data.total_pages);
+      });
+  }, [currentPage]);
 
   const handleLeftClick = () => {
     if (translateX - width >= 0) {
@@ -51,25 +62,28 @@ const PopularMovies = () => {
       console.log("right_click");
     }
     if (translateX + 2 * width > totalPostersLenth) {
+      if (currentPage <= totalPages) {
+        setCurrentPage((currentPage) => currentPage + 1);
+      }
       setTranslateX(totalPostersLenth - width);
-      setDisableRightArrow(true);
+      // setDisableRightArrow(true);
       console.log("right_click");
     }
   };
 
   return (
     <div>
-      <h2>
-        {width}" "{translateX}" "{totalPostersLenth}
-      </h2>
-      <h2>Popular Movies</h2>
-      <div className="w-[100%] relative">
+      <h2>{title}</h2>
+      <div
+        className=" w-[100%] relative overflow-hidden"
+        style={{ height: `${poster_height}px` }}
+      >
         <ul
-          className={`border-2 border-green-600 flex absolute ease-in-out duration-500`}
+          className={`border-2 border-red-600 w-[100%] flex absolute ease-in-out duration-500 `}
           style={{ translate: `-${translateX}px 0px`, gap: `${poster_gap}px` }}
         >
-          {movies.map((movie) => (
-            <li key={movie.id} className="border">
+          {movies.map((movie, i) => (
+            <li key={i} className="border">
               <img
                 src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
                 alt={`${movie.title} poster`}
@@ -79,15 +93,12 @@ const PopularMovies = () => {
                   minHeight: `${poster_height}px`,
                 }}
               />
-              <h3>{movie.title}</h3>
-              <p>{movie.release_date}</p>
             </li>
           ))}
         </ul>
 
         <div
-          className={`border-2 border-red-600 w-[100%]  absolute flex justify-between items-center p-2`}
-          style={{ height: `${poster_height}px` }}
+          className={` w-[100%] h-[100%]  absolute flex justify-between items-center p-2`}
         >
           <Arrow
             direction="left"
@@ -105,4 +116,4 @@ const PopularMovies = () => {
   );
 };
 
-export default PopularMovies;
+export default Slider;
