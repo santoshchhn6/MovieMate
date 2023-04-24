@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import Arrow from "./Buttons/Arrow";
-import useWindowSize from "../useWindowSize";
 
 interface Movie {
   id: string;
@@ -8,6 +7,7 @@ interface Movie {
   date: string;
   poster_path: string;
   release_date: string;
+  vote_average: number;
 }
 
 interface Props {
@@ -30,6 +30,8 @@ const Slider = ({ width, type, title }: Props) => {
   const totalPostersLenth = movies.length * (poster_width + poster_gap);
 
   useEffect(() => {
+    console.log("effect");
+
     fetch(
       `https://api.themoviedb.org/3/movie/${type}?api_key=${
         import.meta.env.VITE_API_KEY
@@ -72,33 +74,41 @@ const Slider = ({ width, type, title }: Props) => {
   };
 
   return (
-    <div>
-      <h2>{title}</h2>
+    <div className="my-3">
+      <h2 className="mb-3 font-bold text-2xl ">{title}</h2>
       <div
         className=" w-[100%] relative overflow-hidden"
-        style={{ height: `${poster_height}px` }}
+        style={{ height: `${poster_height + 45}px` }}
       >
         <ul
-          className={`border-2 border-red-600 w-[100%] flex absolute ease-in-out duration-500 `}
+          className={` w-[100%] flex absolute  ease-in-out duration-500 `}
           style={{ translate: `-${translateX}px 0px`, gap: `${poster_gap}px` }}
         >
           {movies.map((movie, i) => (
-            <li key={i} className="border">
+            <li key={i}>
               <img
                 src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
                 alt={`${movie.title} poster`}
-                className={`object-cover`}
+                className={`rounded-xl object-cover`}
                 style={{
                   minWidth: `${poster_width}px`,
                   minHeight: `${poster_height}px`,
                 }}
               />
+              <div className=" relative">
+                <p className="absolute  w-[160px] h-[30px] rounded-l-2xl p-1 pl-[20px] bg-white text-gray-800 font-bold">
+                  {movie.release_date}
+                </p>
+                <p className="absolute left-[155px] top-[-10px] w-[50px] h-[50px] rounded-full bg-blue-700 text-[20px] flex justify-center items-center">
+                  {movie.vote_average}
+                </p>
+              </div>
             </li>
           ))}
         </ul>
 
         <div
-          className={` w-[100%] h-[100%]  absolute flex justify-between items-center p-2`}
+          className={` w-[100%] h-[100%]  absolute flex justify-between items-center p-2 z-10`}
         >
           <Arrow
             direction="left"

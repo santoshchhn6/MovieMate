@@ -12,9 +12,9 @@ interface Movie {
 const SearchMovie = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [input, setInput] = useState<string>("");
-  const poster_width = 200;
-  const poster_height = 300;
-  const poster_gap = 10;
+  const poster_width = 300;
+  const poster_height = 450;
+  const poster_gap = 20;
 
   const getMovies = () => {
     fetch(
@@ -56,12 +56,12 @@ const SearchMovie = () => {
       </form>
       <ul
         className={` border-2 border-red-600 flex flex-wrap justify-center ease-in-out duration-500 `}
-        style={{ gap: `${poster_gap}px` }}
+        style={{ gap: `${poster_gap}px`, padding: `${poster_gap}px` }}
       >
-        {movies.slice(0, -2).map((movie, i) => (
+        {movies.map((movie, i) => (
           <li key={i} className="border">
             <img
-              src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+              src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
               alt={`${movie.title} poster`}
               className={`object-cover`}
               style={{
