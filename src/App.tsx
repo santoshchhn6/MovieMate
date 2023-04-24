@@ -1,3 +1,4 @@
+import SearchMovie from "./components/SearchMovie";
 import Slider from "./components/Slider";
 import useWindowSize from "./useWindowSize";
 
@@ -6,6 +7,7 @@ function App() {
   return (
     <div className="flex justify-center">
       <div className="border-2 border-blue-500 w-[1440px]">
+        <SearchMovie />
         <Slider title="Popular" type="popular" width={width} />
         <Slider title="Upcoming" type="upcoming" width={width} />
         <Slider title="Now Playing" type="now_playing" width={width} />
