@@ -5,7 +5,7 @@ import useWindowSize from "./useWindowSize";
 function App() {
   const { width } = useWindowSize();
   return (
-    <div className="bg-gray-900 text-white flex justify-center">
+    <div className="bg-gray-950 text-white flex justify-center">
       <div className="border-2 border-blue-500 w-[1440px] px-[20px]">
         {/* <SearchMovie /> */}
         <Slider title="Popular" type="popular" width={width} />

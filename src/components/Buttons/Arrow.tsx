@@ -7,7 +7,7 @@ interface Props {
 }
 
 const Arrow = ({ direction, onClick, disabled }: Props) => {
-  const btnStyle = `border bg-gray-800 p-[5px] border-gray-600 text-gray-600 text-[35px] rounded-full hover:bg-gray-700 hover:text-gray-500 cursor-pointer ${
+  const btnStyle = `border bg-gray-800 p-[5px] border-blue-700 text-blue-700 text-[45px] rounded-full hover:border-white hover:text-white cursor-pointer ${
     disabled ? "invisible" : ""
   }`;
 

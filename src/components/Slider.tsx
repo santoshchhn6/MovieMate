@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import Arrow from "./Buttons/Arrow";
+import Poster from "./Poster";
 
 interface Movie {
   id: string;
   title: string;
   date: string;
   poster_path: string;
+  backdrop_path: string;
   release_date: string;
   vote_average: number;
 }
@@ -85,25 +87,16 @@ const Slider = ({ width, type, title }: Props) => {
           style={{ translate: `-${translateX}px 0px`, gap: `${poster_gap}px` }}
         >
           {movies.map((movie, i) => (
-            <li key={i}>
-              <img
-                src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
-                alt={`${movie.title} poster`}
-                className={`rounded-xl object-cover`}
-                style={{
-                  minWidth: `${poster_width}px`,
-                  minHeight: `${poster_height}px`,
-                }}
-              />
-              <div className=" relative">
-                <p className="absolute  w-[160px] h-[30px] rounded-l-2xl p-1 pl-[20px] bg-white text-gray-800 font-bold">
-                  {movie.release_date}
-                </p>
-                <p className="absolute left-[155px] top-[-10px] w-[50px] h-[50px] rounded-full bg-blue-700 text-[20px] flex justify-center items-center">
-                  {movie.vote_average}
-                </p>
-              </div>
-            </li>
+            <Poster
+              key={i}
+              title={movie.title}
+              width={poster_width}
+              height={poster_height}
+              poster_url={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+              backdrop_url={`https://image.tmdb.org/t/p/w200${movie.backdrop_path}`}
+              release_date={movie.release_date}
+              vote_average={movie.vote_average}
+            />
           ))}
         </ul>
 
