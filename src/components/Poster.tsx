@@ -18,7 +18,7 @@ const Poster = ({
   vote_average,
 }: Props) => {
   return (
-    <li className={`cursor-pointer`}>
+    <div className={`cursor-pointer hover:border-2 border-blue-500`}>
       <img
         src={poster_url}
         alt={`${title} poster`}
@@ -47,7 +47,7 @@ const Poster = ({
           {vote_average}
         </p>
       </div>
-    </li>
+    </div>
   );
 };
 

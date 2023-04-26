@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Arrow from "./Buttons/Arrow";
 import Poster from "./Poster";
+import { AiOutlineArrowLeft } from "react-icons/ai";
 
 interface Movie {
   id: string;
@@ -77,13 +78,13 @@ const Slider = ({ width, type, title }: Props) => {
 
   return (
     <div className="my-3">
-      <h2 className="mb-3 font-bold text-2xl ">{title}</h2>
+      <h2 className="mb-3 font-bold text-2xl">{title}</h2>
       <div
         className=" w-[100%] relative overflow-hidden"
         style={{ height: `${poster_height + 45}px` }}
       >
-        <ul
-          className={` w-[100%] flex absolute  ease-in-out duration-500 `}
+        <div
+          className={` w-[100%] flex absolute ease-in-out duration-500 `}
           style={{ translate: `-${translateX}px 0px`, gap: `${poster_gap}px` }}
         >
           {movies.map((movie, i) => (
@@ -98,22 +99,32 @@ const Slider = ({ width, type, title }: Props) => {
               vote_average={movie.vote_average}
             />
           ))}
-        </ul>
+        </div>
 
+        {/* <div
+          className={`border w-[100%] absolute top-[${poster_width}px]  flex justify-between items-center p-2`}
+        > */}
         <div
-          className={` w-[100%] h-[100%]  absolute flex justify-between items-center p-2 z-10`}
+          className=" absolute left-3"
+          style={{ top: `${poster_height / 2}px` }}
         >
           <Arrow
             direction="left"
             onClick={handleLeftClick}
             disabled={disableLeftArrow}
           />
+        </div>
+        <div
+          className={` absolute right-3`}
+          style={{ top: `${poster_height / 2}px` }}
+        >
           <Arrow
             direction="right"
             onClick={handleRightClick}
             disabled={disableRightArrow}
           />
         </div>
+        {/* </div> */}
       </div>
     </div>
   );
