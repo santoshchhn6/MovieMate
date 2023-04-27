@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 interface Props {
   title: string;
   poster_url: string;
@@ -17,36 +19,59 @@ const Poster = ({
   release_date,
   vote_average,
 }: Props) => {
-  return (
-    <div className={`cursor-pointer hover:border-2 border-blue-500`}>
-      <img
-        src={poster_url}
-        alt={`${title} poster`}
-        className={`rounded-xl object-cover cursor-pointer`}
-        style={{
-          minWidth: `${width}px`,
-          minHeight: `${height}px`,
-        }}
-      />
+  // const [hover, setHover] = useState(false);
 
-      {/* <div
-        // src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
-        // alt={`${movie.title} poster`}
-        className={`border rounded-xl object-cover  hover:bg-[url(${backdrop_url})] cursor-pointer`}
+  // const toggleHover = () => {
+  //   setHover(!hover);
+  // };
+
+  // const w = hover ? 400 : width;
+
+  return (
+    <div
+      className={`relative `}
+      style={{
+        minWidth: `${width}px`,
+        minHeight: `${height}px`,
+      }}
+    >
+      <div
+        className="relative rounded-xl overflow-hidden hover:border-2 hover:border-blue-700"
         style={{
           minWidth: `${width}px`,
           minHeight: `${height}px`,
-          backgroundImage: `url(${poster_url})`,
         }}
-      ></div> */}
-      <div className=" relative">
-        <p className="absolute  w-[160px] h-[30px] rounded-l-2xl p-1 pl-[20px] bg-white text-gray-800 font-bold">
-          {release_date}
-        </p>
-        <p className="absolute left-[155px] top-[-10px] w-[50px] h-[50px] rounded-full bg-blue-700 text-[20px] flex justify-center items-center">
-          {vote_average}
-        </p>
+      >
+        <img
+          src={poster_url}
+          alt={`${title} poster`}
+          className={`absolute  object-cover `}
+          style={{
+            minWidth: `${width}px`,
+            minHeight: `${height}px`,
+          }}
+        />
+
+        <div
+          className={`absolute  bg-slate-950 opacity-0 hover:opacity-80 text-center cursor-pointer`}
+          style={{
+            minWidth: `${width}px`,
+            minHeight: `${height}px`,
+          }}
+        >
+          <div
+            className=" absolute bottom-[40px]"
+            style={{ width: `${width}px` }}
+          >
+            <p className="text-[20px] ">{title}</p>
+            <p className="text-[20px] ">{release_date}</p>
+          </div>
+        </div>
       </div>
+
+      <p className="absolute left-[80px] bottom-[-15px] w-[50px] h-[50px] rounded-full bg-blue-700 text-[20px] flex justify-center items-center">
+        {vote_average}
+      </p>
     </div>
   );
 };
