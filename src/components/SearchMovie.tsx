@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { BsSearch } from "react-icons/bs";
+import Poster from "./Poster";
 
 interface Movie {
   id: string;
@@ -38,40 +39,38 @@ const SearchMovie = () => {
   };
 
   return (
-    <div className="w-[100%]  border-2 border-blue-600">
+    <div className="w-[100%]  flex flex-col items-center">
       <form
         onSubmit={handleSearch}
-        className=" border border-gray-600 rounded-lg w-[300px] px-2 flex"
+        className="mt-[20px] w-[60%] min-w-[300px]  border-2 border-blue-700  rounded-xl  px-2 flex "
       >
         <input
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Search Movies..."
-          className="w-[100%]  text-2xl p-2 outline-none "
+          className="w-[100%]  text-[20px] p-2 outline-none bg-gray-950/0"
         />
         <button type="submit" className="mr-2">
           <BsSearch />
         </button>
       </form>
-      <ul
-        className={` border-2 border-red-600 flex flex-wrap justify-center ease-in-out duration-500 `}
+      <div
+        className={`  flex flex-wrap justify-center ease-in-out duration-500 `}
         style={{ gap: `${poster_gap}px`, padding: `${poster_gap}px` }}
       >
         {movies.map((movie, i) => (
-          <li key={i} className="border">
-            <img
-              src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
-              alt={`${movie.title} poster`}
-              className={`object-cover`}
-              style={{
-                width: `${poster_width}px`,
-                height: `${poster_height}px`,
-              }}
-            />
-          </li>
+          <Poster
+            key={i}
+            title={movie.title}
+            width={poster_width}
+            height={poster_height}
+            poster_url={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+            release_date={movie.release_date}
+            vote_average={null}
+          />
         ))}
-      </ul>
+      </div>
     </div>
   );
 };

@@ -3,17 +3,15 @@ import { useState } from "react";
 interface Props {
   title: string;
   poster_url: string;
-  backdrop_url: string;
   width: number;
   height: number;
   release_date: string;
-  vote_average: number;
+  vote_average: number | null;
 }
 
 const Poster = ({
   title,
   poster_url,
-  backdrop_url,
   width,
   height,
   release_date,
@@ -69,9 +67,11 @@ const Poster = ({
         </div>
       </div>
 
-      <p className="absolute left-[80px] bottom-[-15px] w-[50px] h-[50px] rounded-full bg-blue-700 text-[20px] flex justify-center items-center">
-        {vote_average}
-      </p>
+      {vote_average ? (
+        <p className="absolute left-[80px] bottom-[-15px] w-[50px] h-[50px] rounded-full bg-blue-700 text-[20px] flex justify-center items-center">
+          {vote_average}
+        </p>
+      ) : null}
     </div>
   );
 };

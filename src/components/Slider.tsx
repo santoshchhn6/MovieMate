@@ -94,7 +94,6 @@ const Slider = ({ width, type, title }: Props) => {
               width={poster_width}
               height={poster_height}
               poster_url={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
-              backdrop_url={`https://image.tmdb.org/t/p/w200${movie.backdrop_path}`}
               release_date={movie.release_date}
               vote_average={movie.vote_average}
             />
