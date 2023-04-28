@@ -1,153 +1,128 @@
 import { useState, useEffect } from "react";
+import Arrow from "./Buttons/Arrow";
+import Poster from "./Poster";
+import { AiOutlineArrowLeft } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 interface Movie {
   id: number;
-  genre_ids: number[];
+  title: string;
+  date: string;
+  poster_path: string;
+  backdrop_path: string;
   release_date: string;
   vote_average: number;
+}
+
+interface Props {
+  width: number;
+  type: string;
   title: string;
-  overview: string;
 }
 
-interface Genre {
-  id: number;
-  name: string;
-}
-
-function MovieList() {
+const MovieList = ({ width, type, title }: Props) => {
   const [movies, setMovies] = useState<Movie[]>([]);
-  const [genres, setGenres] = useState<Genre[]>([]);
-  const [selectedGenre, setSelectedGenre] = useState<number | null>(null);
-  const [releaseYear, setReleaseYear] = useState<number | null>(null);
-  const [minimumRating, setMinimumRating] = useState<number | null>(null);
+  const [totalPages, setTotalPages] = useState<number>(1);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [disableLeftArrow, setDisableLeftArrow] = useState<boolean>(true);
+  const [disableRightArrow, setDisableRightArrow] = useState<boolean>(false);
+  const [translateX, setTranslateX] = useState<number>(0);
+  const poster_width = 200;
+  const poster_height = 300;
+  const poster_gap = 10;
+  const totalPostersLenth = movies.length * (poster_width + poster_gap);
 
   useEffect(() => {
-    const fetchMovies = async () => {
-      const url = `https://api.themoviedb.org/3/movie/popular?api_key=${
+
+    fetch(
+      `https://api.themoviedb.org/3/movie/${type}?api_key=${
         import.meta.env.VITE_API_KEY
-      }`;
+      }&page=${currentPage}`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        setMovies((prev) => [...prev, ...data.results]);
+        setTotalPages(data.total_pages);
+      });
+  }, [currentPage]);
 
-      try {
-        const response = await fetch(url);
-        const data = await response.json();
-        setMovies(data.results);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    const fetchGenres = async () => {
-      const url = `https://api.themoviedb.org/3/genre/movie/list?api_key=${
-        import.meta.env.VITE_API_KEY
-      }`;
-
-      try {
-        const response = await fetch(url);
-        const data = await response.json();
-        setGenres(data.genres);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchMovies();
-    fetchGenres();
-  }, []);
-
-  const filteredMovies = movies.filter((movie) => {
-    if (selectedGenre && !movie.genre_ids.includes(selectedGenre)) {
-      return false;
+  const handleLeftClick = () => {
+    if (translateX - width >= 0) {
+      setTranslateX((translateX) => translateX - width);
+      setDisableRightArrow(false);
+      console.log("left_click");
     }
-
-    if (
-      releaseYear &&
-      new Date(movie.release_date).getFullYear() !== releaseYear
-    ) {
-      return false;
+    if (translateX - 2 * width < 0) {
+      setTranslateX(0);
+      setDisableLeftArrow(true);
+      console.log("left_click");
     }
-
-    if (minimumRating && movie.vote_average < minimumRating) {
-      return false;
-    }
-
-    return true;
-  });
-
-  const handleGenreChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedGenre(parseInt(e.target.value));
   };
 
-  const handleReleaseYearChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setReleaseYear(parseInt(event.target.value));
-  };
-
-  const handleMinimumRatingChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setMinimumRating(parseFloat(event.target.value));
+  const handleRightClick = () => {
+    if (translateX + width <= totalPostersLenth) {
+      setTranslateX((translateX) => translateX + width);
+      setDisableLeftArrow(false);
+      console.log("right_click");
+    }
+    if (translateX + 2 * width > totalPostersLenth) {
+      if (currentPage <= totalPages) {
+        setCurrentPage((currentPage) => currentPage + 1);
+      }
+      setTranslateX(totalPostersLenth - width);
+      console.log("right_click");
+    }
   };
 
   return (
-    <div>
-      <div>
-        <label htmlFor="genre">Genre:</label>
-        <select
-          id="genre"
-          value={selectedGenre || ""}
-          onChange={handleGenreChange}
+    <div className="my-3">
+      <h2 className="mb-3 font-bold text-2xl">{title}</h2>
+      <div
+        className=" w-[100%] relative overflow-hidden"
+        style={{ height: `${poster_height + 45}px` }}
+      >
+        <div
+          className={` w-[100%] flex absolute ease-in-out duration-500 `}
+          style={{ translate: `-${translateX}px 0px`, gap: `${poster_gap}px` }}
         >
-          <option value="">All Genres</option>
-          {genres.map((genre) => (
-            <option key={genre.id} value={genre.id}>
-              {genre.name}
-            </option>
+          {movies.map((movie, i) => (
+            <Link to={`/movie/${movie.id}`}>
+              <Poster
+                key={i}
+                title={movie.title}
+                width={poster_width}
+                height={poster_height}
+                poster_url={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+                release_date={movie.release_date}
+                vote_average={movie.vote_average}
+              />
+            </Link>
           ))}
-        </select>
+        </div>
+
+        <div
+          className=" absolute left-3"
+          style={{ top: `${poster_height / 2}px` }}
+        >
+          <Arrow
+            direction="left"
+            onClick={handleLeftClick}
+            disabled={disableLeftArrow}
+          />
+        </div>
+        <div
+          className={` absolute right-3`}
+          style={{ top: `${poster_height / 2}px` }}
+        >
+          <Arrow
+            direction="right"
+            onClick={handleRightClick}
+            disabled={disableRightArrow}
+          />
+        </div>
       </div>
-      <div>
-        <label htmlFor="release-year">Release Year:</label>
-        <input
-          type="number"
-          id="release-year"
-          min="1900"
-          max={new Date().getFullYear()}
-          value={releaseYear || ""}
-          onChange={handleReleaseYearChange}
-        />
-      </div>
-      <div>
-        <label htmlFor="minimum-rating">Minimum Rating:</label>
-        <input
-          type="number"
-          id="minimum-rating"
-          step="0.1"
-          min="0"
-          max="10"
-          value={minimumRating || ""}
-          onChange={handleMinimumRatingChange}
-        />
-      </div>
-      <ul>
-        {filteredMovies.map((movie) => (
-          <li key={movie.id}>
-            <h3>{movie.title}</h3>
-            <p>{movie.release_date}</p>
-            <p>{movie.overview}</p>
-            <ul>
-              {movie.genre_ids.map((genreId) => (
-                <li key={genreId}>
-                  {genres.find((genre) => genre.id === genreId)?.name}
-                </li>
-              ))}
-            </ul>
-            <p>Rating: {movie.vote_average}</p>
-          </li>
-        ))}
-      </ul>
     </div>
   );
-}
+};
 
 export default MovieList;

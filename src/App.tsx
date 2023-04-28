@@ -1,19 +1,22 @@
+import Home from "./components/Home";
+import MovieDetail from "./components/MovieDetail";
 import SearchMovie from "./components/SearchMovie";
-import Slider from "./components/Slider";
-import useWindowSize from "./useWindowSize";
+
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
-  const { width } = useWindowSize();
   return (
-    <div className="bg-gray-950 text-white flex justify-center">
-      <div className=" border-blue-500 w-[1440px] px-[20px]">
-        <SearchMovie />
-        <Slider title="Popular" type="popular" width={width} />
-        <Slider title="Upcoming" type="upcoming" width={width} />
-        <Slider title="Now Playing" type="now_playing" width={width} />
-        <Slider title="Top rated" type="top_rated" width={width} />
+    <Router>
+      <div className="bg-gray-950 text-white flex justify-center">
+        <div className=" border-blue-500 w-[1440px] px-[20px]">
+          <SearchMovie />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/movie/:id" element={<MovieDetail />} />
+          </Routes>
+        </div>
       </div>
-    </div>
+    </Router>
   );
 }
 
