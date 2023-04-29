@@ -8,7 +8,7 @@ function App() {
   return (
     <Router>
       <div className="bg-gray-950 text-white flex justify-center">
-        <div className=" border-blue-500 w-[1440px] px-[20px]">
+        <div className="border border-blue-500 w-[1440px] ">
           <SearchMovie />
           <Routes>
             <Route path="/" element={<Home />} />

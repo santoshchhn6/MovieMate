@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 interface Props {
   title: string;
   poster_url: string;
@@ -17,14 +15,6 @@ const Poster = ({
   release_date,
   vote_average,
 }: Props) => {
-  // const [hover, setHover] = useState(false);
-
-  // const toggleHover = () => {
-  //   setHover(!hover);
-  // };
-
-  // const w = hover ? 400 : width;
-
   return (
     <div
       className={`relative `}
