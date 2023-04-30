@@ -86,9 +86,10 @@ const MovieList = ({ width, type, title }: Props) => {
           style={{ translate: `-${translateX}px 0px`, gap: `${poster_gap}px` }}
         >
           {movies.map((movie, i) => (
-            <Link to={`/movie/${movie.id}`}>
+            // <Link to={`/movie/${movie.id}`}>
               <Poster
                 key={i}
+                id={movie.id}
                 title={movie.title}
                 width={poster_width}
                 height={poster_height}
@@ -96,7 +97,7 @@ const MovieList = ({ width, type, title }: Props) => {
                 release_date={movie.release_date}
                 vote_average={movie.vote_average}
               />
-            </Link>
+            // </Link>
           ))}
         </div>
 

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getFormatedDate } from "../date";
+import { getFormatedDate, getFormatedTime } from "../date";
 
 interface MovieDetail {
   title: string;
@@ -42,16 +42,19 @@ const MovieDetail = () => {
           className="absolute"
         />
 
-        <div className="absolute w-[100%] h-[807px] bg-gray-950/80 px-[20px]">
+        <div className="absolute w-[100%] h-[807px] bg-gray-950/80 p-[20px]">
           <div className="w-[50%]">
             <h1 className="text-[40px] font-semibold leading-[45px] mb-3">
-              {movie?.title}
+              {movie?.title.toUpperCase()} ({movie?.vote_average.toFixed(1)}/10)
             </h1>
             <p className="text-[15px] mb-3">{movie?.overview}</p>
 
-            <div className="flex gap-3 mb-3">
-              <span>{getFormatedDate(movie ? movie?.release_date : "")}</span>
-              <span>{movie?.runtime}</span>
+            <div className="flex gap-5 mb-3">
+              <span className="font-semibold">
+                {getFormatedDate(movie ? movie?.release_date : "")}
+              </span>
+              <span>{getFormatedTime(movie ? movie?.runtime : 0)}</span>
+              <span className="font-semibold">{movie?.adult ? "A" : "UA"}</span>
             </div>
 
             <div className="flex gap-3 text-[16px] font-semibold mb-3">
@@ -65,12 +68,8 @@ const MovieDetail = () => {
               ))}
             </div>
 
-            <p>{movie?.vote_average.toFixed(1)}</p>
-
             <p>{movie?.budget}</p>
             <p>{movie?.revenue}</p>
-
-            <p>{movie?.adult}</p>
           </div>
         </div>
       </div>

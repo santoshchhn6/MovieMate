@@ -3,7 +3,7 @@ import { BsSearch } from "react-icons/bs";
 import Poster from "./Poster";
 
 interface Movie {
-  id: string;
+  id: number;
   title: string;
   date: string;
   poster_path: string;
@@ -62,6 +62,7 @@ const SearchMovie = () => {
         {movies.map((movie, i) => (
           <Poster
             key={i}
+            id={movie.id}
             title={movie.title}
             width={poster_width}
             height={poster_height}

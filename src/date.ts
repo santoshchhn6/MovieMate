@@ -1,16 +1,16 @@
 const months = [
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "May",
-  "June",
-  "July",
-  "Aug",
-  "Sep",
-  "Oct",
-  "Nov",
-  "Dec",
+  "JAN",
+  "FEB",
+  "MAR",
+  "APR",
+  "MAY",
+  "JUN",
+  "JUL",
+  "AUG",
+  "SEP",
+  "OCT",
+  "NOV",
+  "DEC",
 ];
 
 export const getFormatedDate = (date: string) => {
@@ -18,6 +18,8 @@ export const getFormatedDate = (date: string) => {
   return d.getDate() + " " + months[d.getMonth()] + ", " + d.getFullYear();
 };
 
-// export const getFormatedTime=(time:number)=>{
-
-// }
+export const getFormatedTime = (time: number) => {
+  const hour = Math.floor(time / 60);
+  const min = time % 60;
+  return hour + " HRS " + min + " MINS";
+};
