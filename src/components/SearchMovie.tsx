@@ -12,35 +12,35 @@ interface Movie {
 
 const SearchMovie = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
-  const [input, setInput] = useState<string>("");
+  // const [input, setInput] = useState<string>("");
   const poster_width = 300;
   const poster_height = 450;
   const poster_gap = 20;
 
-  const getMovies = () => {
-    fetch(
-      `https://api.themoviedb.org/3/search/movie?api_key=${
-        import.meta.env.VITE_API_KEY
-      }&language=en-US&page=1&include_adult=false&query=${input}`
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        setMovies(data.results);
-      });
-  };
+  // const getMovies = () => {
+  //   fetch(
+  //     `https://api.themoviedb.org/3/search/movie?api_key=${
+  //       import.meta.env.VITE_API_KEY
+  //     }&language=en-US&page=1&include_adult=false&query=${input}`
+  //   )
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       setMovies(data.results);
+  //     });
+  // };
 
-  const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log(input);
-    console.log("enter");
-    if (input) {
-      getMovies();
-    }
-  };
+  // const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+  //   console.log(input);
+  //   console.log("enter");
+  //   if (input) {
+  //     getMovies();
+  //   }
+  // };
 
   return (
     <div className="w-[100%]  flex flex-col items-center">
-      <form
+      {/* <form
         onSubmit={handleSearch}
         className="mt-[20px] w-[60%] min-w-[300px]  border-2 border-blue-700  rounded-xl  px-2 flex "
       >
@@ -54,7 +54,7 @@ const SearchMovie = () => {
         <button type="submit" className="mr-2">
           <BsSearch />
         </button>
-      </form>
+      </form> */}
       <div
         className={`  flex flex-wrap justify-center ease-in-out duration-500 `}
         style={{ gap: `${poster_gap}px`, padding: `${poster_gap}px` }}
