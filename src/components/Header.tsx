@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
-import SearchInput from "./SearchInput";
+import SearchInput from "./SearchMovie";
 import { AiOutlineMenu } from "react-icons/ai";
 
 const Header = () => {
+  
   return (
     <div className=" flex items-center gap-3 justify-between">
       <div className="flex gap-3 items-center">

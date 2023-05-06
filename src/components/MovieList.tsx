@@ -1,29 +1,26 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Arrow from "./Buttons/Arrow";
 import Poster from "./Poster";
-import { AiOutlineArrowLeft } from "react-icons/ai";
-import { Link } from "react-router-dom";
-
-interface Movie {
-  id: number;
-  title: string;
-  date: string;
-  poster_path: string;
-  backdrop_path: string;
-  release_date: string;
-  vote_average: number;
-}
+import { Movie } from "../type";
 
 interface Props {
   width: number;
-  type: string;
+  type: string | number;
   title: string;
+  movies: Movie[];
+  currentPage: number;
+  totalPages: number;
+  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const MovieList = ({ width, type, title }: Props) => {
-  const [movies, setMovies] = useState<Movie[]>([]);
-  const [totalPages, setTotalPages] = useState<number>(1);
-  const [currentPage, setCurrentPage] = useState<number>(1);
+const MovieList = ({
+  width,
+  title,
+  movies,
+  currentPage,
+  totalPages,
+  setCurrentPage,
+}: Props) => {
   const [disableLeftArrow, setDisableLeftArrow] = useState<boolean>(true);
   const [disableRightArrow, setDisableRightArrow] = useState<boolean>(false);
   const [translateX, setTranslateX] = useState<number>(0);
@@ -31,20 +28,6 @@ const MovieList = ({ width, type, title }: Props) => {
   const poster_height = 300;
   const poster_gap = 10;
   const totalPostersLenth = movies.length * (poster_width + poster_gap);
-
-  useEffect(() => {
-
-    fetch(
-      `https://api.themoviedb.org/3/movie/${type}?api_key=${
-        import.meta.env.VITE_API_KEY
-      }&page=${currentPage}`
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        setMovies((prev) => [...prev, ...data.results]);
-        setTotalPages(data.total_pages);
-      });
-  }, [currentPage]);
 
   const handleLeftClick = () => {
     if (translateX - width >= 0) {
@@ -86,18 +69,16 @@ const MovieList = ({ width, type, title }: Props) => {
           style={{ translate: `-${translateX}px 0px`, gap: `${poster_gap}px` }}
         >
           {movies.map((movie, i) => (
-            // <Link to={`/movie/${movie.id}`}>
-              <Poster
-                key={i}
-                id={movie.id}
-                title={movie.title}
-                width={poster_width}
-                height={poster_height}
-                poster_url={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
-                release_date={movie.release_date}
-                vote_average={movie.vote_average}
-              />
-            // </Link>
+            <Poster
+              key={i}
+              id={movie.id}
+              title={movie.title}
+              width={poster_width}
+              height={poster_height}
+              poster_url={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+              release_date={movie.release_date}
+              vote_average={movie.vote_average}
+            />
           ))}
         </div>
 

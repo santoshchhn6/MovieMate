@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getFormatedDate, getFormatedTime } from "../date";
+import { formatter } from "../currency";
 
 interface MovieDetail {
   title: string;
@@ -68,8 +69,12 @@ const MovieDetail = () => {
               ))}
             </div>
 
-            <p>{movie?.budget}</p>
-            <p>{movie?.revenue}</p>
+            {movie?.budget ? (
+              <p>Budget : {formatter.format(movie ? movie.budget : 0)}</p>
+            ) : null}
+            {movie?.revenue ? (
+              <p>Revenue : {formatter.format(movie ? movie.revenue : 0)}</p>
+            ) : null}
           </div>
         </div>
       </div>
