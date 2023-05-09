@@ -1,18 +1,21 @@
 import { useSelector } from "react-redux";
-import useWindowSize from "../useWindowSize";
-import { RootState } from "../redux";
 import FetchMovies from "./FetchMovies";
+import SearchResult from "./SearchResult";
+import { RootState } from "../redux";
+import PopularMovie from "./PopularMovie";
 
 const Home = () => {
-  const { width } = useWindowSize();
-  const search = useSelector((state: RootState) => state.app.search);
-  console.log({ search });
+  // const movies = useSelector((state: RootState) => state.movies.popular);
+  // console.log({ movies });
   return (
     <div>
-      <FetchMovies title="Popular" type="popular" width={width} />
-      <FetchMovies title="Upcoming" type="upcoming" width={width} />
-      <FetchMovies title="Now Playing" type="now_playing" width={width} />
-      <FetchMovies title="Top rated" type="top_rated" width={width} />
+      <SearchResult />
+
+      <PopularMovie/>
+      {/* <FetchMovies title="Popular" type="popular" />
+      <FetchMovies title="Upcoming" type="upcoming" />
+      <FetchMovies title="Now Playing" type="now_playing" />
+      <FetchMovies title="Top rated" type="top_rated" /> */}
     </div>
   );
 };

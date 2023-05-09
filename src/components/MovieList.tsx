@@ -2,25 +2,24 @@ import { useState } from "react";
 import Arrow from "./Buttons/Arrow";
 import Poster from "./Poster";
 import { Movie } from "../type";
+import useWindowSize from "../useWindowSize";
 
 interface Props {
-  width: number;
-  type: string | number;
   title: string;
   movies: Movie[];
   currentPage: number;
   totalPages: number;
-  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
+  setCurrentPage: (page: number) => void;
 }
 
 const MovieList = ({
-  width,
   title,
   movies,
   currentPage,
   totalPages,
   setCurrentPage,
 }: Props) => {
+  const { width } = useWindowSize();
   const [disableLeftArrow, setDisableLeftArrow] = useState<boolean>(true);
   const [disableRightArrow, setDisableRightArrow] = useState<boolean>(false);
   const [translateX, setTranslateX] = useState<number>(0);
@@ -50,7 +49,7 @@ const MovieList = ({
     }
     if (translateX + 2 * width > totalPostersLenth) {
       if (currentPage <= totalPages) {
-        setCurrentPage((currentPage) => currentPage + 1);
+        setCurrentPage(currentPage + 1);
       }
       setTranslateX(totalPostersLenth - width);
       console.log("right_click");

@@ -1,36 +1,36 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import MovieList from "./MovieList";
 import { Movie } from "../type";
-import { fetchPopularMovie } from "../redux/movie_action";
-import { useDispatch } from "react-redux";
-import { appDispatch } from "../redux";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux";
 
-interface Props {
-  type: string | number;
-  title: string;
-}
-
-const FetchMovies = (props: Props) => {
+const SearchResult = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(1);
 
+  const search = useSelector((state: RootState) => state.app.search);
+
   useEffect(() => {
+    getMovies();
+  }, [currentPage, search]);
+
+  const getMovies = () => {
     fetch(
-      `https://api.themoviedb.org/3/movie/${props.type}?api_key=${
+      `https://api.themoviedb.org/3/search/movie?api_key=${
         import.meta.env.VITE_API_KEY
-      }&page=${currentPage}`
+      }&language=en-US&page=${currentPage}&include_adult=false&query=${search}`
     )
       .then((response) => response.json())
       .then((data) => {
-        setMovies((prev) => [...prev, ...data.results]);
+        setMovies(data.results);
         setTotalPages(data.total_pages);
       });
-  }, [currentPage]);
+  };
 
   return (
     <MovieList
-      {...props}
+      title="Search Result"
       movies={movies}
       currentPage={currentPage}
       totalPages={totalPages}
@@ -39,4 +39,4 @@ const FetchMovies = (props: Props) => {
   );
 };
 
-export default FetchMovies;
+export default SearchResult;

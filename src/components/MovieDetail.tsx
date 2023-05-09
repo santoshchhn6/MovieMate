@@ -32,7 +32,7 @@ const MovieDetail = () => {
     )
       .then((res) => res.json())
       .then((data) => setMovie(data));
-  }, []);
+  }, [id]);
   return (
     <div>
       {/* Poster and detail */}
