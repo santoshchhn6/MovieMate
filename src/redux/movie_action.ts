@@ -4,7 +4,7 @@ import { upcomingMovieAction } from "./upcomingMovieSlice";
 import { nowPlayingMovieAction } from "./nowPlayingMovieSlice";
 import { popularMovieAction } from "./popularMovieSlice";
 import { searchResultMovieAction } from "./searchresultMovieSlice";
-import { topRatedMovieAction } from "./topratedMovieSlice";
+import { topRatedMovieAction } from "./topRatedMovieSlice";
 
 export const fetchPopularMovie = (currentPage = 1) => {
   return async (dispatch: appDispatch) => {
