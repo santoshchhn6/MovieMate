@@ -4,6 +4,7 @@ import SearchResult from "./SearchResult";
 import { RootState } from "../redux";
 import PopularMovie from "./PopularMovie";
 import UpcomingMovie from "./UpcomingMovie";
+import NowPlayingMovie from "./NowPlayingMovie";
 
 const Home = () => {
   // const movies = useSelector((state: RootState) => state.movies.popular);
@@ -14,6 +15,7 @@ const Home = () => {
 
       <PopularMovie />
       <UpcomingMovie />
+      <NowPlayingMovie />
       {/* <FetchMovies title="Popular" type="popular" />
       <FetchMovies title="Upcoming" type="upcoming" />
       <FetchMovies title="Now Playing" type="now_playing" />
