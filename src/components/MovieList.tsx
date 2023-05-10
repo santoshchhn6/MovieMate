@@ -57,52 +57,59 @@ const MovieList = ({
   };
 
   return (
-    <div className="my-3">
-      <h2 className="mb-3 font-bold text-2xl">{title}</h2>
-      <div
-        className=" w-[100%] relative overflow-hidden"
-        style={{ height: `${poster_height + 45}px` }}
-      >
-        <div
-          className={` w-[100%] flex absolute ease-in-out duration-500 `}
-          style={{ translate: `-${translateX}px 0px`, gap: `${poster_gap}px` }}
-        >
-          {movies.map((movie, i) => (
-            <Poster
-              key={i}
-              id={movie.id}
-              title={movie.title}
-              width={poster_width}
-              height={poster_height}
-              poster_url={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
-              release_date={movie.release_date}
-              vote_average={movie.vote_average}
-            />
-          ))}
-        </div>
+    <>
+      {movies.length ? (
+        <div className="my-3">
+          <h2 className="mb-3 font-bold text-2xl">{title}</h2>
+          <div
+            className=" w-[100%] relative overflow-hidden"
+            style={{ height: `${poster_height + 45}px` }}
+          >
+            <div
+              className={` w-[100%] flex absolute ease-in-out duration-500 `}
+              style={{
+                translate: `-${translateX}px 0px`,
+                gap: `${poster_gap}px`,
+              }}
+            >
+              {movies.map((movie, i) => (
+                <Poster
+                  key={i}
+                  id={movie.id}
+                  title={movie.title}
+                  width={poster_width}
+                  height={poster_height}
+                  poster_url={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+                  release_date={movie.release_date}
+                  vote_average={movie.vote_average}
+                />
+              ))}
+            </div>
 
-        <div
-          className=" absolute left-3"
-          style={{ top: `${poster_height / 2}px` }}
-        >
-          <Arrow
-            direction="left"
-            onClick={handleLeftClick}
-            disabled={disableLeftArrow}
-          />
+            <div
+              className=" absolute left-3"
+              style={{ top: `${poster_height / 2}px` }}
+            >
+              <Arrow
+                direction="left"
+                onClick={handleLeftClick}
+                disabled={disableLeftArrow}
+              />
+            </div>
+            <div
+              className={` absolute right-3`}
+              style={{ top: `${poster_height / 2}px` }}
+            >
+              <Arrow
+                direction="right"
+                onClick={handleRightClick}
+                disabled={disableRightArrow}
+              />
+            </div>
+          </div>
         </div>
-        <div
-          className={` absolute right-3`}
-          style={{ top: `${poster_height / 2}px` }}
-        >
-          <Arrow
-            direction="right"
-            onClick={handleRightClick}
-            disabled={disableRightArrow}
-          />
-        </div>
-      </div>
-    </div>
+      ) : null}
+    </>
   );
 };
 

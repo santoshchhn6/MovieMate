@@ -1,13 +1,17 @@
 import { configureStore } from "@reduxjs/toolkit";
 import appSlice from "./app_slice";
-import movieSlice from "./movie_slice";
 import popularMovieSlice from "./popularMovieSlice";
+import upcomingMovieSlice from "./upcomingMovieSlice";
+import nowPlayingMovieSlice from "./nowPlayingMovieSlice";
+import topRatedMovieSlice from "./topratedMovieSlice";
 
 const store = configureStore({
   reducer: {
     app: appSlice.reducer,
-    // movies: movieSlice.reducer,
-    popular:popularMovieSlice.reducer
+    popular: popularMovieSlice.reducer,
+    upcoming:upcomingMovieSlice.reducer,
+    nowPlaying:nowPlayingMovieSlice.reducer,
+    topRated:topRatedMovieSlice.reducer
   },
 });
 

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchPopularMovie } from "../redux/movie_action";
 import { appDispatch, RootState } from "../redux";
 import MovieList from "./MovieList";
-import { PopularMovieAction } from "../redux/popularMovieSlice";
+import { popularMovieAction } from "../redux/popularMovieSlice";
 
 const PopularMovie = () => {
   const popularMovie = useSelector((state: RootState) => state.popular);
@@ -15,7 +15,7 @@ const PopularMovie = () => {
   }, [dispatch, popularMovie.currentPage]);
 
   const handleCurrentPage = (page: number) => {
-    dispatch(PopularMovieAction.setCurrentPage(page));
+    dispatch(popularMovieAction.setCurrentPage(page));
   };
 
   return (

@@ -7,8 +7,8 @@ const initialState: MovieList = {
   movies: [],
 };
 
-const popularMovieSlice = createSlice({
-  name: "popular",
+const topRatedMovieSlice = createSlice({
+  name: "topRated",
   initialState,
   reducers: {
     addMovies(state, action: PayloadAction<Movie[]>) {
@@ -23,5 +23,5 @@ const popularMovieSlice = createSlice({
   },
 });
 
-export const popularMovieAction = popularMovieSlice.actions;
-export default popularMovieSlice;
+export const topRatedMovieAction = topRatedMovieSlice.actions;
+export default topRatedMovieSlice;
