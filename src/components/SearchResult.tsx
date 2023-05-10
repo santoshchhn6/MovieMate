@@ -1,40 +1,30 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import MovieList from "./MovieList";
-import { Movie } from "../type";
-import { useSelector } from "react-redux";
-import { RootState } from "../redux";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState, appDispatch } from "../redux";
+import { fetchSearchMovie } from "../redux/movie_action";
+import { searchResultMovieAction } from "../redux/searchresultMovieSlice";
 
 const SearchResult = () => {
-  const [movies, setMovies] = useState<Movie[]>([]);
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [totalPages, setTotalPages] = useState<number>(1);
-
-  const search = useSelector((state: RootState) => state.app.search);
+  const searchInput = useSelector((state: RootState) => state.app.search);
+  const searchResult = useSelector((state: RootState) => state.searchResult);
+  const dispatch = useDispatch<appDispatch>();
 
   useEffect(() => {
-    getMovies();
-  }, [currentPage, search]);
+    dispatch(fetchSearchMovie(searchInput));
+  }, [dispatch, searchResult.currentPage, searchInput]);
 
-  const getMovies = () => {
-    fetch(
-      `https://api.themoviedb.org/3/search/movie?api_key=${
-        import.meta.env.VITE_API_KEY
-      }&language=en-US&page=${currentPage}&include_adult=false&query=${search}`
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        setMovies(data.results);
-        setTotalPages(data.total_pages);
-      });
+  const handleCurrentPage = (page: number) => {
+    dispatch(searchResultMovieAction.setCurrentPage(page));
   };
 
   return (
     <MovieList
       title="Search Result"
-      movies={movies}
-      currentPage={currentPage}
-      totalPages={totalPages}
-      setCurrentPage={setCurrentPage}
+      movies={searchResult.movies}
+      currentPage={searchResult.currentPage}
+      totalPages={searchResult.totalPages}
+      setCurrentPage={handleCurrentPage}
     />
   );
 };

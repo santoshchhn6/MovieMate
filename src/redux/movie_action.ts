@@ -54,16 +54,29 @@ export const fetchTopRatedMovie = (currentPage = 1) => {
   };
 };
 
-export const fetchSearchMovie = (currentPage = 1) => {
+export const fetchSearchMovie = (searchInput: string, currentPage = 1) => {
   return async (dispatch: appDispatch) => {
     try {
-      const data = await fetchHandler(currentPage, "popular");
+      const data = await fetchSearchMovieHandler(searchInput, currentPage);
       dispatch(searchResultMovieAction.addMovies(data));
       dispatch(searchResultMovieAction.setTotalPage(data.length));
     } catch (err) {
       console.log(err);
     }
   };
+};
+
+const fetchSearchMovieHandler = async (
+  search: string,
+  currentPage: number
+): Promise<Movie[]> => {
+  const res = await fetch(
+    `https://api.themoviedb.org/3/search/movie?api_key=${
+      import.meta.env.VITE_API_KEY
+    }&language=en-US&page=${currentPage}&include_adult=false&query=${search}`
+  );
+  const data = await res.json();
+  return data.results;
 };
 
 const fetchHandler = async (

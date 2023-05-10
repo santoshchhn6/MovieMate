@@ -7,7 +7,6 @@ import { popularMovieAction } from "../redux/popularMovieSlice";
 
 const PopularMovie = () => {
   const popularMovie = useSelector((state: RootState) => state.popular);
-
   const dispatch = useDispatch<appDispatch>();
 
   useEffect(() => {

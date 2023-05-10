@@ -12,7 +12,7 @@ const searchResultMovieSlice = createSlice({
   initialState,
   reducers: {
     addMovies(state, action: PayloadAction<Movie[]>) {
-      state.movies = [...state.movies, ...action.payload];
+      state.movies = action.payload;
     },
     setCurrentPage(state, action: PayloadAction<number>) {
       state.currentPage = action.payload;
