@@ -3,15 +3,23 @@ import PopularMovie from "./PopularMovie";
 import UpcomingMovie from "./UpcomingMovie";
 import NowPlayingMovie from "./NowPlayingMovie";
 import TopRatedMovie from "./TopRatedMovie";
+import Header from "./Header";
 
 const Home = () => {
   return (
-    <div>
-      <SearchResult />
+    <div className="w-[1440px] h-[810px] relative">
+      <img
+        src="https://image.tmdb.org/t/p/original/lWqjXgut48IK5f5IRbDBAoO2Epp.jpg"
+        alt=""
+        className="absolute w-[100%] h-[100%] object-cover "
+      />
+      <div className="absolute w-[100%] h-[100%] bg-black/50"></div>
+      <Header />
+      {/* <SearchResult /> */}
       <PopularMovie />
-      <UpcomingMovie />
-      <NowPlayingMovie />
-      <TopRatedMovie />
+      {/* <UpcomingMovie /> */}
+      {/* <NowPlayingMovie /> */}
+      {/* <TopRatedMovie /> */}
     </div>
   );
 };

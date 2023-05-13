@@ -7,8 +7,8 @@ function App() {
   return (
     <Router>
       <div className="bg-gray-950 text-white flex justify-center">
-        <div className="border border-blue-500 w-[1440px] px-3">
-          <Header />
+        <div className="border border-blue-500 w-[1440px] ">
+          {/* <Header /> */}
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/movie/:id" element={<MovieDetail />} />

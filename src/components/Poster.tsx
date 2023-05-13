@@ -22,7 +22,7 @@ const Poster = ({
   return (
     <Link to={`/movie/${id}`}>
       <div
-        className={`relative `}
+        className={`relative`}
         style={{
           minWidth: `${width}px`,
           minHeight: `${height}px`,
@@ -62,11 +62,11 @@ const Poster = ({
           </div>
         </div>
 
-        {vote_average ? (
+        {/* {vote_average ? (
           <p className="absolute left-[80px] bottom-[-15px] w-[50px] h-[50px] rounded-full bg-blue-700 text-[20px] flex justify-center items-center">
             {vote_average.toFixed(1)}
           </p>
-        ) : null}
+        ) : null} */}
       </div>
     </Link>
   );

@@ -25,7 +25,7 @@ const MovieList = ({
   const [translateX, setTranslateX] = useState<number>(0);
   const poster_width = 200;
   const poster_height = 300;
-  const poster_gap = 10;
+  const poster_gap = 20;
   const totalPostersLenth = movies.length * (poster_width + poster_gap);
 
   const handleLeftClick = () => {
@@ -59,11 +59,11 @@ const MovieList = ({
   return (
     <>
       {movies.length ? (
-        <div className="my-3">
-          <h2 className="mb-3 font-bold text-2xl">{title}</h2>
+        <div className="my-3  border absolute bottom-[20px] w-[100%]">
+          {/* <h2 className="mb-3 font-bold text-2xl">{title}</h2> */}
           <div
             className=" w-[100%] relative overflow-hidden"
-            style={{ height: `${poster_height + 45}px` }}
+            style={{ height: `${poster_height}px` }}
           >
             <div
               className={` w-[100%] flex absolute ease-in-out duration-500 `}

@@ -43,14 +43,14 @@ const MovieDetail = () => {
           className="absolute"
         />
 
-        <div className="absolute w-[100%] h-[807px] bg-gray-950/80 p-[20px]">
+        <div className="absolute w-[100%] h-[807px] bg-gradient-to-r from-gray-950 to-gray-950/0 p-[20px] ">
           <div className="w-[50%]">
-            <h1 className="text-[40px] font-semibold leading-[45px] mb-3">
+            <h1 className="text-[40px] font-semibold leading-[45px] mb-5">
               {movie?.title.toUpperCase()} ({movie?.vote_average.toFixed(1)}/10)
             </h1>
-            <p className="text-[15px] mb-3">{movie?.overview}</p>
+            <p className="text-[15px] mb-5">{movie?.overview}</p>
 
-            <div className="flex gap-5 mb-3">
+            <div className="flex gap-5 mb-5">
               <span className="font-semibold">
                 {getFormatedDate(movie ? movie?.release_date : "")}
               </span>
@@ -58,7 +58,7 @@ const MovieDetail = () => {
               <span className="font-semibold">{movie?.adult ? "A" : "UA"}</span>
             </div>
 
-            <div className="flex gap-3 text-[16px] font-semibold mb-3">
+            <div className="flex gap-3 text-[16px] font-semibold mb-5">
               {movie?.genres.map((e) => (
                 <span
                   key={e.id}
