@@ -19,7 +19,7 @@ const SearchMovie = () => {
   return (
     <form
       onSubmit={handleSearch}
-      className=" w-[300px] min-w-[300px] bg-blue-700/50   border-blue-700  rounded-full  px-2 flex "
+      className=" w-[300px] min-w-[300px] bg-gray-700/50   border-blue-700  rounded-full  px-2 flex "
     >
       <input
         type="text"
