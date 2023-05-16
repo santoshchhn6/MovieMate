@@ -1,3 +1,48 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: "SansPro";
+  src: url("./assets/fonts/SourceSansPro-Regular.ttf");
+}
+
+@font-face {
+  font-family: "SansPro-sb";
+  src: url("./assets/fonts/SourceSansPro-SemiBold.ttf");
+}
+
+@font-face {
+  font-family: "SansPro-b";
+  src: url("./assets/fonts/SourceSansPro-Bold.ttf");
+}
+
+@font-face {
+  font-family: "Poppin";
+  src: url("./assets/fonts/Poppins-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Poppin-sb";
+  src: url("./assets/fonts/Poppins-SemiBold.ttf");
+}
+
+@font-face {
+  font-family: "Poppin-b";
+  src: url("./assets/fonts/Poppins-Bold.ttf");
+}
+
+@font-face {
+  font-family: "OpenSans";
+  src: url("./assets/fonts/OpenSans-Regular.ttf");
+}
+
+@font-face {
+  font-family: "OpenSans-sb";
+  src: url("./assets/fonts/OpenSans-SemiBold.ttf");
+}
+
+@font-face {
+  font-family: "OpenSans-b";
+  src: url("./assets/fonts/OpenSans-Bold.ttf");
+}

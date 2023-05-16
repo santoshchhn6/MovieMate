@@ -5,10 +5,12 @@ import upcomingMovieSlice from "./upcomingMovieSlice";
 import nowPlayingMovieSlice from "./nowPlayingMovieSlice";
 import topRatedMovieSlice from "./topRatedMovieSlice";
 import searchResultMovieSlice from "./searchresultMovieSlice";
+import movieSlice from "./movieSlice";
 
 const store = configureStore({
   reducer: {
     app: appSlice.reducer,
+    movie:movieSlice.reducer,
     popular: popularMovieSlice.reducer,
     upcoming: upcomingMovieSlice.reducer,
     nowPlaying: nowPlayingMovieSlice.reducer,

@@ -1,10 +1,11 @@
 import { appDispatch } from ".";
-import { Movie } from "../type";
+import { Genre, Movie } from "../type";
 import { upcomingMovieAction } from "./upcomingMovieSlice";
 import { nowPlayingMovieAction } from "./nowPlayingMovieSlice";
 import { popularMovieAction } from "./popularMovieSlice";
 import { searchResultMovieAction } from "./searchresultMovieSlice";
 import { topRatedMovieAction } from "./topRatedMovieSlice";
+import { movieAction } from "./movieSlice";
 
 export const fetchPopularMovie = (currentPage = 1) => {
   return async (dispatch: appDispatch) => {
@@ -56,6 +57,18 @@ export const fetchTopRatedMovie = (currentPage = 1) => {
 
 export const fetchSearchMovie = (searchInput: string, currentPage = 1) => {
   return async (dispatch: appDispatch) => {
+    const fetchSearchMovieHandler = async (
+      search: string,
+      currentPage: number
+    ): Promise<Movie[]> => {
+      const res = await fetch(
+        `https://api.themoviedb.org/3/search/movie?api_key=${
+          import.meta.env.VITE_API_KEY
+        }&language=en-US&page=${currentPage}&include_adult=false&query=${search}`
+      );
+      const data = await res.json();
+      return data.results;
+    };
     try {
       const data = await fetchSearchMovieHandler(searchInput, currentPage);
       dispatch(searchResultMovieAction.addMovies(data));
@@ -66,17 +79,25 @@ export const fetchSearchMovie = (searchInput: string, currentPage = 1) => {
   };
 };
 
-const fetchSearchMovieHandler = async (
-  search: string,
-  currentPage: number
-): Promise<Movie[]> => {
-  const res = await fetch(
-    `https://api.themoviedb.org/3/search/movie?api_key=${
-      import.meta.env.VITE_API_KEY
-    }&language=en-US&page=${currentPage}&include_adult=false&query=${search}`
-  );
-  const data = await res.json();
-  return data.results;
+export const fetchMovieGenre = () => {
+  return async (dispatch: appDispatch) => {
+    const fetchMovieGenreHandler = async (): Promise<Genre[]> => {
+      const res = await fetch(
+        `https://api.themoviedb.org/3/genre/movie/list?language=en-US&api_key=${
+          import.meta.env.VITE_API_KEY
+        }`
+      );
+      const data = await res.json();
+      return data.genres;
+    };
+    try {
+      const data = await fetchMovieGenreHandler();
+      dispatch(movieAction.addGenres(data));
+      dispatch(searchResultMovieAction.setTotalPage(data.length));
+    } catch (err) {
+      console.log(err);
+    }
+  };
 };
 
 const fetchHandler = async (

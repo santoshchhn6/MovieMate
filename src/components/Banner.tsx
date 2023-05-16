@@ -9,6 +9,7 @@ import Rating from "./Rating";
 
 const Banner = () => {
   const popular = useSelector((state: RootState) => state.popular);
+  const genres = useSelector((state: RootState) => state.movie.genres);
   const dispatch = useDispatch<appDispatch>();
 
   const { width } = useWindowSize();
@@ -48,15 +49,27 @@ const Banner = () => {
               style={{ width: `100%`, height: "100%" }}
               className="absolute object-fill"
             />
-            <div className="absolute w-[100%] h-[100%] bg-black/50"></div>
+            <div className="absolute w-[100%] h-[100%] bg-gradient-to-r from-black via-black/0 via-20% via-black/0 via-80%  to-black"></div>
             <div className="absolute w-[100%] h-[100%] ">
-              <div className="ml-[50px] mt-[200px]">
-                <h1 className="text-[50px]">{movie.title}</h1>
-                <p className="text-[20px]">
+              <div className="w-[50%] ml-[50px] mt-[200px]">
+                <h1 className="text-[50px] mb-3 font-['Poppin-sb']">
+                  {movie.title}
+                </h1>
+                <p className="text-[20px] mb-3 font-['Poppin']">
                   {" "}
                   {getFormatedDate(movie ? movie?.release_date : "")}
                 </p>
-                <Rating />
+                <Rating rating={movie.vote_average} />
+                <div className="flex gap-3 text-[18px] font-['SansPro-sb'] my-3">
+                  {movie.genre_ids?.map((id, index) => (
+                    <span
+                      key={index}
+                      className="border px-3 rounded-full bg-black/90"
+                    >
+                      {genres.find((genre) => genre.id === id)?.name}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
