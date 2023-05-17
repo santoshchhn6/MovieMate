@@ -93,7 +93,27 @@ export const fetchMovieGenre = () => {
     try {
       const data = await fetchMovieGenreHandler();
       dispatch(movieAction.addGenres(data));
-      dispatch(searchResultMovieAction.setTotalPage(data.length));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const fetchMovieTrailer = (id: number) => {
+  return async (dispatch: appDispatch) => {
+    const fetchMovieTrailerHandler = async () => {
+      const res = await fetch(
+        `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${
+          import.meta.env.VITE_API_KEY
+        }`
+      );
+      const data = await res.json();
+      const trailers = data.results;
+      return trailers.find((e: { type: string }) => e.type === "Trailer").id;
+    };
+    try {
+      const data = await fetchMovieTrailerHandler();
+      dispatch(movieAction.addTrailer(data));
     } catch (err) {
       console.log(err);
     }
