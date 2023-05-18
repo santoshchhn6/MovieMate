@@ -5,7 +5,7 @@ import { AiOutlineMenu } from "react-icons/ai";
 const Header = () => {
   const style = "hover:text-blue-500 cursor-pointer";
   return (
-    <div className=" absolute w-[100%]  flex items-center gap-3 justify-between px-3 py-2">
+    <div className=" w-[1440px] h-[60px] flex items-center gap-3 justify-between px-3 py-2 pr-10 fixed top-0 z-10">
       <div className="flex gap-3 items-center">
         <AiOutlineMenu className="text-white text-[20px] hover:text-blue-700 cursor-pointer" />
         <Link to={"/"} className="text-[20px] font-semibold">

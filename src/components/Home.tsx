@@ -26,7 +26,6 @@ const Home = () => {
         className="absolute w-[100%] h-[100%] object-cover "
       /> */}
       {/* <div className="absolute w-[100%] h-[100%] bg-black/50"></div> */}
-      {/* <Header /> */}
       {/* <SearchResult /> */}
       {/* <PopularMovie /> */}
       {/* <UpcomingMovie /> */}

@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getFormatedDate, getFormatedTime } from "../date";
 import { formatter } from "../currency";
+import { BsFillPlayFill } from "react-icons/bs";
+import Rating from "./Rating";
 
 interface MovieDetail {
   title: string;
@@ -34,23 +36,27 @@ const MovieDetail = () => {
       .then((data) => setMovie(data));
   }, [id]);
   return (
-    <div>
-      {/* Poster and detail */}
-      <div className="relative w-[100%] h-[807px]">
-        <img
-          src={`https://image.tmdb.org/t/p/original/${movie?.backdrop_path}`}
-          alt={`${movie?.title}`}
-          className="absolute"
-        />
+    <div className="relative w-[100%] h-[700px] overflow-hidden">
+      <img
+        src={`https://image.tmdb.org/t/p/w500/${movie?.backdrop_path}`}
+        alt={`${movie?.title}`}
+        className="absolute w-[100%] h-[100%] blur-lg"
+      />
 
-        <div className="absolute w-[100%] h-[807px] bg-gradient-to-r from-gray-950 to-gray-950/0 p-[20px] ">
-          <div className="w-[50%]">
-            <h1 className="text-[40px] font-semibold leading-[45px] mb-5">
-              {movie?.title.toUpperCase()} ({movie?.vote_average.toFixed(1)}/10)
+      <div className="absolute flex items-center justify-center w-[100%] h-[100%] bg-gradient-to-r from-black/90 via-black/50 to-black/90">
+        <div className=" w-[80%] flex gap-10  ">
+          <img
+            src={`https://image.tmdb.org/t/p/w300/${movie?.poster_path}`}
+            className="w-[300px] h-[450px] rounded-md"
+          />
+          <div>
+            <h1 className="text-[50px] mb-3 font-['Poppin-sb']">
+              {movie?.title.toUpperCase()}
             </h1>
-            <p className="text-[15px] mb-5">{movie?.overview}</p>
 
-            <div className="flex gap-5 mb-5">
+            <Rating rating={movie ? movie.vote_average : 0} />
+
+            <div className="flex gap-5 my-5 font-['Poppin'] text-[24px]">
               <span className="font-semibold">
                 {getFormatedDate(movie ? movie?.release_date : "")}
               </span>
@@ -58,23 +64,32 @@ const MovieDetail = () => {
               <span className="font-semibold">{movie?.adult ? "A" : "UA"}</span>
             </div>
 
-            <div className="flex gap-3 text-[16px] font-semibold mb-5">
+            <div className="flex gap-3  text-[20px] font-['SansPro-sb'] mb-5">
               {movie?.genres.map((e) => (
                 <span
                   key={e.id}
-                  className="border border-white px-2 rounded-full"
+                  className=" bg-black/50 border border-white px-3   rounded-full "
                 >
                   {e.name}
                 </span>
               ))}
             </div>
 
-            {movie?.budget ? (
+            <p className="text-[20px] mb-5 font-['OpenSans']">
+              {movie?.overview}
+            </p>
+
+            <button className="bg-blue-600 text-[20px] px-4 py-1 rounded-md font-['OpenSans-b'] flex gap-1 items-center">
+              <BsFillPlayFill />
+              Watch Trailer
+            </button>
+
+            {/* {movie?.budget ? (
               <p>Budget : {formatter.format(movie ? movie.budget : 0)}</p>
             ) : null}
             {movie?.revenue ? (
               <p>Revenue : {formatter.format(movie ? movie.revenue : 0)}</p>
-            ) : null}
+            ) : null} */}
           </div>
         </div>
       </div>
