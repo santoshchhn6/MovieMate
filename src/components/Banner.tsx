@@ -1,16 +1,19 @@
 import { useSelector } from "react-redux";
 import { RootState, appDispatch } from "../redux";
 import { useEffect, useState } from "react";
-import { fetchPopularMovie } from "../redux/movie_action";
+import { fetchMovieTrailer, fetchPopularMovie } from "../redux/movie_action";
 import { useDispatch } from "react-redux";
 import useWindowSize from "../useWindowSize";
 import { getFormatedDate } from "../date";
 import Rating from "./Rating";
 import { BsFillPlayFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import { movieAction } from "../redux/movieSlice";
+import Trailer from "./Trailer";
 
 const Banner = () => {
   const popular = useSelector((state: RootState) => state.popular);
+
   const genres = useSelector((state: RootState) => state.movie.genres);
   const dispatch = useDispatch<appDispatch>();
 
@@ -30,19 +33,19 @@ const Banner = () => {
     dispatch(fetchPopularMovie());
   }, [dispatch]);
 
-  console.log({
-    width,
-  });
+  const onClickTrailerHandler = (id: number) => {
+    dispatch(fetchMovieTrailer(id));
+    dispatch(movieAction.setShowTrailer(true));
+  };
 
   return (
-    <div className="  w-[100%] h-[70%] overflow-hidden">
+    <div className="  w-[100%] h-[80%] overflow-hidden">
       <div
         className=" h-[100%] flex ease-in-out duration-[5s]"
         style={{ width: `${width}px`, transform: `translateX(-${x}px)` }}
       >
         {popular.movies.map((movie, index) => (
-          <Link
-            to={`/movie/${movie.id}`}
+          <div
             key={index}
             style={{ minWidth: `${width}px`, height: "100%" }}
             className="relative "
@@ -76,35 +79,29 @@ const Banner = () => {
                 <p className="mb-3 text-[20px] font-['OpenSans']">
                   {movie.overview}
                 </p>
-                <button className="bg-blue-600 px-2 py-1 rounded-md font-['OpenSans-b'] flex gap-1 items-center">
-                  <BsFillPlayFill size={24} />
-                  Trailer
-                </button>
+                <div className="flex gap-3">
+                  <button
+                    className="bg-blue-600 px-2 py-1 rounded-md font-['OpenSans-b'] flex gap-1 items-center"
+                    onClick={() => onClickTrailerHandler(movie.id)}
+                  >
+                    <BsFillPlayFill size={24} />
+                    Trailer
+                  </button>
+
+                  <Link
+                    to={`/movie/${movie.id}`}
+                    className="bg-blue-600 px-2 py-1 rounded-md font-['OpenSans-b'] flex gap-1 items-center"
+                  >
+                    More about
+                  </Link>
+                </div>
               </div>
             </div>
-          </Link>
+          </div>
         ))}
       </div>
-      {/* <h1>Frame</h1> */}
-      {/* <iframe
-        width="560"
-        height="315"
-        src={`https://www.youtube.com/embed/63e6b18f2fccee008171af8c`}
-        title="Movie Trailer"
-        allowFullScreen
-      ></iframe> */}
-      {/* <video width="750" height="500" controls>
-        <source src="blob:https://www.youtube.com/63e6b18f2fccee008171af8c" />
-      </video> */}
-      {/* <video
-        tabindex="-1"
-        class="video-stream html5-main-video"
-        webkit-playsinline=""
-        playsinline=""
-        controlslist="nodownload"
-        style="width: 1294px; height: 728px; left: 1px; top: 0px;"
-        src="blob:https://www.youtube.com/ee71821f-d4df-4bed-af3b-4fe9f5e416ad"
-      ></video> */}
+
+      <Trailer />
     </div>
   );
 };

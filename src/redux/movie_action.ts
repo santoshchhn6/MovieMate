@@ -109,7 +109,7 @@ export const fetchMovieTrailer = (id: number) => {
       );
       const data = await res.json();
       const trailers = data.results;
-      return trailers.find((e: { type: string }) => e.type === "Trailer").id;
+      return trailers.find((e: { type: string }) => e.type === "Trailer").key;
     };
     try {
       const data = await fetchMovieTrailerHandler();

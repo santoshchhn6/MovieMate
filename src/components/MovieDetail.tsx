@@ -4,8 +4,14 @@ import { getFormatedDate, getFormatedTime } from "../date";
 import { formatter } from "../currency";
 import { BsFillPlayFill } from "react-icons/bs";
 import Rating from "./Rating";
+import { useDispatch } from "react-redux";
+import { appDispatch } from "../redux";
+import { fetchMovieTrailer } from "../redux/movie_action";
+import { movieAction } from "../redux/movieSlice";
+import Trailer from "./Trailer";
 
 interface MovieDetail {
+  id: number;
   title: string;
   genres: {
     id: number;
@@ -26,6 +32,8 @@ const MovieDetail = () => {
   const { id } = useParams();
   const [movie, setMovie] = useState<MovieDetail>();
 
+  const dispatch = useDispatch<appDispatch>();
+
   useEffect(() => {
     fetch(
       `https://api.themoviedb.org/3/movie/${id}?api_key=${
@@ -35,6 +43,11 @@ const MovieDetail = () => {
       .then((res) => res.json())
       .then((data) => setMovie(data));
   }, [id]);
+
+  const onClickTrailerHandler = (id: number) => {
+    dispatch(fetchMovieTrailer(id));
+    dispatch(movieAction.setShowTrailer(true));
+  };
   return (
     <div className="relative w-[100%] h-[700px] overflow-hidden">
       <img
@@ -79,7 +92,10 @@ const MovieDetail = () => {
               {movie?.overview}
             </p>
 
-            <button className="bg-blue-600 text-[20px] px-4 py-1 rounded-md font-['OpenSans-b'] flex gap-1 items-center">
+            <button
+              className="bg-blue-600 text-[20px] px-4 py-1 rounded-md font-['OpenSans-b'] flex gap-1 items-center"
+              onClick={() => onClickTrailerHandler(movie ? movie.id : 0)}
+            >
               <BsFillPlayFill />
               Watch Trailer
             </button>
@@ -93,6 +109,7 @@ const MovieDetail = () => {
           </div>
         </div>
       </div>
+      <Trailer />
     </div>
   );
 };
