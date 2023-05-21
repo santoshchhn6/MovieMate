@@ -10,7 +10,7 @@ const Trailer = () => {
   const dispatch = useDispatch<appDispatch>();
 
   const onPlayerReady: YouTubeProps["onReady"] = (event) => {
-    event.target.pauseVideo();
+    event.target.playVideo();
   };
 
   const handleCloseTrailer = () => {
@@ -35,7 +35,7 @@ const Trailer = () => {
               width: "960",
               height: "540",
               playerVars: {
-                autoplay: 1,
+                autoplay: 0,
               },
             }}
             onReady={onPlayerReady}

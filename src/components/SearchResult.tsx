@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import MovieList from "./MovieList";
+import MovieList from "./Slider";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, appDispatch } from "../redux";
 import { fetchSearchMovie } from "../redux/movie_action";

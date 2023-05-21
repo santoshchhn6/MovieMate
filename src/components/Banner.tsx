@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { RootState, appDispatch } from "../redux";
 import { useEffect, useState } from "react";
-import { fetchMovieTrailer, fetchPopularMovie } from "../redux/movie_action";
+import { fetchMovieTrailer, fetchTrendingMovie } from "../redux/movie_action";
 import { useDispatch } from "react-redux";
 import useWindowSize from "../useWindowSize";
 import { getFormatedDate } from "../date";
@@ -13,7 +13,6 @@ import Trailer from "./Trailer";
 
 const Banner = () => {
   const popular = useSelector((state: RootState) => state.popular);
-
   const genres = useSelector((state: RootState) => state.movie.genres);
   const dispatch = useDispatch<appDispatch>();
 
@@ -30,7 +29,7 @@ const Banner = () => {
   }, [popular.movies.length, width, x]);
 
   useEffect(() => {
-    dispatch(fetchPopularMovie());
+    dispatch(fetchTrendingMovie());
   }, [dispatch]);
 
   const onClickTrailerHandler = (id: number) => {
@@ -39,7 +38,7 @@ const Banner = () => {
   };
 
   return (
-    <div className="  w-[100%] h-[80%] overflow-hidden">
+    <div className="  w-[] h-[600px] overflow-hidden">
       <div
         className=" h-[100%] flex ease-in-out duration-[5s]"
         style={{ width: `${width}px`, transform: `translateX(-${x}px)` }}

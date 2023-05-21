@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import MovieList from "./MovieList";
+import MovieList from "./Slider";
 import { Movie } from "../type";
 import { fetchPopularMovie } from "../redux/movie_action";
 import { useDispatch } from "react-redux";

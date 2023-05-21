@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchTopRatedMovie } from "../redux/movie_action";
 import { appDispatch, RootState } from "../redux";
-import MovieList from "./MovieList";
+import MovieList from "./Slider";
 import { topRatedMovieAction } from "../redux/topRatedMovieSlice";
 
 const TopRatedMovie = () => {

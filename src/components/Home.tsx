@@ -18,16 +18,11 @@ const Home = () => {
   }, [dispatch]);
 
   return (
-    <div className="w-[1440px] h-[810px] relative">
+    <div>
       <Banner />
-      {/* <img
-        src="https://image.tmdb.org/t/p/original/lWqjXgut48IK5f5IRbDBAoO2Epp.jpg"
-        alt=""
-        className="absolute w-[100%] h-[100%] object-cover "
-      /> */}
-      {/* <div className="absolute w-[100%] h-[100%] bg-black/50"></div> */}
+
       {/* <SearchResult /> */}
-      {/* <PopularMovie /> */}
+      <PopularMovie />
       {/* <UpcomingMovie /> */}
       {/* <NowPlayingMovie /> */}
       {/* <TopRatedMovie /> */}
