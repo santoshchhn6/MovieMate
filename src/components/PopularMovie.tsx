@@ -10,22 +10,14 @@ const PopularMovie = () => {
   const dispatch = useDispatch<appDispatch>();
 
   useEffect(() => {
-    dispatch(fetchPopularMovie());
+    dispatch(fetchPopularMovie(popularMovie.currentPage));
   }, [dispatch, popularMovie.currentPage]);
 
-  const handleCurrentPage = (page: number) => {
-    dispatch(popularMovieAction.setCurrentPage(page));
+  const handleNextPage = () => {
+    dispatch(popularMovieAction.nextPage());
   };
 
-  return (
-    <MovieList
-      title="Popular"
-      movies={popularMovie.movies}
-      currentPage={popularMovie.currentPage}
-      totalPages={popularMovie.totalPages}
-      setCurrentPage={handleCurrentPage}
-    />
-  );
+  return <MovieList movies={popularMovie.movies} nextPage={handleNextPage} />;
 };
 
 export default PopularMovie;

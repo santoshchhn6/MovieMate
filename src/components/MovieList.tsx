@@ -1,24 +1,15 @@
-import { useState } from "react";
-import Arrow from "./Buttons/Arrow";
 import Poster from "./Poster";
 import { Movie } from "../type";
-import useWindowSize from "../useWindowSize";
-
 interface Props {
-  title: string;
   movies: Movie[];
-  currentPage: number;
-  totalPages: number;
-  setCurrentPage: (page: number) => void;
+  nextPage: () => void;
 }
 
-const MovieList = ({ movies }: Props) => {
+const MovieList = ({ movies, nextPage }: Props) => {
   return (
-    <div className="w-[1440px] p-5 flex justify-center">
+    <div className="w-[1440px] flex justify-center">
       {movies.length ? (
-        <div
-          className={` flex flex-wrap gap-5 justify-evenly ease-in-out duration-500`}
-        >
+        <div className="w-[100%] p-5 grid gap-5 grid-cols-[repeat(auto-fit,minmax(200px,1fr))] ease-in-out duration-500 ">
           {movies.map((movie, i) => (
             <Poster
               key={i}
@@ -31,6 +22,12 @@ const MovieList = ({ movies }: Props) => {
               vote_average={movie.vote_average}
             />
           ))}
+          <div
+            onClick={nextPage}
+            className="w-[200px] h-[300px] border hover:border-blue-600 hover:text-blue-600 cursor-pointer rounded-xl flex justify-center items-center text-[30px] font-['SansPro-sb']"
+          >
+            More
+          </div>
         </div>
       ) : (
         <span>no movie available</span>

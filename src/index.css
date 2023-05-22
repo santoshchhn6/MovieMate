@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+.movielist {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  background: blue;
+}
+
 @font-face {
   font-family: "SansPro";
   src: url("./assets/fonts/SourceSansPro-Regular.ttf");

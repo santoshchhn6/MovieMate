@@ -1,9 +1,9 @@
 import { useEffect } from "react";
-import MovieList from "./Slider";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, appDispatch } from "../redux";
 import { fetchSearchMovie } from "../redux/movie_action";
 import { searchResultMovieAction } from "../redux/searchresultMovieSlice";
+import MovieList from "./MovieList";
 
 const SearchResult = () => {
   const searchInput = useSelector((state: RootState) => state.app.search);
@@ -14,19 +14,11 @@ const SearchResult = () => {
     dispatch(fetchSearchMovie(searchInput));
   }, [dispatch, searchResult.currentPage, searchInput]);
 
-  const handleCurrentPage = (page: number) => {
-    dispatch(searchResultMovieAction.setCurrentPage(page));
+  const handleNextPage = () => {
+    dispatch(searchResultMovieAction.nextPage());
   };
 
-  return (
-    <MovieList
-      title="Search Result"
-      movies={searchResult.movies}
-      currentPage={searchResult.currentPage}
-      totalPages={searchResult.totalPages}
-      setCurrentPage={handleCurrentPage}
-    />
-  );
+  return <MovieList movies={searchResult.movies} nextPage={handleNextPage} />;
 };
 
 export default SearchResult;

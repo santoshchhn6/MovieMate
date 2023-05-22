@@ -14,8 +14,8 @@ const searchResultMovieSlice = createSlice({
     addMovies(state, action: PayloadAction<Movie[]>) {
       state.movies = action.payload;
     },
-    setCurrentPage(state, action: PayloadAction<number>) {
-      state.currentPage = action.payload;
+    nextPage(state) {
+      state.currentPage = state.currentPage + 1;
     },
     setTotalPage(state, action: PayloadAction<number>) {
       state.totalPages = action.payload;
