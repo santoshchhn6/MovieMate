@@ -4,13 +4,15 @@ import { Genre } from "../type";
 interface MovieState {
   genres: Genre[];
   trailer: string;
-  showTrailer:boolean;
+  showTrailer: boolean;
+  movieSelected: "popular" | "nowPlaying" | "topRated" | "upcoming";
 }
 
 const initialState: MovieState = {
   genres: [],
   trailer: "",
-  showTrailer:false
+  showTrailer: false,
+  movieSelected: "popular",
 };
 
 const movieSlice = createSlice({
@@ -25,6 +27,9 @@ const movieSlice = createSlice({
     },
     setShowTrailer(state, action: PayloadAction<boolean>) {
       state.showTrailer = action.payload;
+    },
+    setSelectedMovie(state, action) {
+      state.movieSelected = action.payload;
     },
   },
 });
