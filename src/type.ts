@@ -13,6 +13,7 @@ export interface Movie {
 export interface MovieList {
   currentPage: number;
   totalPages: number;
+  loading:boolean;
   movies: Movie[];
 }
 

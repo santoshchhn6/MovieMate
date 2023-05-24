@@ -10,19 +10,14 @@ const TopRatedMovie = () => {
   const dispatch = useDispatch<appDispatch>();
 
   useEffect(() => {
-    dispatch(fetchTopRatedMovie());
+    dispatch(fetchTopRatedMovie(topRatedMovie.currentPage));
   }, [dispatch, topRatedMovie.currentPage]);
 
   const handleNextPage = () => {
     dispatch(topRatedMovieAction.nextPage());
   };
 
-  return (
-    <MovieList
-      movies={topRatedMovie.movies}
-      nextPage={handleNextPage}
-    />
-  );
+  return <MovieList movies={topRatedMovie.movies} nextPage={handleNextPage} loading={topRatedMovie.loading}/>;
 };
 
 export default TopRatedMovie;

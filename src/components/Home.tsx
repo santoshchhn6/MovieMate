@@ -22,18 +22,18 @@ const Home = () => {
     dispatch(fetchMovieGenre());
   }, [dispatch]);
 
-  const handleOnChange=(event:React.ChangeEvent<HTMLSelectElement>)=>{
-    dispatch(movieAction.setSelectedMovie(event.target.value))
-  }
+  const handleOnChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    dispatch(movieAction.setSelectedMovie(event.target.value));
+  };
 
   return (
     <div>
       <Banner />
 
-      {/* <SearchResult /> */}
       <select
-      onChange={handleOnChange}
-      className="m-5 p-2 w-[220px]  bg-blue-600 text-xl outline-none rounded-lg font-['Poppin-sb']">
+        onChange={handleOnChange}
+        className="m-5 p-2 w-[220px]  bg-blue-600 text-xl outline-none rounded-lg font-['Poppin-sb']"
+      >
         <option value="popular">Popular</option>
         <option value="upcoming">Upcoming</option>
         <option value="nowPlaying">Now Playing</option>

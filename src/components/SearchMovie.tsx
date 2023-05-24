@@ -3,10 +3,12 @@ import { BsSearch } from "react-icons/bs";
 import { useDispatch } from "react-redux";
 import { performSearch } from "../redux/app_slice";
 import { appDispatch } from "../redux";
+import { useNavigate } from "react-router-dom";
 
 const SearchMovie = () => {
   const [input, setInput] = useState<string>("");
   const dispatch = useDispatch<appDispatch>();
+  const navigate = useNavigate();
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -14,6 +16,7 @@ const SearchMovie = () => {
     if (input) {
       console.log(input);
       dispatch(performSearch(input));
+      navigate("/search");
     }
   };
   return (

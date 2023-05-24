@@ -10,7 +10,7 @@ const NowPlayingMovie = () => {
   const dispatch = useDispatch<appDispatch>();
 
   useEffect(() => {
-    dispatch(fetchNowPlayingMovie());
+    dispatch(fetchNowPlayingMovie(nowPlayingMovie.currentPage));
   }, [dispatch, nowPlayingMovie.currentPage]);
 
   const handleNextPage = () => {
@@ -18,7 +18,11 @@ const NowPlayingMovie = () => {
   };
 
   return (
-    <MovieList movies={nowPlayingMovie.movies} nextPage={handleNextPage} />
+    <MovieList
+      movies={nowPlayingMovie.movies}
+      nextPage={handleNextPage}
+      loading={nowPlayingMovie.loading}
+    />
   );
 };
 

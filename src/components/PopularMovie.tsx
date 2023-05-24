@@ -17,7 +17,7 @@ const PopularMovie = () => {
     dispatch(popularMovieAction.nextPage());
   };
 
-  return <MovieList movies={popularMovie.movies} nextPage={handleNextPage} />;
+  return <MovieList movies={popularMovie.movies} nextPage={handleNextPage} loading={popularMovie.loading}/>;
 };
 
 export default PopularMovie;

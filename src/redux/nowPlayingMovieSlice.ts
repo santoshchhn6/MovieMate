@@ -4,6 +4,7 @@ import { Movie, MovieList } from "../type";
 const initialState: MovieList = {
   currentPage: 1,
   totalPages: 1,
+  loading: false,
   movies: [],
 };
 
@@ -19,6 +20,9 @@ const nowPlayingMovieSlice = createSlice({
     },
     setTotalPage(state, action: PayloadAction<number>) {
       state.totalPages = action.payload;
+    },
+    setLoading(state, action: PayloadAction<boolean>) {
+      state.loading = action.payload;
     },
   },
 });

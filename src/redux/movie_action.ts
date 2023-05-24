@@ -10,6 +10,7 @@ import { trendingMovieAction } from "./TrendingMovieSlice";
 
 export const fetchTrendingMovie = (currentPage = 1) => {
   return async (dispatch: appDispatch) => {
+    dispatch(trendingMovieAction.setLoading(true));
     const fetchTrendingMovieHandler = async () => {
       const res = await fetch(
         `https://api.themoviedb.org/3/trending/movie/day?api_key=${
@@ -22,6 +23,7 @@ export const fetchTrendingMovie = (currentPage = 1) => {
       const data = await fetchTrendingMovieHandler();
       dispatch(trendingMovieAction.addMovies(data.results));
       dispatch(trendingMovieAction.setTotalPage(data.total_pages));
+      dispatch(trendingMovieAction.setLoading(false));
     } catch (err) {
       console.log(err);
     }
@@ -78,6 +80,8 @@ export const fetchTopRatedMovie = (currentPage = 1) => {
 
 export const fetchSearchMovie = (searchInput: string, currentPage = 1) => {
   return async (dispatch: appDispatch) => {
+    dispatch(searchResultMovieAction.setLoading(true));
+
     const fetchSearchMovieHandler = async (
       search: string,
       currentPage: number
@@ -91,8 +95,13 @@ export const fetchSearchMovie = (searchInput: string, currentPage = 1) => {
     };
     try {
       const data = await fetchSearchMovieHandler(searchInput, currentPage);
-      dispatch(searchResultMovieAction.addMovies(data.results));
-      dispatch(searchResultMovieAction.setTotalPage(data.total_pages));
+      if (currentPage === 1) {
+        dispatch(searchResultMovieAction.setMovies(data.results));
+        dispatch(searchResultMovieAction.setTotalPage(data.total_pages));
+      } else {
+        dispatch(searchResultMovieAction.addMovies(data.results));
+      }
+      dispatch(searchResultMovieAction.setLoading(false));
     } catch (err) {
       console.log(err);
     }

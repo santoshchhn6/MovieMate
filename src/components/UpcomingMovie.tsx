@@ -10,14 +10,20 @@ const UpcomingMovie = () => {
   const dispatch = useDispatch<appDispatch>();
 
   useEffect(() => {
-    dispatch(fetchUpcomingMovie());
+    dispatch(fetchUpcomingMovie(upcomingMovie.currentPage));
   }, [dispatch, upcomingMovie.currentPage]);
 
   const handleNextPage = () => {
     dispatch(upcomingMovieAction.nextPage());
   };
 
-  return <MovieList movies={upcomingMovie.movies} nextPage={handleNextPage} />;
+  return (
+    <MovieList
+      movies={upcomingMovie.movies}
+      nextPage={handleNextPage}
+      loading={upcomingMovie.loading}
+    />
+  );
 };
 
 export default UpcomingMovie;

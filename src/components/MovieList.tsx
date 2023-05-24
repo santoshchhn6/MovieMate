@@ -3,9 +3,10 @@ import { Movie } from "../type";
 interface Props {
   movies: Movie[];
   nextPage: () => void;
+  loading: boolean;
 }
 
-const MovieList = ({ movies, nextPage }: Props) => {
+const MovieList = ({ movies, nextPage, loading }: Props) => {
   return (
     <div className="w-[1440px] flex justify-center">
       {movies.length ? (
@@ -26,12 +27,10 @@ const MovieList = ({ movies, nextPage }: Props) => {
             onClick={nextPage}
             className="w-[200px] h-[300px] border hover:border-blue-600 hover:text-blue-600 cursor-pointer rounded-xl flex justify-center items-center text-[30px] font-['SansPro-sb']"
           >
-            More
+            {loading ? <span>Loading...</span> : <span>More</span>}
           </div>
         </div>
-      ) : (
-        <span>no movie available</span>
-      )}
+      ) : null}
     </div>
   );
 };

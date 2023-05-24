@@ -11,14 +11,14 @@ const SearchResult = () => {
   const dispatch = useDispatch<appDispatch>();
 
   useEffect(() => {
-    dispatch(fetchSearchMovie(searchInput));
+    dispatch(fetchSearchMovie(searchInput, searchResult.currentPage));
   }, [dispatch, searchResult.currentPage, searchInput]);
 
   const handleNextPage = () => {
     dispatch(searchResultMovieAction.nextPage());
   };
 
-  return <MovieList movies={searchResult.movies} nextPage={handleNextPage} />;
+  return <MovieList movies={searchResult.movies} nextPage={handleNextPage} loading={searchResult.loading}/>;
 };
 
 export default SearchResult;
