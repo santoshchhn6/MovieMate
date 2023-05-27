@@ -3,13 +3,13 @@ import { RootState, appDispatch } from "../redux";
 import { useEffect, useState } from "react";
 import { fetchMovieTrailer, fetchTrendingMovie } from "../redux/movie_action";
 import { useDispatch } from "react-redux";
-import useWindowSize from "../useWindowSize";
 import { getFormatedDate } from "../date";
 import Rating from "./Rating";
 import { BsFillPlayFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { movieAction } from "../redux/movieSlice";
 import Trailer from "./Trailer";
+import useWindowSize from "../customHooks/useWindowSize";
 
 const Banner = () => {
   const popular = useSelector((state: RootState) => state.popular);

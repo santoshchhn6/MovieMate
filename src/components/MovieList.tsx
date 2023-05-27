@@ -1,7 +1,8 @@
 import Poster from "./Poster";
 import { Movie } from "../type";
+import spinner from "../assets/loading.gif";
 interface Props {
-  movies: Movie[];
+  movies: Movie[] | undefined;
   nextPage: () => void;
   loading: boolean;
 }
@@ -9,7 +10,7 @@ interface Props {
 const MovieList = ({ movies, nextPage, loading }: Props) => {
   return (
     <div className="w-[1440px] flex justify-center">
-      {movies.length ? (
+      {movies?.length && !loading ? (
         <div className="w-[100%] p-5 grid gap-5 grid-cols-[repeat(auto-fit,minmax(200px,1fr))] ease-in-out duration-500 ">
           {movies.map((movie, i) => (
             <Poster
@@ -30,7 +31,11 @@ const MovieList = ({ movies, nextPage, loading }: Props) => {
             {loading ? <span>Loading...</span> : <span>More</span>}
           </div>
         </div>
-      ) : null}
+      ) : (
+        <div className="w-[100%] h-[100vh] flex justify-center items-center">
+          <img src={spinner} alt="" />
+        </div>
+      )}
     </div>
   );
 };

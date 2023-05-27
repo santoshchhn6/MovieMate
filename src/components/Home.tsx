@@ -1,4 +1,3 @@
-import SearchResult from "./SearchResult";
 import PopularMovie from "./PopularMovie";
 import UpcomingMovie from "./UpcomingMovie";
 import NowPlayingMovie from "./NowPlayingMovie";

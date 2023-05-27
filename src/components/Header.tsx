@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import SearchMovie from "./SearchMovie";
 import { AiOutlineMenu } from "react-icons/ai";
-import { useScrollHandler } from "../useScrollHandler";
+import { useScrollHandler } from "../customHooks/useScrollHandler";
 
 const Header = () => {
   const scrollPosition = useScrollHandler();
