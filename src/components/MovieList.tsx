@@ -10,9 +10,9 @@ interface Props {
 const MovieList = ({ movies, nextPage, loading }: Props) => {
   return (
     <div className="w-[1440px] flex justify-center">
-      {movies?.length && !loading ? (
+      {movies?.length || !loading ? (
         <div className="w-[100%] p-5 grid gap-5 grid-cols-[repeat(auto-fit,minmax(200px,1fr))] ease-in-out duration-500 ">
-          {movies.map((movie, i) => (
+          {movies?.map((movie, i) => (
             <Poster
               key={i}
               id={movie.id}
@@ -28,12 +28,16 @@ const MovieList = ({ movies, nextPage, loading }: Props) => {
             onClick={nextPage}
             className="w-[200px] h-[300px] border hover:border-blue-600 hover:text-blue-600 cursor-pointer rounded-xl flex justify-center items-center text-[30px] font-['SansPro-sb']"
           >
-            {loading ? <span>Loading...</span> : <span>More</span>}
+            {loading ? (
+              <img src={spinner} alt="" className="w-[100px] h-[100px]" />
+            ) : (
+              <span>More</span>
+            )}
           </div>
         </div>
       ) : (
         <div className="w-[100%] h-[100vh] flex justify-center items-center">
-          <img src={spinner} alt="" />
+          <img src={spinner} alt="" className="w-[100px] h-[100px]"/>
         </div>
       )}
     </div>

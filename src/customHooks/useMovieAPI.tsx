@@ -19,8 +19,10 @@ const useMovieAPI = (endpoint: string) => {
           }&page=${currentPage}`
         );
         const data = await response.json();
-        setMovies((movies) => [...movies, ...data.results]);
-        setTotalPages(data.total_pages);
+        if (currentPage === 1) {
+          setMovies(data.results);
+          setTotalPages(data.total_pages);
+        } else setMovies((movies) => [...movies, ...data.results]);
       } catch (error: unknown) {
         let message;
         if (error instanceof Error) message = error.message;
@@ -38,7 +40,11 @@ const useMovieAPI = (endpoint: string) => {
       setCurrentPage((currentPage) => currentPage + 1);
   };
 
-  return { movies, isLoading, error, currentPage, nextPage };
+  const resetCurrentPage = () => {
+    setCurrentPage(1);
+  };
+
+  return { movies, isLoading, error, currentPage, nextPage, resetCurrentPage };
 };
 
 export default useMovieAPI;
