@@ -10,16 +10,21 @@ import { Link } from "react-router-dom";
 import { movieAction } from "../redux/movieSlice";
 import Trailer from "./Trailer";
 import useWindowSize from "../customHooks/useWindowSize";
-import useMovieAPI from "../customHooks/useMovieAPI";
 import loadingImg from "../assets/loading.gif";
+import { trendingMovieAction } from "../redux/TrendingMovieSlice";
 
 const Banner = () => {
-  const { movies, isLoading } = useMovieAPI("/trending/movie/day");
+  const { movies, loading, currentPage } = useSelector(
+    (state: RootState) => state.trending
+  );
   const genres = useSelector((state: RootState) => state.movie.genres);
-  const dispatch = useDispatch<appDispatch>();
-
   const { width } = useWindowSize();
   const [x, setX] = useState(0);
+  const dispatch = useDispatch<appDispatch>();
+
+  useEffect(() => {
+    dispatch(fetchTrendingMovie(currentPage));
+  }, [currentPage, dispatch]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -30,10 +35,6 @@ const Banner = () => {
     return () => clearInterval(interval);
   }, [movies.length, width, x]);
 
-  useEffect(() => {
-    dispatch(fetchTrendingMovie());
-  }, [dispatch]);
-
   const onClickTrailerHandler = (id: number) => {
     dispatch(fetchMovieTrailer(id));
     dispatch(movieAction.setShowTrailer(true));
@@ -41,7 +42,7 @@ const Banner = () => {
 
   return (
     <div className=" h-[600px] overflow-hidden ">
-      {!isLoading ? (
+      {!loading ? (
         <div
           className=" h-[100%] flex ease-in-out duration-[5s]"
           style={{ width: `${width}px`, transform: `translateX(-${x}px)` }}

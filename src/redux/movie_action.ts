@@ -11,16 +11,9 @@ import { trendingMovieAction } from "./TrendingMovieSlice";
 export const fetchTrendingMovie = (currentPage = 1) => {
   return async (dispatch: appDispatch) => {
     dispatch(trendingMovieAction.setLoading(true));
-    const fetchTrendingMovieHandler = async () => {
-      const res = await fetch(
-        `https://api.themoviedb.org/3/trending/movie/day?api_key=${
-          import.meta.env.VITE_API_KEY
-        }&page=${currentPage}`
-      );
-      return await res.json();
-    };
+    
     try {
-      const data = await fetchTrendingMovieHandler();
+      const data = await fetchData(`/trending/movie/day?page=${currentPage}&`);
       dispatch(trendingMovieAction.addMovies(data.results));
       dispatch(trendingMovieAction.setTotalPage(data.total_pages));
       dispatch(trendingMovieAction.setLoading(false));
@@ -33,7 +26,7 @@ export const fetchTrendingMovie = (currentPage = 1) => {
 export const fetchPopularMovie = (currentPage = 1) => {
   return async (dispatch: appDispatch) => {
     try {
-      const data = await fetchHandler(currentPage, "popular");
+      const data = await fetchData(`/movie/popular?page=${currentPage}&`);
       dispatch(popularMovieAction.addMovies(data.results));
       dispatch(popularMovieAction.setTotalPage(data.total_pages));
     } catch (err) {
@@ -45,7 +38,7 @@ export const fetchPopularMovie = (currentPage = 1) => {
 export const fetchUpcomingMovie = (currentPage = 1) => {
   return async (dispatch: appDispatch) => {
     try {
-      const data = await fetchHandler(currentPage, "upcoming");
+      const data = await fetchData(`/movie/upcoming?page=${currentPage}&`);
       dispatch(upcomingMovieAction.addMovies(data.results));
       dispatch(upcomingMovieAction.setTotalPage(data.total_pages));
     } catch (err) {
@@ -57,7 +50,7 @@ export const fetchUpcomingMovie = (currentPage = 1) => {
 export const fetchNowPlayingMovie = (currentPage = 1) => {
   return async (dispatch: appDispatch) => {
     try {
-      const data = await fetchHandler(currentPage, "now_playing");
+      const data = await fetchData(`/movie/now_playing?page=${currentPage}&`);
       dispatch(nowPlayingMovieAction.addMovies(data.results));
       dispatch(nowPlayingMovieAction.setTotalPage(data.total_pages));
     } catch (err) {
@@ -69,7 +62,7 @@ export const fetchNowPlayingMovie = (currentPage = 1) => {
 export const fetchTopRatedMovie = (currentPage = 1) => {
   return async (dispatch: appDispatch) => {
     try {
-      const data = await fetchHandler(currentPage, "top_rated");
+      const data = await fetchData(`/movie/top_rated?page=${currentPage}&`);
       dispatch(topRatedMovieAction.addMovies(data.results));
       dispatch(topRatedMovieAction.setTotalPage(data.total_pages));
     } catch (err) {
@@ -82,19 +75,9 @@ export const fetchSearchMovie = (searchInput: string, currentPage = 1) => {
   return async (dispatch: appDispatch) => {
     dispatch(searchResultMovieAction.setLoading(true));
 
-    const fetchSearchMovieHandler = async (
-      search: string,
-      currentPage: number
-    ) => {
-      const res = await fetch(
-        `https://api.themoviedb.org/3/search/movie?api_key=${
-          import.meta.env.VITE_API_KEY
-        }&language=en-US&page=${currentPage}&include_adult=false&query=${search}`
-      );
-      return await res.json();
-    };
+    
     try {
-      const data = await fetchSearchMovieHandler(searchInput, currentPage);
+      const data = await fetchData(`/search/movie?query=${searchInput}&page=${currentPage}&`);
       if (currentPage === 1) {
         dispatch(searchResultMovieAction.setMovies(data.results));
         dispatch(searchResultMovieAction.setTotalPage(data.total_pages));
@@ -110,18 +93,10 @@ export const fetchSearchMovie = (searchInput: string, currentPage = 1) => {
 
 export const fetchMovieGenre = () => {
   return async (dispatch: appDispatch) => {
-    const fetchMovieGenreHandler = async (): Promise<Genre[]> => {
-      const res = await fetch(
-        `https://api.themoviedb.org/3/genre/movie/list?language=en-US&api_key=${
-          import.meta.env.VITE_API_KEY
-        }`
-      );
-      const data = await res.json();
-      return data.genres;
-    };
+   
     try {
-      const data = await fetchMovieGenreHandler();
-      dispatch(movieAction.addGenres(data));
+      const data = await fetchData('/genre/movie/list?');
+      dispatch(movieAction.addGenres(data.genres));
     } catch (err) {
       console.log(err);
     }
@@ -130,30 +105,26 @@ export const fetchMovieGenre = () => {
 
 export const fetchMovieTrailer = (id: number) => {
   return async (dispatch: appDispatch) => {
-    const fetchMovieTrailerHandler = async () => {
-      const res = await fetch(
-        `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${
-          import.meta.env.VITE_API_KEY
-        }`
-      );
-      const data = await res.json();
-      const trailers = data.results;
-      return trailers.find((e: { type: string }) => e.type === "Trailer").key;
-    };
+    
     try {
-      const data = await fetchMovieTrailerHandler();
-      dispatch(movieAction.addTrailer(data));
+      const data = await fetchData(`/movie/${id}/videos?`);
+      const trailers = data.results;
+      const trailerKey= trailers.find((e: { type: string }) => e.type === "Trailer").key;
+      dispatch(movieAction.addTrailer(trailerKey));
     } catch (err) {
       console.log(err);
     }
   };
 };
 
-const fetchHandler = async (currentPage: number, type: string) => {
+const fetchData = async (endpoint: string) => {
   const res = await fetch(
-    `https://api.themoviedb.org/3/movie/${type}?api_key=${
+    `https://api.themoviedb.org/3${endpoint}api_key=${
       import.meta.env.VITE_API_KEY
-    }&page=${currentPage}`
+    }`
   );
   return await res.json();
 };
+
+
+

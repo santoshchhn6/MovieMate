@@ -28,6 +28,12 @@ const searchResultMovieSlice = createSlice({
     setLoading(state, action: PayloadAction<boolean>) {
       state.loading = action.payload;
     },
+    reset(state){
+      state.currentPage= 1;
+      state.totalPages= 1;
+      state.loading= false;
+      state.movies= [];
+    }
   },
 });
 

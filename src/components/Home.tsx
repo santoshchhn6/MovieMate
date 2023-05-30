@@ -35,13 +35,13 @@ const Home = () => {
       >
         <option value="popular">Popular</option>
         <option value="upcoming">Upcoming</option>
-        <option value="nowPlaying">Now Playing</option>
-        <option value="topRated">Top Rated</option>
+        <option value="now_playing">Now Playing</option>
+        <option value="top_rated">Top Rated</option>
       </select>
       {movieSelected === "popular" ? <PopularMovie /> : null}
       {movieSelected === "upcoming" ? <UpcomingMovie /> : null}
-      {movieSelected === "nowPlaying" ? <NowPlayingMovie /> : null}
-      {movieSelected === "topRated" ? <TopRatedMovie /> : null}
+      {movieSelected === "now_playing" ? <NowPlayingMovie /> : null}
+      {movieSelected === "top_rated" ? <TopRatedMovie /> : null}
     </div>
   );
 };

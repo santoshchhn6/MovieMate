@@ -20,7 +20,8 @@ const popularMovieSlice = createSlice({
     },
     setTotalPage(state, action: PayloadAction<number>) {
       state.totalPages = action.payload;
-    }, setLoading(state, action: PayloadAction<boolean>) {
+    },
+    setLoading(state, action: PayloadAction<boolean>) {
       state.loading = action.payload;
     },
   },
