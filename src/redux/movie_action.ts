@@ -7,11 +7,12 @@ import { searchResultMovieAction } from "./searchresultMovieSlice";
 import { topRatedMovieAction } from "./topRatedMovieSlice";
 import { movieAction } from "./movieSlice";
 import { trendingMovieAction } from "./TrendingMovieSlice";
+import { castAction } from "./castSlice";
 
 export const fetchTrendingMovie = (currentPage = 1) => {
   return async (dispatch: appDispatch) => {
     dispatch(trendingMovieAction.setLoading(true));
-    
+
     try {
       const data = await fetchData(`/trending/movie/day?page=${currentPage}&`);
       dispatch(trendingMovieAction.addMovies(data.results));
@@ -71,13 +72,27 @@ export const fetchTopRatedMovie = (currentPage = 1) => {
   };
 };
 
+export const fetchCast = (movieId: number) => {
+  return async (dispatch: appDispatch) => {
+    try {
+      if (movieId) {
+        const data = await fetchData(`/movie/${movieId}/credits?`);
+        dispatch(castAction.addCast(data.cast));
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
 export const fetchSearchMovie = (searchInput: string, currentPage = 1) => {
   return async (dispatch: appDispatch) => {
     dispatch(searchResultMovieAction.setLoading(true));
 
-    
     try {
-      const data = await fetchData(`/search/movie?query=${searchInput}&page=${currentPage}&`);
+      const data = await fetchData(
+        `/search/movie?query=${searchInput}&page=${currentPage}&`
+      );
       if (currentPage === 1) {
         dispatch(searchResultMovieAction.setMovies(data.results));
         dispatch(searchResultMovieAction.setTotalPage(data.total_pages));
@@ -93,9 +108,8 @@ export const fetchSearchMovie = (searchInput: string, currentPage = 1) => {
 
 export const fetchMovieGenre = () => {
   return async (dispatch: appDispatch) => {
-   
     try {
-      const data = await fetchData('/genre/movie/list?');
+      const data = await fetchData("/genre/movie/list?");
       dispatch(movieAction.addGenres(data.genres));
     } catch (err) {
       console.log(err);
@@ -105,11 +119,12 @@ export const fetchMovieGenre = () => {
 
 export const fetchMovieTrailer = (id: number) => {
   return async (dispatch: appDispatch) => {
-    
     try {
       const data = await fetchData(`/movie/${id}/videos?`);
       const trailers = data.results;
-      const trailerKey= trailers.find((e: { type: string }) => e.type === "Trailer").key;
+      const trailerKey = trailers.find(
+        (e: { type: string }) => e.type === "Trailer"
+      ).key;
       dispatch(movieAction.addTrailer(trailerKey));
     } catch (err) {
       console.log(err);
@@ -125,6 +140,3 @@ const fetchData = async (endpoint: string) => {
   );
   return await res.json();
 };
-
-
-

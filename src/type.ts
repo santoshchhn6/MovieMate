@@ -10,10 +10,17 @@ export interface Movie {
   genre_ids?: number[];
 }
 
+export interface Actors {
+  id: number;
+  name: string;
+  profile_path: string;
+  character: string;
+}
+
 export interface MovieList {
   currentPage: number;
   totalPages: number;
-  loading:boolean;
+  loading: boolean;
   movies: Movie[];
 }
 
