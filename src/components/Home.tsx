@@ -38,10 +38,24 @@ const Home = () => {
         <option value="now_playing">Now Playing</option>
         <option value="top_rated">Top Rated</option>
       </select>
-      {movieSelected === "popular" ? <PopularMovie /> : null}
-      {movieSelected === "upcoming" ? <UpcomingMovie /> : null}
-      {movieSelected === "now_playing" ? <NowPlayingMovie /> : null}
-      {movieSelected === "top_rated" ? <TopRatedMovie /> : null}
+      <div className={`${movieSelected === "popular" ? "visible" : "hidden"} `}>
+        <PopularMovie />
+      </div>
+      <div
+        className={`${movieSelected === "upcoming" ? "visible" : "hidden"} `}
+      >
+        <UpcomingMovie />
+      </div>
+      <div
+        className={`${movieSelected === "now_playing" ? "visible" : "hidden"} `}
+      >
+        <NowPlayingMovie />
+      </div>
+      <div
+        className={`${movieSelected === "top_rated" ? "visible" : "hidden"} `}
+      >
+        <TopRatedMovie />
+      </div>
     </div>
   );
 };
