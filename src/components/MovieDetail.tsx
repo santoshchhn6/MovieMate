@@ -10,6 +10,7 @@ import { fetchMovieTrailer } from "../redux/movie_action";
 import { movieAction } from "../redux/movieSlice";
 import Trailer from "./Trailer";
 import Cast from "./Cast";
+import Reviews from "./Reviews";
 
 interface MovieDetail {
   id: number;
@@ -119,6 +120,9 @@ const MovieDetail = () => {
 
       {/* cast */}
       <Cast movieId={movie ? movie.id : 0} />
+
+      {/* reviews */}
+      <Reviews movieId={movie ? movie.id : 0}  />
     </div>
   );
 };

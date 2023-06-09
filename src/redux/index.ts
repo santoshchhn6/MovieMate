@@ -8,12 +8,14 @@ import searchResultMovieSlice from "./searchresultMovieSlice";
 import movieSlice from "./movieSlice";
 import trendingMovieSlice from "./TrendingMovieSlice";
 import castSlice from "./castSlice";
+import reviewsSlice from "./reviewsSlice";
 
 const store = configureStore({
   reducer: {
     app: appSlice.reducer,
     movie: movieSlice.reducer,
     cast: castSlice.reducer,
+    review: reviewsSlice.reducer,
     trending: trendingMovieSlice.reducer,
     popular: popularMovieSlice.reducer,
     upcoming: upcomingMovieSlice.reducer,

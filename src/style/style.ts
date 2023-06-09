@@ -1,0 +1,1 @@
+export const heading="mb-5 text-[24px] font-['Poppin-sb'] text-blue-500"

@@ -4,6 +4,7 @@ import { RootState, appDispatch } from "../redux";
 import { fetchCast } from "../redux/movie_action";
 import useWindowSize from "../customHooks/useWindowSize";
 import Arrow from "./Buttons/Arrow";
+import { heading } from "../style/style";
 
 type Props = {
   movieId: number;
@@ -45,9 +46,7 @@ const Cast = ({ movieId }: Props) => {
 
   return (
     <div className="p-5">
-      <h2 className="mb-5 text-[24px] font-['Poppin-sb'] text-blue-500">
-        Cast
-      </h2>
+      <h2 className={heading}>Cast</h2>
       <div className=" w-[100%] h-[400px] relative overflow-hidden">
         <div
           className=" absolute flex gap-5 text-center ease-in-out duration-500"

@@ -8,6 +8,7 @@ import { topRatedMovieAction } from "./topRatedMovieSlice";
 import { movieAction } from "./movieSlice";
 import { trendingMovieAction } from "./TrendingMovieSlice";
 import { castAction } from "./castSlice";
+import { reviewAction } from "./reviewsSlice";
 
 export const fetchTrendingMovie = (currentPage = 1) => {
   return async (dispatch: appDispatch) => {
@@ -78,6 +79,19 @@ export const fetchCast = (movieId: number) => {
       if (movieId) {
         const data = await fetchData(`/movie/${movieId}/credits?`);
         dispatch(castAction.addCast(data.cast));
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const fetchReviews = (movieId: number) => {
+  return async (dispatch: appDispatch) => {
+    try {
+      if (movieId) {
+        const data = await fetchData(`/movie/${movieId}/reviews?`);
+        dispatch(reviewAction.addReviews(data.results));
       }
     } catch (err) {
       console.log(err);
