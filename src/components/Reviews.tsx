@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { fetchReviews } from "../redux/movie_action";
 import { getFormatedDate } from "../date";
 import Rating from "./Rating";
+import ReadMore from "./ReadMore";
 
 type Props = {
   movieId: number;
@@ -38,7 +39,7 @@ const Reviews = ({ movieId }: Props) => {
 
             <Rating rating={review.author_details.rating} />
 
-            <p>{review.content}</p>
+            <ReadMore maxLength={250}>{review.content}</ReadMore>
           </div>
         ))}
       </div>
