@@ -11,6 +11,7 @@ import { movieAction } from "../redux/movieSlice";
 import Trailer from "./Trailer";
 import Cast from "./Cast";
 import Reviews from "./Reviews";
+import ImageComponent from "./ImageComponent";
 
 interface MovieDetail {
   id: number;
@@ -66,6 +67,7 @@ const MovieDetail = () => {
               src={`https://image.tmdb.org/t/p/w300/${movie?.poster_path}`}
               className="w-[300px] h-[450px] rounded-md"
             />
+
             <div>
               <h1 className="text-[50px] mb-3 font-['Poppin-sb']">
                 {movie?.title.toUpperCase()}
@@ -122,7 +124,7 @@ const MovieDetail = () => {
       <Cast movieId={movie ? movie.id : 0} />
 
       {/* reviews */}
-      <Reviews movieId={movie ? movie.id : 0}  />
+      <Reviews movieId={movie ? movie.id : 0} />
     </div>
   );
 };
