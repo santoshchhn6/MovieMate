@@ -41,3 +41,22 @@ export interface Review {
   created_at: string;
   id: number;
 }
+
+export interface MovieDetail {
+  id: number;
+  title: string;
+  genres: {
+    id: number;
+    name: string;
+  }[];
+  vote_average: number;
+  release_date: string;
+  budget: number;
+  revenue: number;
+  runtime: number;
+  poster_path: string;
+  backdrop_path: string;
+  overview: string;
+  adult: boolean;
+  tagline: string;
+}

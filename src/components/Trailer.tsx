@@ -3,6 +3,7 @@ import YouTube, { YouTubeProps } from "react-youtube";
 import { RootState, appDispatch } from "../redux";
 import { useDispatch } from "react-redux";
 import { movieAction } from "../redux/movieSlice";
+import ButtonExit from "./Buttons/ButtonExit";
 
 const Trailer = () => {
   const movie = useSelector((state: RootState) => state.movie);
@@ -22,12 +23,8 @@ const Trailer = () => {
         <div className="fixed  w-[960px] h-[540px]  z-20 top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
           <div className="flex justify-between items-center w-[100%] h-[40px]  bg-gray-950">
             <span className="ml-5 text-[20px]">Trailer</span>
-            <button
-              className="w-[40px] aspect-square text-[20px] font-semibold text-center bg-blue-600 hover:bg-red-600"
-              onClick={handleCloseTrailer}
-            >
-              X
-            </button>
+           
+            <ButtonExit onClick={handleCloseTrailer} />
           </div>
           <YouTube
             videoId={trailer}

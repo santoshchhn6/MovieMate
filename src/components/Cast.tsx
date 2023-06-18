@@ -5,6 +5,7 @@ import { fetchCast } from "../redux/movie_action";
 import useWindowSize from "../customHooks/useWindowSize";
 import Arrow from "./Buttons/Arrow";
 import { heading } from "../style/style";
+import ImageComponent from "./ImageComponent";
 
 type Props = {
   movieId: number;
@@ -57,10 +58,9 @@ const Cast = ({ movieId }: Props) => {
         >
           {actors.map((actor) => (
             <div key={actor.id} className="">
-              <img
+              <ImageComponent
                 src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`}
-                alt={actor.name}
-                className="min-w-[200px] min-h-[300px] rounded-lg"
+                className="min-w-[200px] min-h-[300px] rounded-lg object-contain bg-[#51627E]"
               />
               <p className="text-[18px] font-['Poppin-sb'] my-2">
                 {actor.name}

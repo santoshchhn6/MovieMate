@@ -1,13 +1,12 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { Genre, Movie } from "../type";
+import { Genre, MovieDetail } from "../type";
 
 interface MovieState {
   genres: Genre[];
   trailer: string;
   showTrailer: boolean;
   movieSelected: "popular" | "now_playing" | "top_rated" | "upcoming";
-
- 
+  movieDetail: MovieDetail | null;
 }
 
 const initialState: MovieState = {
@@ -15,7 +14,7 @@ const initialState: MovieState = {
   trailer: "",
   showTrailer: false,
   movieSelected: "popular",
-
+  movieDetail: null,
 };
 
 const movieSlice = createSlice({
@@ -33,6 +32,9 @@ const movieSlice = createSlice({
     },
     setSelectedMovie(state, action) {
       state.movieSelected = action.payload;
+    },
+    setMovieDetail(state, action: PayloadAction<MovieDetail>) {
+      state.movieDetail = action.payload;
     },
   },
 });

@@ -4,48 +4,23 @@ import { getFormatedDate, getFormatedTime } from "../date";
 import { formatter } from "../currency";
 import { BsFillPlayFill } from "react-icons/bs";
 import Rating from "./Rating";
-import { useDispatch } from "react-redux";
-import { appDispatch } from "../redux";
-import { fetchMovieTrailer } from "../redux/movie_action";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState, appDispatch } from "../redux";
+import { fetchMovieDetail, fetchMovieTrailer } from "../redux/movie_action";
 import { movieAction } from "../redux/movieSlice";
 import Trailer from "./Trailer";
 import Cast from "./Cast";
 import Reviews from "./Reviews";
-import ImageComponent from "./ImageComponent";
-
-interface MovieDetail {
-  id: number;
-  title: string;
-  genres: {
-    id: number;
-    name: string;
-  }[];
-  vote_average: number;
-  release_date: string;
-  budget: number;
-  revenue: number;
-  runtime: number;
-  poster_path: string;
-  backdrop_path: string;
-  overview: string;
-  adult: boolean;
-}
 
 const MovieDetail = () => {
   const { id } = useParams();
-  const [movie, setMovie] = useState<MovieDetail>();
+  const movie = useSelector((state: RootState) => state.movie.movieDetail);
 
   const dispatch = useDispatch<appDispatch>();
 
   useEffect(() => {
-    fetch(
-      `https://api.themoviedb.org/3/movie/${id}?api_key=${
-        import.meta.env.VITE_API_KEY
-      }&language=en-US`
-    )
-      .then((res) => res.json())
-      .then((data) => setMovie(data));
-  }, [id]);
+    dispatch(fetchMovieDetail(Number(id)));
+  }, [id, dispatch]);
 
   const onClickTrailerHandler = (id: number) => {
     dispatch(fetchMovieTrailer(id));

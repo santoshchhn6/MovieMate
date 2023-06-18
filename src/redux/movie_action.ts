@@ -98,6 +98,18 @@ export const fetchReviews = (movieId: number) => {
     }
   };
 };
+export const fetchMovieDetail = (movieId: number) => {
+  return async (dispatch: appDispatch) => {
+    try {
+      if (movieId) {
+        const data = await fetchData(`/movie/${movieId}?`);
+        dispatch(movieAction.setMovieDetail(data));
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
 
 export const fetchSearchMovie = (searchInput: string, currentPage = 1) => {
   return async (dispatch: appDispatch) => {
