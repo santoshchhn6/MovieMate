@@ -60,3 +60,12 @@ export interface MovieDetail {
   adult: boolean;
   tagline: string;
 }
+
+export interface Videos {
+  name: string;
+  key: string;
+  type: string;
+  official: boolean;
+  published_at: string;
+  id: string;
+}

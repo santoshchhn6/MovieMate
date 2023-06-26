@@ -11,6 +11,7 @@ import { movieAction } from "../redux/movieSlice";
 import Trailer from "./Trailer";
 import Cast from "./Cast";
 import Reviews from "./Reviews";
+import Videos from "./Videos";
 
 const MovieDetail = () => {
   const { id } = useParams();
@@ -100,6 +101,9 @@ const MovieDetail = () => {
 
       {/* reviews */}
       <Reviews movieId={movie ? movie.id : 0} />
+
+      {/* Videos */}
+      <Videos  movieId={movie ? movie.id : 0}/>
     </div>
   );
 };

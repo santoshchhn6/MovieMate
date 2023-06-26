@@ -158,6 +158,19 @@ export const fetchMovieTrailer = (id: number) => {
   };
 };
 
+export const fetchMovieVideos = (id: number) => {
+  return async (dispatch: appDispatch) => {
+    try {
+      if (id) {
+        const data = await fetchData(`/movie/${id}/videos?`);
+        dispatch(movieAction.addVideos(data.results));
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
 const fetchData = async (endpoint: string) => {
   const res = await fetch(
     `https://api.themoviedb.org/3${endpoint}api_key=${

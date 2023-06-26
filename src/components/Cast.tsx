@@ -4,7 +4,7 @@ import { RootState, appDispatch } from "../redux";
 import { fetchCast } from "../redux/movie_action";
 import useWindowSize from "../customHooks/useWindowSize";
 import Arrow from "./Buttons/Arrow";
-import { heading } from "../style/style";
+import { container, heading } from "../style/style";
 import ImageComponent from "./ImageComponent";
 
 type Props = {
@@ -46,7 +46,7 @@ const Cast = ({ movieId }: Props) => {
   };
 
   return (
-    <div className="p-5">
+    <div className={container}>
       <h2 className={heading}>Cast</h2>
       <div className=" w-[100%] h-[400px] relative overflow-hidden">
         <div

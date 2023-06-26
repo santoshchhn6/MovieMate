@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { heading } from "../style/style";
+import { container, heading } from "../style/style";
 import { RootState, appDispatch } from "../redux";
 import { useEffect, useState } from "react";
 import { fetchReviews } from "../redux/movie_action";
@@ -27,7 +27,7 @@ const Reviews = ({ movieId }: Props) => {
   };
 
   return (
-    <div className="p-5">
+    <div className={container}>
       <h1 className={heading}>Reviews</h1>
       {!showAllReviews ? (
         <div className="border w-[60%] relative rounded-xl">
