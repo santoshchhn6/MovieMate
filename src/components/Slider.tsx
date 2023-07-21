@@ -55,7 +55,7 @@ const Slider = (props: PropsWithChildren<Props>) => {
   return (
     <>
       {dataLength ? (
-        <div className="border border-red-600 my-3   bottom-[20px] w-[100%]">
+        <div className=" my-3   bottom-[20px] w-[100%]">
           <div
             className=" w-[100%] relative overflow-hidden"
             style={{ height: `${poster_height}px` }}
@@ -72,8 +72,8 @@ const Slider = (props: PropsWithChildren<Props>) => {
             </div>
 
             <div
-              className=" absolute left-3"
-              style={{ top: `${poster_height / 2}px` }}
+              className=" absolute left-3 "
+              style={{ top: `${poster_height / 2 - 50}px` }}
             >
               <Arrow
                 direction="left"
@@ -83,7 +83,7 @@ const Slider = (props: PropsWithChildren<Props>) => {
             </div>
             <div
               className={` absolute right-3`}
-              style={{ top: `${poster_height / 2}px` }}
+              style={{ top: `${poster_height / 2 - 50}px` }}
             >
               <Arrow
                 direction="right"

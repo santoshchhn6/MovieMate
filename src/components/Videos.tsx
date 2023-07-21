@@ -1,4 +1,3 @@
-import { container, heading } from "../style/style";
 import { AiFillPlayCircle } from "react-icons/ai";
 import { VideoType } from "../type";
 
@@ -9,7 +8,12 @@ type Props = {
   poster_gap?: number;
 };
 
-const Videos = ({ data, poster_height, poster_width, poster_gap }: Props) => {
+const Videos = ({
+  data,
+  poster_height = 270,
+  poster_width = 480,
+  poster_gap = 20,
+}: Props) => {
   console.log({ data });
   return (
     <div className="flex" style={{ gap: `${poster_gap}px` }}>

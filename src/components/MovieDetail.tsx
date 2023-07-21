@@ -10,7 +10,8 @@ import { movieAction } from "../redux/movieSlice";
 import Trailer from "./Trailer";
 import Cast from "./Cast";
 import Reviews from "./Reviews";
-import FetchMovie from "./FetchMovie";
+import FetchVideo from "./FetchVideo";
+import FetchCast from "./FetchCast";
 
 const MovieDetail = () => {
   const { id } = useParams();
@@ -96,13 +97,13 @@ const MovieDetail = () => {
       </div>
 
       {/* cast */}
-      {/* <Cast movieId={movie ? movie.id : 0} /> */}
+      <FetchCast movieId={movie ? movie.id : 0} />
 
       {/* reviews */}
-      {/* <Reviews movieId={movie ? movie.id : 0} /> */}
+      <Reviews movieId={movie ? movie.id : 0} />
 
       {/* Videos */}
-      <FetchMovie movieId={movie ? movie.id : 0} />
+      <FetchVideo movieId={movie ? movie.id : 0} />
     </div>
   );
 };
