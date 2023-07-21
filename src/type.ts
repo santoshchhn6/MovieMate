@@ -61,7 +61,7 @@ export interface MovieDetail {
   tagline: string;
 }
 
-export interface Videos {
+export interface VideoType {
   name: string;
   key: string;
   type: string;

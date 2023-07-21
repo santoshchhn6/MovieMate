@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getFormatedDate, getFormatedTime } from "../date";
-import { formatter } from "../currency";
 import { BsFillPlayFill } from "react-icons/bs";
 import Rating from "./Rating";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,7 +10,7 @@ import { movieAction } from "../redux/movieSlice";
 import Trailer from "./Trailer";
 import Cast from "./Cast";
 import Reviews from "./Reviews";
-import Videos from "./Videos";
+import FetchMovie from "./FetchMovie";
 
 const MovieDetail = () => {
   const { id } = useParams();
@@ -97,13 +96,13 @@ const MovieDetail = () => {
       </div>
 
       {/* cast */}
-      <Cast movieId={movie ? movie.id : 0} />
+      {/* <Cast movieId={movie ? movie.id : 0} /> */}
 
       {/* reviews */}
-      <Reviews movieId={movie ? movie.id : 0} />
+      {/* <Reviews movieId={movie ? movie.id : 0} /> */}
 
       {/* Videos */}
-      <Videos  movieId={movie ? movie.id : 0}/>
+      <FetchMovie movieId={movie ? movie.id : 0} />
     </div>
   );
 };
