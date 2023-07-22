@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { Genre, MovieDetail, Videos } from "../type";
+import { Genre, MovieDetail, VideoType } from "../type";
 
 interface MovieState {
   genres: Genre[];
@@ -7,7 +7,7 @@ interface MovieState {
   showTrailer: boolean;
   movieSelected: "popular" | "now_playing" | "top_rated" | "upcoming";
   movieDetail: MovieDetail | null;
-  videos: Videos[];
+  videos: VideoType[];
   photos: [];
 }
 
@@ -31,7 +31,7 @@ const movieSlice = createSlice({
     addTrailer(state, action: PayloadAction<string>) {
       state.trailer = action.payload;
     },
-    addVideos(state, action: PayloadAction<Videos[]>) {
+    addVideos(state, action: PayloadAction<VideoType[]>) {
       state.videos = action.payload;
     },
     setShowTrailer(state, action: PayloadAction<boolean>) {

@@ -9,10 +9,12 @@ import movieSlice from "./movieSlice";
 import trendingMovieSlice from "./TrendingMovieSlice";
 import castSlice from "./castSlice";
 import reviewsSlice from "./reviewsSlice";
+import videoPlayerSlice from "./videoPlayerSlice";
 
 const store = configureStore({
   reducer: {
     app: appSlice.reducer,
+    videoPlayer:videoPlayerSlice.reducer,
     movie: movieSlice.reducer,
     cast: castSlice.reducer,
     review: reviewsSlice.reducer,

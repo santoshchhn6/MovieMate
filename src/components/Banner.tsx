@@ -7,11 +7,10 @@ import { getFormatedDate } from "../date";
 import Rating from "./Rating";
 import { BsFillPlayFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
-import { movieAction } from "../redux/movieSlice";
-import Trailer from "./Trailer";
 import useWindowSize from "../customHooks/useWindowSize";
 import loadingImg from "../assets/loading.gif";
-import { trendingMovieAction } from "../redux/TrendingMovieSlice";
+import YoutubePlayer from "./YoutubePlayer";
+import { showVideoPlayer } from "../redux/videoPlayerSlice";
 
 const Banner = () => {
   const { movies, loading, currentPage } = useSelector(
@@ -37,7 +36,7 @@ const Banner = () => {
 
   const onClickTrailerHandler = (id: number) => {
     dispatch(fetchMovieTrailer(id));
-    dispatch(movieAction.setShowTrailer(true));
+    dispatch(showVideoPlayer());
   };
 
   return (
@@ -109,7 +108,7 @@ const Banner = () => {
         </div>
       )}
 
-      <Trailer />
+      <YoutubePlayer />
     </div>
   );
 };

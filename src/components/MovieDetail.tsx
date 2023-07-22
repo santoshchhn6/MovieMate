@@ -6,12 +6,11 @@ import Rating from "./Rating";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, appDispatch } from "../redux";
 import { fetchMovieDetail, fetchMovieTrailer } from "../redux/movie_action";
-import { movieAction } from "../redux/movieSlice";
-import Trailer from "./Trailer";
-import Cast from "./Cast";
 import Reviews from "./Reviews";
 import FetchVideo from "./FetchVideo";
 import FetchCast from "./FetchCast";
+import YoutubePlayer from "./YoutubePlayer";
+import { showVideoPlayer } from "../redux/videoPlayerSlice";
 
 const MovieDetail = () => {
   const { id } = useParams();
@@ -25,7 +24,7 @@ const MovieDetail = () => {
 
   const onClickTrailerHandler = (id: number) => {
     dispatch(fetchMovieTrailer(id));
-    dispatch(movieAction.setShowTrailer(true));
+    dispatch(showVideoPlayer());
   };
   return (
     <div>
@@ -93,7 +92,7 @@ const MovieDetail = () => {
             </div>
           </div>
         </div>
-        <Trailer />
+        <YoutubePlayer />
       </div>
 
       {/* cast */}

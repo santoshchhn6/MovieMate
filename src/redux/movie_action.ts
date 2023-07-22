@@ -1,5 +1,4 @@
 import { appDispatch } from ".";
-import { Genre } from "../type";
 import { upcomingMovieAction } from "./upcomingMovieSlice";
 import { nowPlayingMovieAction } from "./nowPlayingMovieSlice";
 import { popularMovieAction } from "./popularMovieSlice";
@@ -9,6 +8,7 @@ import { movieAction } from "./movieSlice";
 import { trendingMovieAction } from "./TrendingMovieSlice";
 import { castAction } from "./castSlice";
 import { reviewAction } from "./reviewsSlice";
+import { setVideoId } from "./videoPlayerSlice";
 
 export const fetchTrendingMovie = (currentPage = 1) => {
   return async (dispatch: appDispatch) => {
@@ -151,7 +151,7 @@ export const fetchMovieTrailer = (id: number) => {
       const trailerKey = trailers.find(
         (e: { type: string }) => e.type === "Trailer"
       ).key;
-      dispatch(movieAction.addTrailer(trailerKey));
+      dispatch(setVideoId(trailerKey));
     } catch (err) {
       console.log(err);
     }
