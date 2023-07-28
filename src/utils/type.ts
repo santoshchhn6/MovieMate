@@ -1,4 +1,4 @@
-export interface Movie {
+export interface MovieProps {
   id: number;
   title: string;
   overview: string;
@@ -10,26 +10,19 @@ export interface Movie {
   genre_ids?: number[];
 }
 
-export interface Actors {
-  id: number;
-  name: string;
-  profile_path: string;
-  character: string;
-}
-
-export interface MovieList {
+export interface MovieListProps {
   currentPage: number;
   totalPages: number;
   loading: boolean;
-  movies: Movie[];
+  movies: MovieProps[];
 }
 
-export interface Genre {
+export interface GenreProps {
   id: number;
   name: string;
 }
 
-export interface Review {
+export interface ReviewProps {
   author: string;
   author_details: {
     name: string;
@@ -42,7 +35,7 @@ export interface Review {
   id: number;
 }
 
-export interface MovieDetail {
+export interface MovieInfoProps {
   id: number;
   title: string;
   genres: {
@@ -61,11 +54,29 @@ export interface MovieDetail {
   tagline: string;
 }
 
-export interface VideoType {
+export interface VideoProps {
   name: string;
   key: string;
   type: string;
   official: boolean;
   published_at: string;
   id: string;
+}
+
+export interface CastProps {
+  id: number;
+  name: string;
+  profile_path: string;
+  character: string;
+}
+
+export interface CrewProps {
+  id: number;
+  name: string;
+  profile_path: string | null;
+  job: string;
+}
+export interface CreditsProps {
+  cast: CastProps[];
+  crew: CrewProps[];
 }

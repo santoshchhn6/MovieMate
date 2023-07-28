@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { RootState, appDispatch } from "../redux";
-import { fetchSearchMovie } from "../redux/movie_action";
-import { searchResultMovieAction } from "../redux/searchresultMovieSlice";
+import { RootState, appDispatch } from "../store";
+import { fetchSearchMovie } from "../store/api/movieApi";
+import { searchResultMovieAction } from "../store/searchresultMovieSlice";
 import MovieList from "./MovieList";
 // import useMovieAPI from "../customHooks/useMovieAPI";
 
@@ -25,7 +25,13 @@ const SearchResult = () => {
 
   // return <MovieList movies={movies} nextPage={nextPage} loading={isLoading} />;
 
-  return <MovieList movies={searchResult.movies} nextPage={handleNextPage} loading={searchResult.loading}/>;
+  return (
+    <MovieList
+      movies={searchResult.movies}
+      nextPage={handleNextPage}
+      loading={searchResult.loading}
+    />
+  );
 };
 
 export default SearchResult;

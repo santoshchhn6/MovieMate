@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
-import { RootState, appDispatch } from "../redux";
+import { RootState, appDispatch } from "../store";
 import YouTube, { YouTubeProps } from "react-youtube";
 import ButtonExit from "./Buttons/ButtonExit";
-import { hideVideoPlayer } from "../redux/videoPlayerSlice";
+import { hideVideoPlayer } from "../store/videoPlayerSlice";
 
 const YoutubePlayer = () => {
   const videoPlayer = useSelector((state: RootState) => state.videoPlayer);

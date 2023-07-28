@@ -1,8 +1,8 @@
 import ImageComponent from "./ImageComponent";
-import { Actors } from "../type";
+import { CastProps } from "../utils/type";
 
 type Props = {
-  actors: Actors[];
+  actors: CastProps[];
 };
 
 const Cast = ({ actors }: Props) => {

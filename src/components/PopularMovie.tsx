@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import MovieList from "./MovieList";
-import { RootState, appDispatch } from "../redux";
-import { popularMovieAction } from "../redux/popularMovieSlice";
-import { fetchPopularMovie } from "../redux/movie_action";
+import { RootState, appDispatch } from "../store";
+import { popularMovieAction } from "../store/popularMovieSlice";
+import { fetchPopularMovie } from "../store/api/movieApi";
 import { useEffect } from "react";
 
 const PopularMovie = () => {

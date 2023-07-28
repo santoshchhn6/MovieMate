@@ -5,19 +5,17 @@ import upcomingMovieSlice from "./upcomingMovieSlice";
 import nowPlayingMovieSlice from "./nowPlayingMovieSlice";
 import topRatedMovieSlice from "./topRatedMovieSlice";
 import searchResultMovieSlice from "./searchresultMovieSlice";
-import movieSlice from "./movieSlice";
+import moviesSlice from "./moviesSlice";
 import trendingMovieSlice from "./TrendingMovieSlice";
-import castSlice from "./castSlice";
-import reviewsSlice from "./reviewsSlice";
 import videoPlayerSlice from "./videoPlayerSlice";
+import movieDetailSlice from "./movieDetailSlice";
 
 const store = configureStore({
   reducer: {
     app: appSlice.reducer,
-    videoPlayer:videoPlayerSlice.reducer,
-    movie: movieSlice.reducer,
-    cast: castSlice.reducer,
-    review: reviewsSlice.reducer,
+    videoPlayer: videoPlayerSlice.reducer,
+    movies: moviesSlice.reducer,
+    movieDetail: movieDetailSlice.reducer,
     trending: trendingMovieSlice.reducer,
     popular: popularMovieSlice.reducer,
     upcoming: upcomingMovieSlice.reducer,

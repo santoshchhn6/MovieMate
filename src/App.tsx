@@ -1,6 +1,6 @@
 import Header from "./components/Header";
-import Home from "./components/Home";
-import MovieDetail from "./components/MovieDetail";
+import Home from "./pages/Home";
+import MovieDetail from "./pages/MovieDetail";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import SearchPage from "./components/SearchPage";
 

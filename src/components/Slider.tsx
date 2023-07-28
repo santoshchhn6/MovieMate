@@ -1,6 +1,6 @@
 import { PropsWithChildren, useState } from "react";
 import Arrow from "./Buttons/Arrow";
-import useWindowSize from "../customHooks/useWindowSize";
+import useWindowSize from "../utils/hooks/useWindowSize";
 
 interface Props {
   dataLength: number;

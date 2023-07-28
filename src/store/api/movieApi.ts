@@ -1,14 +1,14 @@
-import { appDispatch } from ".";
-import { upcomingMovieAction } from "./upcomingMovieSlice";
-import { nowPlayingMovieAction } from "./nowPlayingMovieSlice";
-import { popularMovieAction } from "./popularMovieSlice";
-import { searchResultMovieAction } from "./searchresultMovieSlice";
-import { topRatedMovieAction } from "./topRatedMovieSlice";
-import { movieAction } from "./movieSlice";
-import { trendingMovieAction } from "./TrendingMovieSlice";
+import { appDispatch } from "..";
+import { upcomingMovieAction } from "../upcomingMovieSlice";
+import { nowPlayingMovieAction } from "../nowPlayingMovieSlice";
+import { popularMovieAction } from "../popularMovieSlice";
+import { searchResultMovieAction } from "../searchresultMovieSlice";
+import { topRatedMovieAction } from "../topRatedMovieSlice";
+import { movieAction } from "../moviesSlice";
+import { trendingMovieAction } from "../TrendingMovieSlice";
 import { castAction } from "./castSlice";
 import { reviewAction } from "./reviewsSlice";
-import { setVideoId } from "./videoPlayerSlice";
+import { setVideoId } from "../videoPlayerSlice";
 
 export const fetchTrendingMovie = (currentPage = 1) => {
   return async (dispatch: appDispatch) => {

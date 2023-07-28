@@ -1,18 +1,18 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { Movie, MovieList } from "../type";
+import { MovieProps, MovieListProps } from "../utils/type";
 
-const initialState: MovieList = {
+const initialState: MovieListProps = {
   currentPage: 1,
   totalPages: 1,
   loading: false,
   movies: [],
 };
 
-const upcomingMovieSlice = createSlice({
-  name: "upcoming",
+const topRatedMovieSlice = createSlice({
+  name: "topRated",
   initialState,
   reducers: {
-    addMovies(state, action: PayloadAction<Movie[]>) {
+    addMovies(state, action: PayloadAction<MovieProps[]>) {
       state.movies = [...state.movies, ...action.payload];
     },
     nextPage(state) {
@@ -27,5 +27,5 @@ const upcomingMovieSlice = createSlice({
   },
 });
 
-export const upcomingMovieAction = upcomingMovieSlice.actions;
-export default upcomingMovieSlice;
+export const topRatedMovieAction = topRatedMovieSlice.actions;
+export default topRatedMovieSlice;

@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import MovieList from "./MovieList";
-import { RootState, appDispatch } from "../redux";
-import { nowPlayingMovieAction } from "../redux/nowPlayingMovieSlice";
-import { fetchNowPlayingMovie } from "../redux/movie_action";
+import { RootState, appDispatch } from "../store";
+import { nowPlayingMovieAction } from "../store/nowPlayingMovieSlice";
+import { fetchNowPlayingMovie } from "../store/api/movieApi";
 import { useEffect } from "react";
 
 const NowPlayingMovie = () => {

@@ -1,18 +1,18 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { Movie, MovieList } from "../type";
+import { MovieProps, MovieListProps } from "../utils/type";
 
-const initialState: MovieList = {
+const initialState: MovieListProps = {
   currentPage: 1,
   totalPages: 1,
   loading: false,
   movies: [],
 };
 
-const trendingMovieSlice = createSlice({
-  name: "trending",
+const upcomingMovieSlice = createSlice({
+  name: "upcoming",
   initialState,
   reducers: {
-    addMovies(state, action: PayloadAction<Movie[]>) {
+    addMovies(state, action: PayloadAction<MovieProps[]>) {
       state.movies = [...state.movies, ...action.payload];
     },
     nextPage(state) {
@@ -27,5 +27,5 @@ const trendingMovieSlice = createSlice({
   },
 });
 
-export const trendingMovieAction = trendingMovieSlice.actions;
-export default trendingMovieSlice;
+export const upcomingMovieAction = upcomingMovieSlice.actions;
+export default upcomingMovieSlice;

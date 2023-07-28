@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { BsSearch } from "react-icons/bs";
 import { useDispatch } from "react-redux";
-import { performSearch } from "../redux/app_slice";
-import { appDispatch } from "../redux";
+import { performSearch } from "../store/app_slice";
+import { appDispatch } from "../store";
 import { useNavigate } from "react-router-dom";
 
 const SearchMovie = () => {

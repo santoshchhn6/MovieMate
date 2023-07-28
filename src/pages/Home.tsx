@@ -1,15 +1,16 @@
-import PopularMovie from "./PopularMovie";
-import UpcomingMovie from "./UpcomingMovie";
-import NowPlayingMovie from "./NowPlayingMovie";
-import TopRatedMovie from "./TopRatedMovie";
-import Banner from "./Banner";
+import PopularMovie from "../components/PopularMovie";
+import UpcomingMovie from "../components/UpcomingMovie";
+import NowPlayingMovie from "../components/NowPlayingMovie";
+import TopRatedMovie from "../components/TopRatedMovie";
+import Banner from "../components/Banner";
 import { useDispatch } from "react-redux";
-import { appDispatch } from "../redux";
+import { appDispatch } from "../store";
 import { useEffect } from "react";
-import { fetchMovieGenre } from "../redux/movie_action";
+import { fetchMovieGenre } from "../store/api/movieApi";
 import { useSelector } from "react-redux";
-import { RootState } from "../redux";
-import { movieAction } from "../redux/movieSlice";
+import { RootState } from "../store";
+import { movieAction } from "../store/moviesSlice";
+import MovieList from "../components/MovieList";
 
 const Home = () => {
   const movieSelected = useSelector(
@@ -38,7 +39,8 @@ const Home = () => {
         <option value="now_playing">Now Playing</option>
         <option value="top_rated">Top Rated</option>
       </select>
-      <div className={`${movieSelected === "popular" ? "visible" : "hidden"} `}>
+      <MovieList />
+      {/* <div className={`${movieSelected === "popular" ? "visible" : "hidden"} `}>
         <PopularMovie />
       </div>
       <div
@@ -55,7 +57,7 @@ const Home = () => {
         className={`${movieSelected === "top_rated" ? "visible" : "hidden"} `}
       >
         <TopRatedMovie />
-      </div>
+      </div> */}
     </div>
   );
 };

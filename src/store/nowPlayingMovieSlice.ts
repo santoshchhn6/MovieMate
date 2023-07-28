@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { Movie, MovieList } from "../type";
+import { Movie, MovieList } from "../utils/type";
 
 const initialState: MovieList = {
   currentPage: 1,
@@ -8,8 +8,8 @@ const initialState: MovieList = {
   movies: [],
 };
 
-const popularMovieSlice = createSlice({
-  name: "popular",
+const nowPlayingMovieSlice = createSlice({
+  name: "nowPlaying",
   initialState,
   reducers: {
     addMovies(state, action: PayloadAction<Movie[]>) {
@@ -27,5 +27,5 @@ const popularMovieSlice = createSlice({
   },
 });
 
-export const popularMovieAction = popularMovieSlice.actions;
-export default popularMovieSlice;
+export const nowPlayingMovieAction = nowPlayingMovieSlice.actions;
+export default nowPlayingMovieSlice;

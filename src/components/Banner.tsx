@@ -1,16 +1,16 @@
 import { useSelector } from "react-redux";
-import { RootState, appDispatch } from "../redux";
+import { RootState, appDispatch } from "../store";
 import { useEffect, useState } from "react";
-import { fetchMovieTrailer, fetchTrendingMovie } from "../redux/movie_action";
+import { fetchMovieTrailer, fetchTrendingMovie } from "../store/api/movieApi";
 import { useDispatch } from "react-redux";
-import { getFormatedDate } from "../date";
+import { getFormatedDate } from "../utils/date";
 import Rating from "./Rating";
 import { BsFillPlayFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
-import useWindowSize from "../customHooks/useWindowSize";
+import useWindowSize from "../utils/hooks/useWindowSize";
 import loadingImg from "../assets/loading.gif";
 import YoutubePlayer from "./YoutubePlayer";
-import { showVideoPlayer } from "../redux/videoPlayerSlice";
+import { showVideoPlayer } from "../store/videoPlayerSlice";
 
 const Banner = () => {
   const { movies, loading, currentPage } = useSelector(

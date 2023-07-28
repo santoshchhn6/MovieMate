@@ -1,11 +1,11 @@
 import { useDispatch } from "react-redux";
-import { VideoType } from "../type";
+import { VideoProps } from "../utils/type";
 import { BsPlayCircle } from "react-icons/bs";
-import { appDispatch } from "../redux";
-import { setVideoId, showVideoPlayer } from "../redux/videoPlayerSlice";
+import { appDispatch } from "../store";
+import { setVideoId, showVideoPlayer } from "../store/videoPlayerSlice";
 
 type Props = {
-  data: VideoType[];
+  data: VideoProps[];
   poster_width?: number;
   poster_height?: number;
   poster_gap?: number;

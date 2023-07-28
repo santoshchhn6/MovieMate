@@ -1,8 +1,8 @@
 import Poster from "./Poster";
-import { Movie } from "../type";
+import { MovieProps } from "../utils/type";
 import spinner from "../assets/loading.gif";
 interface Props {
-  movies: Movie[] | undefined;
+  movies: MovieProps[] | undefined;
   nextPage: () => void;
   loading: boolean;
 }
@@ -37,7 +37,7 @@ const MovieList = ({ movies, nextPage, loading }: Props) => {
         </div>
       ) : (
         <div className="w-[100%] h-[100vh] flex justify-center items-center">
-          <img src={spinner} alt="" className="w-[100px] h-[100px]"/>
+          <img src={spinner} alt="" className="w-[100px] h-[100px]" />
         </div>
       )}
     </div>

@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import MovieList from "./MovieList";
-import { RootState, appDispatch } from "../redux";
-import { topRatedMovieAction } from "../redux/topRatedMovieSlice";
-import { fetchTopRatedMovie } from "../redux/movie_action";
+import { RootState, appDispatch } from "../store";
+import { topRatedMovieAction } from "../store/topRatedMovieSlice";
+import { fetchTopRatedMovie } from "../store/api/movieApi";
 import { useEffect } from "react";
 
 const TopRatedMovie = () => {
