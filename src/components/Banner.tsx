@@ -1,7 +1,11 @@
 import { useSelector } from "react-redux";
 import { RootState, appDispatch } from "../store";
 import { useEffect, useState } from "react";
-import { fetchMovieTrailer, fetchTrendingMovie } from "../store/api/movieApi";
+import {
+  fetchMovieGenre,
+  fetchMovieTrailer,
+  fetchTrendingMovie,
+} from "../store/api/movieApi";
 import { useDispatch } from "react-redux";
 import { getFormatedDate } from "../utils/date";
 import Rating from "./Rating";
@@ -20,6 +24,10 @@ const Banner = () => {
   const { width } = useWindowSize();
   const [x, setX] = useState(0);
   const dispatch = useDispatch<appDispatch>();
+
+  useEffect(() => {
+    dispatch(fetchMovieGenre());
+  }, [currentPage, dispatch]);
 
   useEffect(() => {
     dispatch(fetchTrendingMovie(currentPage));
@@ -68,7 +76,7 @@ const Banner = () => {
                     {getFormatedDate(movie ? movie?.release_date : "")}
                   </p>
 
-                  <div className="flex gap-3 text-[18px] font-['SansPro-sb'] my-3">
+                  <div className="flex gap-3 text-[18px] font-['SansPro-sb'] my-3 cursor-pointer">
                     {movie.genre_ids?.map((id, index) => (
                       <span
                         key={index}

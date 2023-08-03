@@ -6,9 +6,18 @@ import { BsFillPlayFill } from "react-icons/bs";
 import { setVideoId, showVideoPlayer } from "../store/videoPlayerSlice";
 
 const MovieBanner = () => {
-  const { details: movie, videos } = useSelector(
-    (state: RootState) => state.movieDetail
-  );
+  const {
+    details: movie,
+    videos,
+    credits,
+  } = useSelector((state: RootState) => state.movieDetail);
+
+  const director = credits.crew.find(
+    (e: { job: string }) => e.job === "Director"
+  )?.name;
+  const writer = credits.crew.find(
+    (e: { job: string }) => e.job === "Writer"
+  )?.name;
   const dispatch = useDispatch<appDispatch>();
 
   const onClickTrailerHandler = () => {
@@ -28,10 +37,19 @@ const MovieBanner = () => {
 
       <div className="absolute flex items-center justify-center w-[100%] h-[100%] bg-gradient-to-r from-black/90 via-black/50 to-black/90">
         <div className=" w-[80%] flex gap-10  ">
-          <img
-            src={`https://image.tmdb.org/t/p/w300/${movie?.poster_path}`}
-            className="w-[300px] h-[450px] rounded-md"
-          />
+          <div>
+            <img
+              src={`https://image.tmdb.org/t/p/w300/${movie?.poster_path}`}
+              className="min-w-[300px] h-[450px] rounded-md "
+            />
+            <button
+              className="w-[100%] h-[60px] bg-blue-600 text-[20px] mt-5 px-4 py-1 rounded-md font-['Poppin-b'] flex gap-5 items-center justify-center"
+              onClick={onClickTrailerHandler}
+            >
+              <BsFillPlayFill />
+              <span>Watch Trailer</span>
+            </button>
+          </div>
 
           <div>
             <h1 className="text-[50px] mb-3 font-['Poppin-sb']">
@@ -63,13 +81,18 @@ const MovieBanner = () => {
               {movie?.overview}
             </p>
 
-            <button
-              className="bg-blue-600 text-[20px] px-4 py-1 rounded-md font-['OpenSans-b'] flex gap-1 items-center"
-              onClick={onClickTrailerHandler}
-            >
-              <BsFillPlayFill />
-              Watch Trailer
-            </button>
+            <div className=" flex justify-between">
+              <div>
+                <p className="font-['Poppin-sb'] text-[24px]">Director</p>
+                <p className="font-['Poppin'] text-[24px]">{director}</p>
+              </div>
+              {writer ? (
+                <div>
+                  <p className="font-['Poppin-sb'] text-[24px]">Writer</p>
+                  <p className="font-['Poppin'] text-[24px]">{writer}</p>
+                </div>
+              ) : null}
+            </div>
 
             {/* {movie?.budget ? (
           <p>Budget : {formatter.format(movie ? movie.budget : 0)}</p>

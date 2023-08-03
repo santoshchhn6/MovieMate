@@ -23,7 +23,10 @@ const MovieCategories = () => {
 
   const handleOnChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setCategory(event.target.value as MovieCategoryProps);
+    dispatch(categoryAction.resetPage());
   };
+
+  console.log({ category });
   return (
     <>
       <select

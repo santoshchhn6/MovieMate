@@ -26,8 +26,12 @@ export const fetchMovie = (category: MovieCategoryProps, currentPage = 1) => {
   return async (dispatch: appDispatch) => {
     try {
       const data = await fetchData(`/movie/${category}?page=${currentPage}&`);
-      dispatch(categoryAction.addMovies(data.results));
-      dispatch(categoryAction.setTotalPage(data.total_pages));
+      if (currentPage === 1) {
+        dispatch(categoryAction.setMovies(data.results));
+        dispatch(categoryAction.setTotalPage(data.total_pages));
+      } else {
+        dispatch(categoryAction.addMovies(data.results));
+      }
     } catch (err) {
       console.log(err);
     }
