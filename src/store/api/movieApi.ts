@@ -1,14 +1,11 @@
 import { appDispatch } from "..";
-import { upcomingMovieAction } from "../upcomingMovieSlice";
-import { nowPlayingMovieAction } from "../nowPlayingMovieSlice";
-import { popularMovieAction } from "../popularMovieSlice";
-import { searchResultMovieAction } from "../searchresultMovieSlice";
-import { topRatedMovieAction } from "../topRatedMovieSlice";
-import { movieAction } from "../moviesSlice";
+import { searchResultMovieAction } from "../searchMovieSlice";
 import { trendingMovieAction } from "../TrendingMovieSlice";
-import { castAction } from "./castSlice";
-import { reviewAction } from "./reviewsSlice";
 import { setVideoId } from "../videoPlayerSlice";
+import { MovieCategoryProps } from "../../utils/type";
+import { categoryAction } from "../categorySlice";
+import { movieDetailAction } from "../movieDetailSlice";
+import { moviesAction } from "../moviesSlice";
 
 export const fetchTrendingMovie = (currentPage = 1) => {
   return async (dispatch: appDispatch) => {
@@ -25,60 +22,24 @@ export const fetchTrendingMovie = (currentPage = 1) => {
   };
 };
 
-export const fetchPopularMovie = (currentPage = 1) => {
+export const fetchMovie = (category: MovieCategoryProps, currentPage = 1) => {
   return async (dispatch: appDispatch) => {
     try {
-      const data = await fetchData(`/movie/popular?page=${currentPage}&`);
-      dispatch(popularMovieAction.addMovies(data.results));
-      dispatch(popularMovieAction.setTotalPage(data.total_pages));
+      const data = await fetchData(`/movie/${category}?page=${currentPage}&`);
+      dispatch(categoryAction.addMovies(data.results));
+      dispatch(categoryAction.setTotalPage(data.total_pages));
     } catch (err) {
       console.log(err);
     }
   };
 };
 
-export const fetchUpcomingMovie = (currentPage = 1) => {
-  return async (dispatch: appDispatch) => {
-    try {
-      const data = await fetchData(`/movie/upcoming?page=${currentPage}&`);
-      dispatch(upcomingMovieAction.addMovies(data.results));
-      dispatch(upcomingMovieAction.setTotalPage(data.total_pages));
-    } catch (err) {
-      console.log(err);
-    }
-  };
-};
-
-export const fetchNowPlayingMovie = (currentPage = 1) => {
-  return async (dispatch: appDispatch) => {
-    try {
-      const data = await fetchData(`/movie/now_playing?page=${currentPage}&`);
-      dispatch(nowPlayingMovieAction.addMovies(data.results));
-      dispatch(nowPlayingMovieAction.setTotalPage(data.total_pages));
-    } catch (err) {
-      console.log(err);
-    }
-  };
-};
-
-export const fetchTopRatedMovie = (currentPage = 1) => {
-  return async (dispatch: appDispatch) => {
-    try {
-      const data = await fetchData(`/movie/top_rated?page=${currentPage}&`);
-      dispatch(topRatedMovieAction.addMovies(data.results));
-      dispatch(topRatedMovieAction.setTotalPage(data.total_pages));
-    } catch (err) {
-      console.log(err);
-    }
-  };
-};
-
-export const fetchCast = (movieId: number) => {
+export const fetchCredits = (movieId: number) => {
   return async (dispatch: appDispatch) => {
     try {
       if (movieId) {
         const data = await fetchData(`/movie/${movieId}/credits?`);
-        dispatch(castAction.addCast(data.cast));
+        dispatch(movieDetailAction.addCredits(data));
       }
     } catch (err) {
       console.log(err);
@@ -91,19 +52,33 @@ export const fetchReviews = (movieId: number) => {
     try {
       if (movieId) {
         const data = await fetchData(`/movie/${movieId}/reviews?`);
-        dispatch(reviewAction.addReviews(data.results));
+        dispatch(movieDetailAction.addReviews(data.results));
       }
     } catch (err) {
       console.log(err);
     }
   };
 };
+
+export const fetchMovieVideos = (id: number) => {
+  return async (dispatch: appDispatch) => {
+    try {
+      if (id) {
+        const data = await fetchData(`/movie/${id}/videos?`);
+        dispatch(movieDetailAction.addVideos(data.results));
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
 export const fetchMovieDetail = (movieId: number) => {
   return async (dispatch: appDispatch) => {
     try {
       if (movieId) {
         const data = await fetchData(`/movie/${movieId}?`);
-        dispatch(movieAction.setMovieDetail(data));
+        dispatch(movieDetailAction.addMovieDetails(data));
       }
     } catch (err) {
       console.log(err);
@@ -136,7 +111,7 @@ export const fetchMovieGenre = () => {
   return async (dispatch: appDispatch) => {
     try {
       const data = await fetchData("/genre/movie/list?");
-      dispatch(movieAction.addGenres(data.genres));
+      dispatch(moviesAction.addGenres(data.genres));
     } catch (err) {
       console.log(err);
     }
@@ -147,24 +122,11 @@ export const fetchMovieTrailer = (id: number) => {
   return async (dispatch: appDispatch) => {
     try {
       const data = await fetchData(`/movie/${id}/videos?`);
-      const trailers = data.results;
-      const trailerKey = trailers.find(
+      const videos = data.results;
+      const trailerKey = videos.find(
         (e: { type: string }) => e.type === "Trailer"
       ).key;
       dispatch(setVideoId(trailerKey));
-    } catch (err) {
-      console.log(err);
-    }
-  };
-};
-
-export const fetchMovieVideos = (id: number) => {
-  return async (dispatch: appDispatch) => {
-    try {
-      if (id) {
-        const data = await fetchData(`/movie/${id}/videos?`);
-        dispatch(movieAction.addVideos(data.results));
-      }
     } catch (err) {
       console.log(err);
     }

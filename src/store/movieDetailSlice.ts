@@ -42,5 +42,5 @@ const movieDetailSlice = createSlice({
   },
 });
 
-export const movieAction = movieDetailSlice.actions;
+export const movieDetailAction = movieDetailSlice.actions;
 export default movieDetailSlice;

@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { Movie, MovieList } from "../utils/type";
+import { Movie, MovieList } from "../../utils/type";
 
 const initialState: MovieList = {
   currentPage: 1,

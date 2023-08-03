@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, appDispatch } from "../store";
 import { fetchSearchMovie } from "../store/api/movieApi";
-import { searchResultMovieAction } from "../store/searchresultMovieSlice";
+import { searchResultMovieAction } from "../store/searchMovieSlice";
 import MovieList from "./MovieList";
 // import useMovieAPI from "../customHooks/useMovieAPI";
 

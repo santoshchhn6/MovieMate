@@ -1,14 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
 import appSlice from "./app_slice";
-import popularMovieSlice from "./popularMovieSlice";
-import upcomingMovieSlice from "./upcomingMovieSlice";
-import nowPlayingMovieSlice from "./nowPlayingMovieSlice";
-import topRatedMovieSlice from "./topRatedMovieSlice";
-import searchResultMovieSlice from "./searchresultMovieSlice";
+// import popularMovieSlice from "./popularMovieSlice";
+// import upcomingMovieSlice from "./upcomingMovieSlice";
+// import nowPlayingMovieSlice from "./tobedeleted/nowPlayingMovieSlice";
+// import topRatedMovieSlice from "./topRatedMovieSlice";
+import searchResultMovieSlice from "./searchMovieSlice";
 import moviesSlice from "./moviesSlice";
 import trendingMovieSlice from "./TrendingMovieSlice";
 import videoPlayerSlice from "./videoPlayerSlice";
 import movieDetailSlice from "./movieDetailSlice";
+import categorySlice from "./categorySlice";
 
 const store = configureStore({
   reducer: {
@@ -17,10 +18,7 @@ const store = configureStore({
     movies: moviesSlice.reducer,
     movieDetail: movieDetailSlice.reducer,
     trending: trendingMovieSlice.reducer,
-    popular: popularMovieSlice.reducer,
-    upcoming: upcomingMovieSlice.reducer,
-    nowPlaying: nowPlayingMovieSlice.reducer,
-    topRated: topRatedMovieSlice.reducer,
+    category: categorySlice.reducer,
     searchResult: searchResultMovieSlice.reducer,
   },
 });

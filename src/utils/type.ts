@@ -80,3 +80,9 @@ export interface CreditsProps {
   cast: CastProps[];
   crew: CrewProps[];
 }
+
+export type MovieCategoryProps =
+  | "popular"
+  | "upcoming"
+  | "top_rated"
+  | "now_playing";

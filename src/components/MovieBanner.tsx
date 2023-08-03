@@ -3,13 +3,19 @@ import { RootState, appDispatch } from "../store";
 import Rating from "./Rating";
 import { getFormatedDate, getFormatedTime } from "../utils/date";
 import { BsFillPlayFill } from "react-icons/bs";
-import { showVideoPlayer } from "../store/videoPlayerSlice";
+import { setVideoId, showVideoPlayer } from "../store/videoPlayerSlice";
 
 const MovieBanner = () => {
-  const movie = useSelector((state: RootState) => state.movieDetail.details);
+  const { details: movie, videos } = useSelector(
+    (state: RootState) => state.movieDetail
+  );
   const dispatch = useDispatch<appDispatch>();
 
   const onClickTrailerHandler = () => {
+    const trailerId = videos.find(
+      (e: { type: string }) => e?.type === "Trailer"
+    )?.key;
+    dispatch(setVideoId(trailerId as string));
     dispatch(showVideoPlayer());
   };
   return (

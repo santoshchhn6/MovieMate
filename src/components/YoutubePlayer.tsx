@@ -7,7 +7,6 @@ import { hideVideoPlayer } from "../store/videoPlayerSlice";
 const YoutubePlayer = () => {
   const videoPlayer = useSelector((state: RootState) => state.videoPlayer);
   const { show_video_player, videoId } = videoPlayer;
-  console.log({ show_video_player, videoId });
   const dispatch = useDispatch<appDispatch>();
 
   const onPlayerReady: YouTubeProps["onReady"] = (event) => {

@@ -16,7 +16,7 @@ const Banner = () => {
   const { movies, loading, currentPage } = useSelector(
     (state: RootState) => state.trending
   );
-  const genres = useSelector((state: RootState) => state.movie.genres);
+  const genres = useSelector((state: RootState) => state.movies.genres);
   const { width } = useWindowSize();
   const [x, setX] = useState(0);
   const dispatch = useDispatch<appDispatch>();
