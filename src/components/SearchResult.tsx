@@ -4,7 +4,6 @@ import { RootState, appDispatch } from "../store";
 import { fetchSearchMovie } from "../store/api/movieApi";
 import { searchResultMovieAction } from "../store/searchMovieSlice";
 import MovieList from "./MovieList";
-// import useMovieAPI from "../customHooks/useMovieAPI";
 
 const SearchResult = () => {
   const searchInput = useSelector((state: RootState) => state.app.search);
@@ -18,12 +17,6 @@ const SearchResult = () => {
   const handleNextPage = () => {
     dispatch(searchResultMovieAction.nextPage());
   };
-
-  // const { movies, isLoading, nextPage } = useMovieAPI(
-  //   `/search/movie?query=${searchInput}&include_adult=false`
-  // );
-
-  // return <MovieList movies={movies} nextPage={nextPage} loading={isLoading} />;
 
   return (
     <MovieList

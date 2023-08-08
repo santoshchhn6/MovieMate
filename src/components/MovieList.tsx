@@ -9,7 +9,7 @@ interface Props {
 
 const MovieList = ({ movies, nextPage, loading }: Props) => {
   return (
-    <div className="w-[1440px] flex justify-center">
+    <div className=" flex justify-center">
       {movies?.length || !loading ? (
         <div className="w-[100%] p-5 grid gap-5 grid-cols-[repeat(auto-fit,minmax(200px,1fr))] ease-in-out duration-500 ">
           {movies?.map((movie, i) => (
@@ -26,7 +26,7 @@ const MovieList = ({ movies, nextPage, loading }: Props) => {
           ))}
           <div
             onClick={nextPage}
-            className="w-[200px] h-[300px] border hover:border-blue-600 hover:text-blue-600 cursor-pointer rounded-xl flex justify-center items-center text-[30px] font-['SansPro-sb']"
+            className="w-[200px] h-[300px]  bg-gray-900 border text-blue-600 border-blue-600 hover:border-white hover:text-white cursor-pointer rounded-xl flex justify-center items-center text-[30px] font-['SansPro-sb']"
           >
             {loading ? (
               <img src={spinner} alt="" className="w-[100px] h-[100px]" />

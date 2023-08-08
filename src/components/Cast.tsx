@@ -9,7 +9,7 @@ const Cast = ({ actors }: Props) => {
   return (
     <div className="flex gap-[20px]">
       {actors.map((actor) => (
-        <div key={actor.id} className="">
+        <div key={actor.id} className="cursor-pointer">
           <ImageComponent
             src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`}
             className={`min-w-[200px] min-h-[300px] rounded-lg object-contain bg-[#51627E]`}

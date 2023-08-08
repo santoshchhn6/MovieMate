@@ -43,10 +43,10 @@ const MovieBanner = () => {
               className="min-w-[300px] h-[450px] rounded-md "
             />
             <button
-              className="w-[100%] h-[60px] bg-blue-600 text-[20px] mt-5 px-4 py-1 rounded-md font-['Poppin-b'] flex gap-5 items-center justify-center"
+              className="w-[100%] h-[60px] bg-blue-600 text-[25px] mt-5 px-2 rounded-md font-['Poppin-b'] flex gap-5 items-center "
               onClick={onClickTrailerHandler}
             >
-              <BsFillPlayFill />
+              <BsFillPlayFill size={50} />
               <span>Watch Trailer</span>
             </button>
           </div>
@@ -66,11 +66,11 @@ const MovieBanner = () => {
               <span className="font-semibold">{movie?.adult ? "A" : "UA"}</span>
             </div>
 
-            <div className="flex gap-3  text-[20px] font-['SansPro-sb'] mb-5">
+            <div className="flex gap-3  text-[20px] font-['SansPro-sb'] mb-5 cursor-pointer">
               {movie?.genres.map((e) => (
                 <span
                   key={e.id}
-                  className=" bg-black/50 border border-white px-3   rounded-full "
+                  className=" bg-black/50 border-2   border-blue-600 px-3    rounded-full "
                 >
                   {e.name}
                 </span>

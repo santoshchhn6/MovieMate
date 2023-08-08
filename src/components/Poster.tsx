@@ -21,7 +21,7 @@ const Poster = ({
   return (
     <Link
       to={`/movie/${id}`}
-      className="relative justify-self-center rounded-xl overflow-hidden hover:border-2 hover:border-blue-700"
+      className="relative justify-self-center rounded-xl overflow-hidden hover:border-2 hover:border-white"
       style={{
         width: `${width}px`,
         height: `${height}px`,
