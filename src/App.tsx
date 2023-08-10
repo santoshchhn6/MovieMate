@@ -1,7 +1,7 @@
 import Header from "./components/Header";
 import Home from "./pages/Home";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import SearchPage from "./components/SearchPage";
+import SearchPage from "./pages/Search";
 import Footer from "./components/Footer";
 import Movie from "./pages/Movie";
 import Person from "./pages/Person";

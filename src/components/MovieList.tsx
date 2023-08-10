@@ -11,7 +11,7 @@ const MovieList = ({ movies, nextPage, loading }: Props) => {
   return (
     <div className=" flex justify-center">
       {movies?.length || !loading ? (
-        <div className="w-[100%] p-5 grid gap-5 grid-cols-[repeat(auto-fit,minmax(200px,1fr))] ease-in-out duration-500 ">
+        <div className="w-[100%] my-5 grid gap-5 grid-cols-[repeat(auto-fit,minmax(200px,1fr))] ease-in-out duration-500 ">
           {movies?.map((movie, i) => (
             <Poster
               key={i}

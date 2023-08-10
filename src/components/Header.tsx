@@ -1,7 +1,8 @@
 import SearchMovie from "./SearchMovie";
 import { AiOutlineMenu } from "react-icons/ai";
-// import { useScrollHandler } from "../utils/hooks/useScrollHandler";
 import Logo from "./Logo";
+import { margin, padding } from "../style/style";
+// import { useScrollHandler } from "../utils/hooks/useScrollHandler";
 
 const Header = () => {
   // const scrollPosition = useScrollHandler();
@@ -13,7 +14,7 @@ const Header = () => {
       //     ? "bg-black/80 backdrop-blur-lg"
       //     : "bg-black/20 backdrop-blur-lg"
       // }`}
-      className={` w-[100%] h-[60px] bg-gray-900 flex items-center gap-3 justify-between px-3 py-2 pr-10  `}
+      className={` h-[60px] bg-gray-900 flex items-center gap-3 justify-between ${padding}`}
     >
       <div className="flex gap-3 items-center">
         <AiOutlineMenu className="text-white text-[20px] hover:text-blue-700 cursor-pointer" />

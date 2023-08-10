@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { container, heading } from "../style/style";
+import { container, heading, margin } from "../style/style";
 import { RootState, appDispatch } from "../store";
 import { useEffect, useState } from "react";
 // import { fetchReviews } from "../redux/movie_action";
@@ -20,11 +20,11 @@ const Reviews = () => {
   };
 
   return (
-    <div className={`${container} `}>
+    <div className={margin}>
       <h1 className={heading}>Reviews</h1>
       {reviews.length ? (
         !showAllReviews ? (
-          <div className="border w-[60%] relative rounded-xl">
+          <div className="border border-gray-600 w-[60%] relative rounded-xl">
             <SingleReview review={reviews[0]} />
             <button
               className="absolute bottom-[-15px] left-[40%] bg-blue-600 text-[18px] font-['Poppin-sb'] p-1 px-5 rounded-full hover:bg-blue-500 "
@@ -59,7 +59,7 @@ type SingleReviewProps = {
   review: ReviewProps;
 };
 const SingleReview = ({ review }: SingleReviewProps) => (
-  <div className=" flex flex-col gap-3 border-b-2 p-3">
+  <div className=" flex flex-col gap-3  p-3">
     <div className="flex gap-3">
       <ImageComponent
         src={`https://image.tmdb.org/t/p/w200${review?.author_details.avatar_path}`}

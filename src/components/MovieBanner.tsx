@@ -4,6 +4,7 @@ import Rating from "./Rating";
 import { getFormatedDate, getFormatedTime } from "../utils/date";
 import { BsFillPlayFill } from "react-icons/bs";
 import { setVideoId, showVideoPlayer } from "../store/videoPlayerSlice";
+import { margin } from "../style/style";
 
 const MovieBanner = () => {
   const {
@@ -35,8 +36,8 @@ const MovieBanner = () => {
         className="absolute w-[100%] h-[100%] blur-lg"
       />
 
-      <div className="absolute flex items-center justify-center w-[100%] h-[100%] bg-gradient-to-r from-black/90 via-black/50 to-black/90">
-        <div className=" w-[80%] flex gap-10  ">
+      <div className="absolute flex items-center  w-[100%] h-[100%] bg-gradient-to-r from-black/90 via-black/50 to-black/90">
+        <div className={`  w-[80%] flex gap-10 ${margin} `}>
           <div>
             <img
               src={`https://image.tmdb.org/t/p/w300/${movie?.poster_path}`}

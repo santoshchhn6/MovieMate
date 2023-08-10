@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 
-import { container, heading } from "../../style/style";
+import { heading, leftMargin } from "../../style/style";
 import Slider from "../Slider";
 import Cast from "../Cast";
 
@@ -10,10 +10,10 @@ const FetchCast = () => {
     (state: RootState) => state.movieDetail.credits.cast
   );
 
-  console.log({actors})
+  console.log({ actors });
 
   return (
-    <div className={container}>
+    <div className={leftMargin}>
       <h1 className={heading}>Cast</h1>
       <Slider
         dataLength={actors.length}

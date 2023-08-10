@@ -15,6 +15,7 @@ import useWindowSize from "../utils/hooks/useWindowSize";
 import loadingImg from "../assets/loading.gif";
 import YoutubePlayer from "./YoutubePlayer";
 import { showVideoPlayer } from "../store/videoPlayerSlice";
+import { margin } from "../style/style";
 
 const Banner = () => {
   const { movies, loading, currentPage } = useSelector(
@@ -66,8 +67,9 @@ const Banner = () => {
                 className="absolute object-cover"
               />
               <div className="absolute w-[100%] h-[100%] bg-gradient-to-r from-black  via-black/0 via-50%  to-black "></div>
-              <div className="absolute w-[100%] h-[100%] ">
-                <div className="w-[40%] ml-[50px] mt-[40px]">
+
+              <div className={`absolute  h-[100%] ${margin}`}>
+                <div className="w-[40%] mt-[40px]">
                   <h1 className="text-[50px] mb-3 font-['Poppin-sb']">
                     {movie.title.toUpperCase()}
                   </h1>
