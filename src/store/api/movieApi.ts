@@ -6,6 +6,7 @@ import { MovieCategoryProps } from "../../utils/type";
 import { categoryAction } from "../categorySlice";
 import { movieDetailAction } from "../movieDetailSlice";
 import { moviesAction } from "../moviesSlice";
+import { fetchData } from "./baseApi";
 
 export const fetchTrendingMovie = (currentPage = 1) => {
   return async (dispatch: appDispatch) => {
@@ -135,13 +136,4 @@ export const fetchMovieTrailer = (id: number) => {
       console.log(err);
     }
   };
-};
-
-const fetchData = async (endpoint: string) => {
-  const res = await fetch(
-    `https://api.themoviedb.org/3${endpoint}api_key=${
-      import.meta.env.VITE_API_KEY
-    }`
-  );
-  return await res.json();
 };

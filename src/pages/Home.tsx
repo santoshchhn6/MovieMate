@@ -3,10 +3,10 @@ import MovieCategories from "../components/MovieCategories";
 
 const Home = () => {
   return (
-    <div>
+    <>
       <Banner />
       <MovieCategories />
-    </div>
+    </>
   );
 };
 

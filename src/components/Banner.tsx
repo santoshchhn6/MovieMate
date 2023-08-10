@@ -67,7 +67,7 @@ const Banner = () => {
               />
               <div className="absolute w-[100%] h-[100%] bg-gradient-to-r from-black  via-black/0 via-50%  to-black "></div>
               <div className="absolute w-[100%] h-[100%] ">
-                <div className="w-[40%] ml-[50px] mt-[100px]">
+                <div className="w-[40%] ml-[50px] mt-[40px]">
                   <h1 className="text-[50px] mb-3 font-['Poppin-sb']">
                     {movie.title.toUpperCase()}
                   </h1>

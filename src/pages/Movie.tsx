@@ -14,7 +14,7 @@ import {
   fetchReviews,
 } from "../store/api/movieApi";
 
-const MovieDetail = () => {
+const Movie = () => {
   const { id } = useParams();
 
   const dispatch = useDispatch<appDispatch>();
@@ -31,7 +31,7 @@ const MovieDetail = () => {
   }, [id, dispatch]);
 
   return (
-    <div>
+    <>
       <MovieBanner />
 
       <FetchCast />
@@ -41,8 +41,8 @@ const MovieDetail = () => {
       <FetchVideo />
 
       <YoutubePlayer />
-    </div>
+    </>
   );
 };
 
-export default MovieDetail;
+export default Movie;
