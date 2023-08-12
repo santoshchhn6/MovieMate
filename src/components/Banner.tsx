@@ -15,7 +15,7 @@ import useWindowSize from "../utils/hooks/useWindowSize";
 import loadingImg from "../assets/loading.gif";
 import YoutubePlayer from "./YoutubePlayer";
 import { showVideoPlayer } from "../store/videoPlayerSlice";
-import { margin } from "../style/style";
+import { content, heading2, margin } from "../style/style";
 
 const Banner = () => {
   const { movies, loading, currentPage } = useSelector(
@@ -70,9 +70,7 @@ const Banner = () => {
 
               <div className={`absolute  h-[100%] ${margin}`}>
                 <div className="w-[40%] mt-[40px]">
-                  <h1 className="text-[50px] mb-3 font-['Poppin-sb']">
-                    {movie.title.toUpperCase()}
-                  </h1>
+                  <h1 className={heading2}>{movie.title.toUpperCase()}</h1>
                   <Rating rating={movie.vote_average} />
                   <p className="text-[20px] my-3 font-['Poppin']">
                     {getFormatedDate(movie ? movie?.release_date : "")}
@@ -88,7 +86,7 @@ const Banner = () => {
                       </span>
                     ))}
                   </div>
-                  <p className="mb-3 text-[20px] font-['OpenSans']">
+                  <p className={content}>
                     {movie.overview}
                   </p>
                   <div className="flex gap-3">

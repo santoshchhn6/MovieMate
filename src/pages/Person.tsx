@@ -4,6 +4,8 @@ import { RootState, appDispatch } from "../store";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPerson } from "../store/api/personApi";
 import ImageComponent from "../components/ImageComponent";
+import { content, heading, heading2, heading3, margin } from "../style/style";
+import { getAge, getFormatedDate } from "../utils/date";
 
 const Person = () => {
   const { id } = useParams();
@@ -15,16 +17,21 @@ const Person = () => {
   }, [dispatch, id]);
 
   return (
-    <div>
-      <div className="flex border gap-5">
+    <div className={margin}>
+      <div className="flex my-5 gap-5">
         <ImageComponent
-          src={`https://image.tmdb.org/t/p/w200${person?.profile_path}`}
-          className={`min-w-[200px] min-h-[300px] rounded-lg object-contain bg-[#51627E]`}
+          src={`https://image.tmdb.org/t/p/w300${person?.profile_path}`}
+          className={`min-w-[300px] min-h-[450px] rounded-lg object-contain bg-gray-900`}
         />
         <div>
-          <p>{person?.name}</p>
-          <p>Biography</p>
-          <p>{person?.biography}</p>
+          <p className={heading2}>{person?.name}</p>
+
+          <p className={`font-['OpenSans'] -mt-3 ${heading3}`}>
+            Age {getAge(person ? person?.birthday : "")} years
+          </p>
+
+          <p className={heading}>Biography</p>
+          <p className={content}>{person?.biography}</p>
         </div>
       </div>
 
@@ -35,7 +42,7 @@ const Person = () => {
         ))}
       </div>
 
-      <p>birthday: {person?.birthday}</p>
+      <p>birthday: {getFormatedDate(person ? person?.birthday : "")}</p>
       <p>deathday: {person?.deathday}</p>
       <p>gender:{person?.gender}</p>
       <p>known for:{person?.known_for_department}</p>

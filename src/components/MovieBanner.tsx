@@ -4,7 +4,7 @@ import Rating from "./Rating";
 import { getFormatedDate, getFormatedTime } from "../utils/date";
 import { BsFillPlayFill } from "react-icons/bs";
 import { setVideoId, showVideoPlayer } from "../store/videoPlayerSlice";
-import { margin } from "../style/style";
+import { content, heading2, heading3, margin } from "../style/style";
 
 const MovieBanner = () => {
   const {
@@ -53,13 +53,11 @@ const MovieBanner = () => {
           </div>
 
           <div>
-            <h1 className="text-[50px] mb-3 font-['Poppin-sb']">
-              {movie?.title.toUpperCase()}
-            </h1>
+            <h1 className={heading2}>{movie?.title.toUpperCase()}</h1>
 
             <Rating rating={movie ? movie.vote_average : 0} />
 
-            <div className="flex gap-5 my-5 font-['Poppin'] text-[24px]">
+            <div className={`flex gap-5 ${heading3}`}>
               <span className="font-semibold">
                 {getFormatedDate(movie ? movie?.release_date : "")}
               </span>
@@ -78,9 +76,7 @@ const MovieBanner = () => {
               ))}
             </div>
 
-            <p className="text-[20px] mb-5 font-['OpenSans']">
-              {movie?.overview}
-            </p>
+            <p className={content}>{movie?.overview}</p>
 
             <div className=" flex justify-between">
               <div>
