@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { RootState, appDispatch } from "../store";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,21 +7,44 @@ import ImageComponent from "../components/ImageComponent";
 import { content, heading, heading2, heading3, margin } from "../style/style";
 import { getAge, getFormatedDate } from "../utils/date";
 
+type PersonInfoType = {
+  "Known for": string;
+  Popularity: number;
+  Birthday: string;
+  "Place of birth": string;
+  Deathday: string | null;
+  Gender: string;
+};
+
 const Person = () => {
   const { id } = useParams();
   const dispatch: appDispatch = useDispatch();
   const person = useSelector((state: RootState) => state.personDetail.person);
 
+  const gender = ["Not Specified", "Female", "Male"];
+  const [personInfo, setPersonInfo] = useState<PersonInfoType | null>(null);
+
   useEffect(() => {
     dispatch(fetchPerson(Number(id)));
   }, [dispatch, id]);
 
+  useEffect(() => {
+    setPersonInfo({
+      "Known for": person ? person?.known_for_department : "null",
+      Popularity: person ? person?.popularity : 0,
+      Birthday: getFormatedDate(person ? person?.birthday : "null"),
+      "Place of birth": person ? person?.place_of_birth : "null",
+      Deathday: person ? person?.deathday : null,
+      Gender: gender[person ? person?.gender : 0],
+    });
+  }, [person]);
+
   return (
     <div className={margin}>
       <div className="flex my-5 gap-5">
-        <ImageComponent
+        <img
           src={`https://image.tmdb.org/t/p/w300${person?.profile_path}`}
-          className={`min-w-[300px] min-h-[450px] rounded-lg object-contain bg-gray-900`}
+          className={`w-[300px] h-[450px] rounded-lg object-contain bg-gray-900`}
         />
         <div>
           <p className={heading2}>{person?.name}</p>
@@ -31,23 +54,37 @@ const Person = () => {
           </p>
 
           <p className={heading}>Biography</p>
-          <p className={content}>{person?.biography}</p>
+          <p className={`${content}  h-[270px] overflow-hidden`}>
+            {person?.biography}
+          </p>
         </div>
       </div>
 
-      <div>
+      {/* <div>
         <p>Also known as</p>
         {person?.also_known_as.map((name, i) => (
           <p key={i}>{name}</p>
         ))}
-      </div>
+      </div> */}
 
-      <p>birthday: {getFormatedDate(person ? person?.birthday : "")}</p>
-      <p>deathday: {person?.deathday}</p>
-      <p>gender:{person?.gender}</p>
-      <p>known for:{person?.known_for_department}</p>
-      <p>Place of birth:{person?.place_of_birth}</p>
-      <p>Popularity:{person?.popularity}</p>
+      <div className="flex my-5 gap-5">
+        <div className="w-[300px] ">
+          {personInfo
+            ? Object.entries(personInfo).map((e, i) => (
+                <div key={i} className="mb-3">
+                  {e[1] ? (
+                    <>
+                      <p className="text-[20px] font-['Poppin-sb']">{e[0]}</p>
+                      <p className="text-[20px] font-['Poppin']">{e[1]}</p>
+                    </>
+                  ) : null}
+                </div>
+              ))
+            : null}
+        </div>
+
+        <div></div>
+      </div>
     </div>
   );
 };
