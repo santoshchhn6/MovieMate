@@ -20,7 +20,7 @@ const ReadMore: React.FC<ReadMoreProps> = ({ children, maxLength }) => {
           {isReadMore ? `${text.slice(0, maxLength)}...` : text}
           <span
             onClick={toggleReadMore}
-            className="font-bold cursor-pointer mx-2"
+            className="font-bold text-blue-500 cursor-pointer mx-2 hover:text-white"
           >
             {isReadMore ? "read more" : "show less"}
           </span>

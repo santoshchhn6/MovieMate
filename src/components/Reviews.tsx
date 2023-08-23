@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 // import { fetchReviews } from "../redux/movie_action";
 import { getFormatedDate } from "../utils/date";
 import Rating from "./Rating";
-import ReadMore from "./ReadMore";
+import ReadMore from "./Buttons/ReadMore";
 import ImageComponent from "./ImageComponent";
 import ButtonExit from "./Buttons/ButtonExit";
 import { ReviewProps } from "../utils/type";

@@ -3,9 +3,9 @@ import { useParams } from "react-router-dom";
 import { RootState, appDispatch } from "../store";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPerson } from "../store/api/personApi";
-import ImageComponent from "../components/ImageComponent";
 import { content, heading, heading2, heading3, margin } from "../style/style";
 import { getAge, getFormatedDate } from "../utils/date";
+import ReadMore from "../components/Buttons/ReadMore";
 
 type PersonInfoType = {
   "Known for": string;
@@ -54,8 +54,10 @@ const Person = () => {
           </p>
 
           <p className={heading}>Biography</p>
-          <p className={`${content}  h-[270px] overflow-hidden`}>
-            {person?.biography}
+          <p className={`${content}  `}>
+            <ReadMore maxLength={800}>
+              {person ? person?.biography : ""}
+            </ReadMore>
           </p>
         </div>
       </div>

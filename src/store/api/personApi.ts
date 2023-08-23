@@ -14,3 +14,16 @@ export const fetchPerson = (personId: number) => {
     }
   };
 };
+
+export const fetchPersonMovies = (personId: number) => {
+  return async (dispatch: appDispatch) => {
+    try {
+      if (personId) {
+        const data = await fetchData(`/person/${personId}?`);
+        dispatch(personAction.setPerson(data));
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
