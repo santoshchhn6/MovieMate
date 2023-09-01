@@ -50,7 +50,6 @@ const Slider = (props: PropsWithChildren<Props>) => {
     }
   };
 
-
   return (
     <>
       {dataLength ? (

@@ -10,7 +10,6 @@ const FetchCast = () => {
     (state: RootState) => state.movieDetail.credits.cast
   );
 
-  console.log({ actors });
 
   return (
     <div className={leftMargin}>

@@ -15,12 +15,12 @@ export const fetchPerson = (personId: number) => {
   };
 };
 
-export const fetchPersonMovies = (personId: number) => {
+export const fetchPersonKnownForMovies = (personId: number) => {
   return async (dispatch: appDispatch) => {
     try {
       if (personId) {
-        const data = await fetchData(`/person/${personId}?`);
-        dispatch(personAction.setPerson(data));
+        const data = await fetchData(`/person/${personId}/movie_credits?`);
+        dispatch(personAction.setKnowFor(data.cast));
       }
     } catch (err) {
       console.log(err);

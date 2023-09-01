@@ -1,12 +1,14 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { PersonType } from "../utils/type";
+import { MovieProps, PersonType } from "../utils/type";
 
 type PersonState = {
   person: PersonType | null;
+  knownFor: MovieProps[];
 };
 
 const initialState: PersonState = {
   person: null,
+  knownFor: [],
 };
 
 const personSlice = createSlice({
@@ -15,6 +17,9 @@ const personSlice = createSlice({
   reducers: {
     setPerson(state, action: PayloadAction<PersonType>) {
       state.person = action.payload;
+    },
+    setKnowFor(state, action: PayloadAction<MovieProps[]>) {
+      state.knownFor = action.payload;
     },
   },
 });

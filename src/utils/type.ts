@@ -3,6 +3,7 @@ export interface MovieProps {
   title: string;
   overview: string;
   date: string;
+  adult: boolean;
   poster_path: string;
   backdrop_path: string;
   release_date: string;

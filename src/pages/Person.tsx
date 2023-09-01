@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { RootState, appDispatch } from "../store";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchPerson } from "../store/api/personApi";
+import { fetchPerson, fetchPersonKnownForMovies } from "../store/api/personApi";
 import { content, heading, heading2, heading3, margin } from "../style/style";
 import { getAge, getFormatedDate } from "../utils/date";
 import ReadMore from "../components/Buttons/ReadMore";
+import Poster from "../components/Poster";
+import Slider from "../components/Slider";
 
 type PersonInfoType = {
   "Known for": string;
@@ -19,13 +21,16 @@ type PersonInfoType = {
 const Person = () => {
   const { id } = useParams();
   const dispatch: appDispatch = useDispatch();
-  const person = useSelector((state: RootState) => state.personDetail.person);
+  const { person, knownFor } = useSelector(
+    (state: RootState) => state.personDetail
+  );
 
   const gender = ["Not Specified", "Female", "Male"];
   const [personInfo, setPersonInfo] = useState<PersonInfoType | null>(null);
 
   useEffect(() => {
     dispatch(fetchPerson(Number(id)));
+    dispatch(fetchPersonKnownForMovies(Number(id)));
   }, [dispatch, id]);
 
   useEffect(() => {
@@ -38,6 +43,8 @@ const Person = () => {
       Gender: gender[person ? person?.gender : 0],
     });
   }, [person]);
+
+  console.log({ knownFor });
 
   return (
     <div className={margin}>
@@ -70,7 +77,7 @@ const Person = () => {
       </div> */}
 
       <div className="flex my-5 gap-5">
-        <div className="w-[300px] ">
+        <div className=" min-w-[300px] ">
           {personInfo
             ? Object.entries(personInfo).map((e, i) => (
                 <div key={i} className="mb-3">
@@ -85,7 +92,25 @@ const Person = () => {
             : null}
         </div>
 
-        <div></div>
+        <div className="w-[100%]">
+          <h2 className={`${heading} mt-0`}>Known For</h2>
+          <Slider dataLength={knownFor.length}>
+            <div className=" flex gap-5">
+              {knownFor?.map((movie, i) => (
+                <Poster
+                  key={i}
+                  id={movie.id}
+                  title={movie.title}
+                  width={200}
+                  height={300}
+                  poster_url={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+                  release_date={movie.release_date}
+                  vote_average={movie.vote_average}
+                />
+              ))}
+            </div>
+          </Slider>
+        </div>
       </div>
     </div>
   );
