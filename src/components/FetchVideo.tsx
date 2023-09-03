@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux";
-import { RootState } from "../../store";
-import Videos from "../Videos";
-import Slider from "../Slider";
-import {  heading, leftMargin } from "../../style/style";
+import { RootState } from "../store";
+import Videos from "./Videos";
+import Slider from "./Slider";
+import { heading, leftMargin } from "../style/style";
 
 const FetchVideo = () => {
   const videos = useSelector((state: RootState) => state.movieDetail.videos);

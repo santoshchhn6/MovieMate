@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import ImageComponent from "./ImageComponent";
 
 interface Props {
   id: number;
@@ -27,7 +28,7 @@ const Poster = ({
         height: `${height}px`,
       }}
     >
-      <img
+      <ImageComponent
         src={poster_url}
         alt={`${title} poster`}
         className={`absolute  object-cover `}

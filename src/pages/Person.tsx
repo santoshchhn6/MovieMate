@@ -6,8 +6,7 @@ import { fetchPerson, fetchPersonKnownForMovies } from "../store/api/personApi";
 import { content, heading, heading2, heading3, margin } from "../style/style";
 import { getAge, getFormatedDate } from "../utils/date";
 import ReadMore from "../components/Buttons/ReadMore";
-import Poster from "../components/Poster";
-import Slider from "../components/Slider";
+import MovieListWithSlider from "../components/MovieListWithSlider";
 
 type PersonInfoType = {
   "Known for": string;
@@ -94,22 +93,7 @@ const Person = () => {
 
         <div className="w-[100%]">
           <h2 className={`${heading} mt-0`}>Known For</h2>
-          <Slider dataLength={knownFor.length}>
-            <div className=" flex gap-5">
-              {knownFor?.map((movie, i) => (
-                <Poster
-                  key={i}
-                  id={movie.id}
-                  title={movie.title}
-                  width={200}
-                  height={300}
-                  poster_url={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
-                  release_date={movie.release_date}
-                  vote_average={movie.vote_average}
-                />
-              ))}
-            </div>
-          </Slider>
+          <MovieListWithSlider data={knownFor} />
         </div>
       </div>
     </div>

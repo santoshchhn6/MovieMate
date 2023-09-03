@@ -1,14 +1,20 @@
 import React, { useRef, useState } from "react";
-import user from "../assets/user.png";
+import no_image from "../assets/no_image.webp";
 
 interface ImageComponentProps {
   src: string;
+  alt?: string;
   className?: string;
+  defaultImage?: string;
+  style?: React.CSSProperties;
 }
 
 const ImageComponent: React.FC<ImageComponentProps> = ({
   src,
+  defaultImage = no_image,
   className = "",
+  alt = "",
+  style = {},
 }) => {
   const image = useRef<HTMLImageElement>(null);
   const [valid, setValid] = useState(true);
@@ -31,11 +37,20 @@ const ImageComponent: React.FC<ImageComponentProps> = ({
         onError={() => setValid(false)}
         ref={image}
         className={className}
+        alt={alt}
+        style={style}
       />
     );
   }
 
-  return <img src={user} alt="default image" className={className} />;
+  return (
+    <img
+      src={defaultImage}
+      alt="default image"
+      className={className}
+      style={style}
+    />
+  );
 };
 
 export default ImageComponent;

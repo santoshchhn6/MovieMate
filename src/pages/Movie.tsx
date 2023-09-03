@@ -3,16 +3,18 @@ import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { appDispatch } from "../store";
 import MovieBanner from "../components/MovieBanner";
-import FetchCast from "../components/api/FetchCast";
+import FetchCast from "../components/FetchCast";
 import Reviews from "../components/Reviews";
-import FetchVideo from "../components/api/FetchVideo";
+import FetchVideo from "../components/FetchVideo";
 import YoutubePlayer from "../components/YoutubePlayer";
 import {
   fetchCredits,
   fetchMovieDetail,
   fetchMovieVideos,
+  fetchRecommendations,
   fetchReviews,
 } from "../store/api/movieApi";
+import Recommendation from "../components/Recommendation";
 
 const Movie = () => {
   const { id } = useParams();
@@ -24,6 +26,7 @@ const Movie = () => {
     dispatch(fetchCredits(movieId));
     dispatch(fetchReviews(movieId));
     dispatch(fetchMovieVideos(movieId));
+    dispatch(fetchRecommendations(movieId));
   };
 
   useEffect(() => {
@@ -39,6 +42,8 @@ const Movie = () => {
       <Reviews />
 
       <FetchVideo />
+
+      <Recommendation />
 
       <YoutubePlayer />
     </>

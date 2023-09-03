@@ -1,15 +1,14 @@
 import { useSelector } from "react-redux";
-import { RootState } from "../../store";
+import { RootState } from "../store";
 
-import { heading, leftMargin } from "../../style/style";
-import Slider from "../Slider";
-import Cast from "../Cast";
+import { heading, leftMargin } from "../style/style";
+import Slider from "./Slider";
+import Cast from "./Cast";
 
 const FetchCast = () => {
   const actors = useSelector(
     (state: RootState) => state.movieDetail.credits.cast
   );
-
 
   return (
     <div className={leftMargin}>

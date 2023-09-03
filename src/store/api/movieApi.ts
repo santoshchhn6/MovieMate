@@ -65,6 +65,19 @@ export const fetchReviews = (movieId: number) => {
   };
 };
 
+export const fetchRecommendations = (movieId: number) => {
+  return async (dispatch: appDispatch) => {
+    try {
+      if (movieId) {
+        const data = await fetchData(`/movie/${movieId}/recommendations?`);
+        dispatch(movieDetailAction.addRecommendations(data.results));
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
 export const fetchMovieVideos = (id: number) => {
   return async (dispatch: appDispatch) => {
     try {

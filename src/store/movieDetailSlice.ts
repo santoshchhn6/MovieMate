@@ -2,6 +2,7 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import {
   CreditsProps,
   MovieInfoProps,
+  MovieProps,
   ReviewProps,
   VideoProps,
 } from "../utils/type";
@@ -11,6 +12,7 @@ type MovieState = {
   reviews: ReviewProps[];
   videos: VideoProps[];
   details: MovieInfoProps | null;
+  recommendations: MovieProps[];
 };
 
 const initialState: MovieState = {
@@ -21,6 +23,7 @@ const initialState: MovieState = {
   reviews: [],
   videos: [],
   details: null,
+  recommendations: [],
 };
 
 const movieDetailSlice = createSlice({
@@ -38,6 +41,9 @@ const movieDetailSlice = createSlice({
     },
     addReviews(state, action: PayloadAction<ReviewProps[]>) {
       state.reviews = action.payload;
+    },
+    addRecommendations(state, action: PayloadAction<MovieProps[]>) {
+      state.recommendations = action.payload;
     },
   },
 });
