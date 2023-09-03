@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import ImageComponent from "./ImageComponent";
+import useScrollToTop from "../utils/hooks/useScrollToTop";
 
 interface Props {
   id: number;
@@ -19,6 +20,7 @@ const Poster = ({
   height,
   release_date,
 }: Props) => {
+  const { scrollToTop } = useScrollToTop();
   return (
     <Link
       to={`/movie/${id}`}
@@ -27,6 +29,7 @@ const Poster = ({
         width: `${width}px`,
         height: `${height}px`,
       }}
+      onClick={scrollToTop}
     >
       <ImageComponent
         src={poster_url}
