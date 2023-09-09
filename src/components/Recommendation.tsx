@@ -6,10 +6,10 @@ import { useSelector } from "react-redux";
 const Recommendation = () => {
     const recommendation=useSelector((state:RootState)=>state.movieDetail.recommendations)
   return (
-    <div className={leftMargin}>
+    <>
       <h2 className={heading}>Recommendation</h2>
       <MovieListWithSlider data={recommendation} />
-    </div>
+    </>
   );
 };
 

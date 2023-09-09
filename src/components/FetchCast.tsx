@@ -11,7 +11,7 @@ const FetchCast = () => {
   );
 
   return (
-    <div className={leftMargin}>
+    <>
       <h1 className={heading}>Cast</h1>
       <Slider
         dataLength={actors.length}
@@ -21,7 +21,7 @@ const FetchCast = () => {
       >
         <Cast actors={actors} />
       </Slider>
-    </div>
+    </>
   );
 };
 

@@ -8,7 +8,7 @@ const FetchVideo = () => {
   const videos = useSelector((state: RootState) => state.movieDetail.videos);
 
   return (
-    <div className={leftMargin}>
+    <>
       <h1 className={heading}>Videos</h1>
       <Slider
         dataLength={videos.length}
@@ -18,7 +18,7 @@ const FetchVideo = () => {
       >
         <Videos data={videos} />
       </Slider>
-    </div>
+    </>
   );
 };
 

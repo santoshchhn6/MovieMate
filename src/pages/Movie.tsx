@@ -15,6 +15,7 @@ import {
   fetchReviews,
 } from "../store/api/movieApi";
 import Recommendation from "../components/Recommendation";
+import { leftMargin } from "../style/style";
 
 const Movie = () => {
   const { id } = useParams();
@@ -37,15 +38,17 @@ const Movie = () => {
     <>
       <MovieBanner />
 
-      <FetchCast />
+      <div className={leftMargin}>
+        <FetchCast />
 
-      <Reviews />
+        <Reviews />
 
-      <FetchVideo />
+        <FetchVideo />
 
-      <Recommendation />
+        <Recommendation />
 
-      <YoutubePlayer />
+        <YoutubePlayer />
+      </div>
     </>
   );
 };

@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { MovieCategoryProps } from "../utils/type";
 import { fetchMovie } from "../store/api/movieApi";
 import { categoryAction } from "../store/categorySlice";
-import { margin } from "../style/style";
+import { margin, rightMargin } from "../style/style";
 
 const MovieCategories = () => {
   const [category, setCategory] = useState<MovieCategoryProps>("popular");
@@ -29,7 +29,7 @@ const MovieCategories = () => {
 
   console.log({ category });
   return (
-    <div className={`mt-5 ${margin}`}>
+    <div className={`mt-5`}>
       <select
         onChange={handleOnChange}
         className=" p-2 w-[220px]  bg-blue-600 text-xl outline-none rounded-lg font-['Poppin-sb']"

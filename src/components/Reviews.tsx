@@ -20,7 +20,7 @@ const Reviews = () => {
   };
 
   return (
-    <div className={margin}>
+    <>
       <h1 className={heading}>Reviews</h1>
       {reviews.length ? (
         !showAllReviews ? (
@@ -51,7 +51,7 @@ const Reviews = () => {
       ) : (
         <span>No reviews</span>
       )}
-    </div>
+    </>
   );
 };
 
