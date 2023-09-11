@@ -5,13 +5,32 @@ import { useEffect, useState } from "react";
 import { MovieCategoryProps } from "../utils/type";
 import { fetchMovie } from "../store/api/movieApi";
 import { categoryAction } from "../store/categorySlice";
-import { margin, rightMargin } from "../style/style";
+import StyledSelect from "./StyledSelect";
 
 const MovieCategories = () => {
   const [category, setCategory] = useState<MovieCategoryProps>("popular");
   const { movies, loading, currentPage } = useSelector(
     (state: RootState) => state.category
   );
+
+  const categoryOptions = [
+    {
+      value: "popular",
+      title: "Popular",
+    },
+    {
+      value: "upcoming",
+      title: "Upcoming",
+    },
+    {
+      value: "now_playing",
+      title: "Now playing",
+    },
+    {
+      value: "top_rated",
+      title: "Top Rated",
+    },
+  ];
   const dispatch = useDispatch<appDispatch>();
 
   useEffect(() => {
@@ -27,19 +46,9 @@ const MovieCategories = () => {
     dispatch(categoryAction.resetPage());
   };
 
-  console.log({ category });
   return (
     <div className={`mt-5`}>
-      <select
-        onChange={handleOnChange}
-        className=" p-2 w-[220px]  bg-blue-600 text-xl outline-none rounded-lg font-['Poppin-sb']"
-      >
-        <option value="popular">Popular</option>
-        <option value="upcoming">Upcoming</option>
-        <option value="now_playing">Now Playing</option>
-        <option value="top_rated">Top Rated</option>
-      </select>
-
+      <StyledSelect options={categoryOptions} onChange={handleOnChange} />
       <MovieList movies={movies} nextPage={nextPage} loading={loading} />
     </div>
   );
