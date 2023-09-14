@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { MovieCategoryProps } from "../utils/type";
 import { fetchMovie } from "../store/api/movieApi";
 import { categoryAction } from "../store/categorySlice";
-import StyledSelect from "./StyledSelect";
+import CustomSelect from "./CustomComponent/CustomSelect";
 
 const MovieCategories = () => {
   const [category, setCategory] = useState<MovieCategoryProps>("popular");
@@ -48,7 +48,11 @@ const MovieCategories = () => {
 
   return (
     <div className={`mt-5`}>
-      <StyledSelect options={categoryOptions} onChange={handleOnChange} />
+      <CustomSelect
+        options={categoryOptions}
+        onChange={handleOnChange}
+        className="w-[240px]"
+      />
       <MovieList movies={movies} nextPage={nextPage} loading={loading} />
     </div>
   );

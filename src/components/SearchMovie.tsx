@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { performSearch } from "../store/app_slice";
 import { appDispatch } from "../store";
 import { useNavigate } from "react-router-dom";
+import CustomInput from "./CustomComponent/CustomInput";
 
 const SearchMovie = () => {
   const [input, setInput] = useState<string>("");
@@ -22,14 +23,14 @@ const SearchMovie = () => {
   return (
     <form
       onSubmit={handleSearch}
-      className=" w-[300px] min-w-[300px] bg-black/50 border   border-blue-600  rounded-full  px-2 flex "
+      className=" w-[300px] min-w-[300px] px-2 flex "
     >
-      <input
+      <CustomInput
         type="text"
         value={input}
         onChange={(e) => setInput(e.target.value)}
         placeholder="Search Movies..."
-        className="w-[100%]  text-[16px] px-2 py-1 outline-none bg-gray-950/0"
+        className="w-[100%] pr-10 -mr-8"
       />
       <button type="submit" className="mr-2">
         <BsSearch />

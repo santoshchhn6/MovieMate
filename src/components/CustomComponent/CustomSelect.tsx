@@ -6,13 +6,14 @@ type Props = {
     value: string;
     title: string;
   }[];
+  className?: string;
 };
 
-const StyledSelect = ({ onChange, options }: Props) => {
+const CustomSelect = ({ onChange, options, className = "" }: Props) => {
   return (
     <select
       onChange={onChange}
-      className=" p-2 w-[220px]  bg-blue-600 text-xl outline-none rounded-lg font-['Poppin-sb']"
+      className={` p-2 px-4   bg-blue-600 text-xl outline-none rounded-lg font-['Poppin-sb'] ${className}`}
     >
       {options.map((opt, i) => (
         <option key={i} value={opt.value}>
@@ -23,4 +24,4 @@ const StyledSelect = ({ onChange, options }: Props) => {
   );
 };
 
-export default StyledSelect;
+export default CustomSelect;

@@ -103,3 +103,8 @@ export interface PersonType {
   popularity: number;
   profile_path: number;
 }
+
+export interface OptionType {
+  value: string;
+  title: string;
+}
