@@ -9,7 +9,7 @@ const initialState: MoviesState = {
   category: "popular",
   currentPage: 1,
   totalPages: 1,
-  loading: false,
+  loading: true,
   movies: [],
 };
 

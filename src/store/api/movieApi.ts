@@ -7,6 +7,7 @@ import { categoryAction } from "../categorySlice";
 import { movieDetailAction } from "../movieDetailSlice";
 import { moviesAction } from "../moviesSlice";
 import { fetchData } from "./baseApi";
+import { movieFilterAction } from "../movieFilterSlice";
 
 export const fetchTrendingMovie = (currentPage = 1) => {
   return async (dispatch: appDispatch) => {
@@ -147,6 +148,23 @@ export const fetchMovieTrailer = (id: number) => {
       dispatch(setVideoId(trailerKey));
     } catch (err) {
       console.log(err);
+    }
+  };
+};
+
+export const fetchFilteredMovie = (year: number) => {
+  return async (dispatch: appDispatch) => {
+    try {
+      dispatch(movieFilterAction.setLoading(true));
+      const data = await fetchData(
+        `/discover/movie/?primary_release_year=${year}&`
+      );
+      dispatch(movieFilterAction.setMovie(data.results));
+      dispatch(movieFilterAction.setTotalPage(data.total_pages));
+      dispatch(movieFilterAction.setLoading(false));
+    } catch (err) {
+      console.log(err);
+      dispatch(movieFilterAction.setLoading(false));
     }
   };
 };

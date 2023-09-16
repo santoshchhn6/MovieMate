@@ -7,6 +7,7 @@ import videoPlayerSlice from "./videoPlayerSlice";
 import movieDetailSlice from "./movieDetailSlice";
 import categorySlice from "./categorySlice";
 import personSlice from "./personSlice";
+import movieFilterSlice from "./movieFilterSlice";
 
 const store = configureStore({
   reducer: {
@@ -15,6 +16,7 @@ const store = configureStore({
     videoPlayer: videoPlayerSlice.reducer,
     movies: moviesSlice.reducer,
     movieDetail: movieDetailSlice.reducer,
+    movieFilter: movieFilterSlice.reducer,
     trending: trendingMovieSlice.reducer,
     category: categorySlice.reducer,
     searchResult: searchResultMovieSlice.reducer,
