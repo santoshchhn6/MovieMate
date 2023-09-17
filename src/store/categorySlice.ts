@@ -9,7 +9,7 @@ const initialState: MoviesState = {
   category: "popular",
   currentPage: 1,
   totalPages: 1,
-  loading: true,
+  loading: false,
   movies: [],
 };
 
@@ -17,8 +17,7 @@ const categorySlice = createSlice({
   name: "movies",
   initialState,
   reducers: {
-   
-    setCategory(state, action:PayloadAction<MovieCategoryProps>) {
+    setCategory(state, action: PayloadAction<MovieCategoryProps>) {
       state.category = action.payload;
     },
 

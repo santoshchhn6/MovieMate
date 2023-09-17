@@ -27,6 +27,7 @@ export const fetchTrendingMovie = (currentPage = 1) => {
 export const fetchMovie = (category: MovieCategoryProps, currentPage = 1) => {
   return async (dispatch: appDispatch) => {
     try {
+      dispatch(categoryAction.setLoading(true));
       const data = await fetchData(`/movie/${category}?page=${currentPage}&`);
       if (currentPage === 1) {
         dispatch(categoryAction.setMovies(data.results));
@@ -34,8 +35,10 @@ export const fetchMovie = (category: MovieCategoryProps, currentPage = 1) => {
       } else {
         dispatch(categoryAction.addMovies(data.results));
       }
+      dispatch(categoryAction.setLoading(false));
     } catch (err) {
       console.log(err);
+      dispatch(categoryAction.setLoading(false));
     }
   };
 };
@@ -152,15 +155,19 @@ export const fetchMovieTrailer = (id: number) => {
   };
 };
 
-export const fetchFilteredMovie = (year: number) => {
+export const fetchFilteredMovie = (currentPage = 1, year: number) => {
   return async (dispatch: appDispatch) => {
     try {
       dispatch(movieFilterAction.setLoading(true));
       const data = await fetchData(
-        `/discover/movie/?primary_release_year=${year}&`
+        `/discover/movie/?primary_release_year=${year}&page=${currentPage}&`
       );
-      dispatch(movieFilterAction.setMovie(data.results));
-      dispatch(movieFilterAction.setTotalPage(data.total_pages));
+      if (currentPage === 1) {
+        dispatch(movieFilterAction.setMovie(data.results));
+        dispatch(movieFilterAction.setTotalPage(data.total_pages));
+      } else {
+        dispatch(movieFilterAction.addMovie(data.results));
+      }
       dispatch(movieFilterAction.setLoading(false));
     } catch (err) {
       console.log(err);

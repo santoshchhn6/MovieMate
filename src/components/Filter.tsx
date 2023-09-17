@@ -13,14 +13,16 @@ const Filter = () => {
   const [genre, setGenre] = useState("All");
   const [rating, setRating] = useState<number | "All">("All");
   const genres = useSelector((state: RootState) => state.movies.genres);
-  const { movies, currentPage, totalPages, loading } = useSelector(
+  const { movies, currentPage, loading } = useSelector(
     (state: RootState) => state.movieFilter
   );
   const dispatch = useDispatch<appDispatch>();
 
   useEffect(() => {
-    dispatch(fetchFilteredMovie(year));
-  }, [year]);
+    dispatch(fetchFilteredMovie(currentPage, year));
+  }, [year, currentPage]);
+
+  console.log({ currentPage });
 
   return (
     <>
