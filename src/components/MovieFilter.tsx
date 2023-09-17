@@ -8,7 +8,7 @@ import { fetchFilteredMovie } from "../store/api/movieApi";
 import MovieList from "./MovieList";
 import { movieFilterAction } from "../store/movieFilterSlice";
 
-const Filter = () => {
+const MovieFilter = () => {
   const [year, setYear] = useState(Number(new Date().getFullYear()));
   const [genre, setGenre] = useState("All");
   const [rating, setRating] = useState<number | "All">("All");
@@ -23,6 +23,11 @@ const Filter = () => {
   }, [year, currentPage]);
 
   console.log({ currentPage });
+
+  const handleOnChageYear = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setYear(Number(e.target.value));
+    dispatch(movieFilterAction.resetPage());
+  };
 
   return (
     <>
@@ -44,7 +49,7 @@ const Filter = () => {
             type="number"
             placeholder="Year"
             value={String(year)}
-            onChange={(e) => setYear(Number(e.target.value))}
+            onChange={handleOnChageYear}
             className="w-[100px] rounded-lg text-[20px] text-center "
           />
         </div>
@@ -76,4 +81,4 @@ const Filter = () => {
   );
 };
 
-export default Filter;
+export default MovieFilter;

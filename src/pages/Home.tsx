@@ -1,14 +1,14 @@
 import Banner from "../components/Banner";
-import Filter from "../components/Filter";
 import MovieCategories from "../components/MovieCategories";
-import { leftMargin, margin } from "../style/style";
+import MovieFilter from "../components/MovieFilter";
+import { margin } from "../style/style";
 
 const Home = () => {
   return (
     <>
       <Banner />
       <div className={margin}>
-        <Filter />
+        <MovieFilter />
         <MovieCategories />
       </div>
     </>
