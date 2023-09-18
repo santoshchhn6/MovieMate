@@ -11,7 +11,7 @@ import { movieFilterAction } from "../store/movieFilterSlice";
 const MovieFilter = () => {
   const [year, setYear] = useState(Number(new Date().getFullYear()));
   const [genre, setGenre] = useState("All");
-  const [rating, setRating] = useState<number | "All">("All");
+  const [rating, setRating] = useState<number>(9);
   const genres = useSelector((state: RootState) => state.movies.genres);
   const { movies, currentPage, loading } = useSelector(
     (state: RootState) => state.movieFilter
@@ -19,13 +19,18 @@ const MovieFilter = () => {
   const dispatch = useDispatch<appDispatch>();
 
   useEffect(() => {
-    dispatch(fetchFilteredMovie(currentPage, year));
-  }, [year, currentPage]);
+    dispatch(fetchFilteredMovie(currentPage, year, rating));
+  }, [year, currentPage, rating]);
 
   console.log({ currentPage });
 
   const handleOnChageYear = (e: React.ChangeEvent<HTMLInputElement>) => {
     setYear(Number(e.target.value));
+    dispatch(movieFilterAction.resetPage());
+  };
+
+  const handleOnChageRating = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setRating(Number(e.target.value));
     dispatch(movieFilterAction.resetPage());
   };
 
@@ -58,8 +63,13 @@ const MovieFilter = () => {
           <span className={heading3}>Rating : </span>
           <CustomSelect
             options={[9, 8, 7, 6, 5, 4, 3, 2, 1, 0]}
-            onChange={(e) => setRating(Number(e.target.value))}
+            onChange={handleOnChageRating}
           />
+        </div>
+
+        <div>
+          <span className={heading3}>Country : </span>
+          <CustomSelect options={[]} onChange={handleOnChageRating} />
         </div>
 
         <button

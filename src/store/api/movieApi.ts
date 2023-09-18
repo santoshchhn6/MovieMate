@@ -155,12 +155,18 @@ export const fetchMovieTrailer = (id: number) => {
   };
 };
 
-export const fetchFilteredMovie = (currentPage = 1, year: number) => {
+export const fetchFilteredMovie = (
+  currentPage = 1,
+  year: number,
+  rating: number
+) => {
   return async (dispatch: appDispatch) => {
     try {
       dispatch(movieFilterAction.setLoading(true));
       const data = await fetchData(
-        `/discover/movie/?primary_release_year=${year}&page=${currentPage}&`
+        `/discover/movie/?primary_release_year=${year}&page=${currentPage}&vote_average.gte=${rating}&vote_average.lte=${
+          rating + 1
+        }&include_adult=false&with_origin_country=IN&`
       );
       if (currentPage === 1) {
         dispatch(movieFilterAction.setMovie(data.results));
