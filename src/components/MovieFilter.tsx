@@ -10,19 +10,19 @@ import { movieFilterAction } from "../store/movieFilterSlice";
 
 const MovieFilter = () => {
   const [year, setYear] = useState(Number(new Date().getFullYear()));
-  const [genre, setGenre] = useState("All");
+  const [genre, setGenre] = useState<number | null>(null);
   const [rating, setRating] = useState<number>(9);
+  const [country, setCountry] = useState("");
   const genres = useSelector((state: RootState) => state.movies.genres);
+  console.log({ genres });
   const { movies, currentPage, loading } = useSelector(
     (state: RootState) => state.movieFilter
   );
   const dispatch = useDispatch<appDispatch>();
 
   useEffect(() => {
-    dispatch(fetchFilteredMovie(currentPage, year, rating));
-  }, [year, currentPage, rating]);
-
-  console.log({ currentPage });
+    dispatch(fetchFilteredMovie(currentPage, year, rating, genre));
+  }, [year, currentPage, rating, genre, dispatch]);
 
   const handleOnChageYear = (e: React.ChangeEvent<HTMLInputElement>) => {
     setYear(Number(e.target.value));
@@ -30,6 +30,19 @@ const MovieFilter = () => {
   };
 
   const handleOnChageRating = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setRating(Number(e.target.value));
+    dispatch(movieFilterAction.resetPage());
+  };
+
+  const handleOnChageGenre = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setGenre(
+      genres.find((genre) => genre.name === e.target.value)?.id as number
+    );
+
+    dispatch(movieFilterAction.resetPage());
+  };
+
+  const handleOnChageCountry = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setRating(Number(e.target.value));
     dispatch(movieFilterAction.resetPage());
   };
@@ -44,7 +57,7 @@ const MovieFilter = () => {
               value: genre.name,
               title: genre.name.toUpperCase(),
             }))}
-            onChange={(e) => setGenre(e.target.value)}
+            onChange={handleOnChageGenre}
           />
         </div>
 
