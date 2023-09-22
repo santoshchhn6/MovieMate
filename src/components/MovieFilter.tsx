@@ -7,34 +7,40 @@ import { heading, heading3 } from "../style/style";
 import { fetchFilteredMovie } from "../store/api/movieApi";
 import MovieList from "./MovieList";
 import { movieFilterAction } from "../store/movieFilterSlice";
+import { fetchLanguage } from "../store/api/language";
 
 const MovieFilter = () => {
   const [year, setYear] = useState(Number(new Date().getFullYear()));
   const [genre, setGenre] = useState<number | null>(null);
   const [rating, setRating] = useState<number>(9);
-  const [country, setCountry] = useState("");
+  const [language, setLanguage] = useState("");
   const genres = useSelector((state: RootState) => state.movies.genres);
-  console.log({ genres });
+  const languges = useSelector((state: RootState) => state.language.languages);
+  console.log({ languges });
   const { movies, currentPage, loading } = useSelector(
     (state: RootState) => state.movieFilter
   );
   const dispatch = useDispatch<appDispatch>();
 
   useEffect(() => {
-    dispatch(fetchFilteredMovie(currentPage, year, rating, genre));
-  }, [year, currentPage, rating, genre, dispatch]);
+    dispatch(fetchLanguage());
+  }, [dispatch]);
 
-  const handleOnChageYear = (e: React.ChangeEvent<HTMLInputElement>) => {
+  useEffect(() => {
+    dispatch(fetchFilteredMovie(currentPage, year, rating, genre, language));
+  }, [year, currentPage, rating, genre, language, dispatch]);
+
+  const handleOnChangeYear = (e: React.ChangeEvent<HTMLInputElement>) => {
     setYear(Number(e.target.value));
     dispatch(movieFilterAction.resetPage());
   };
 
-  const handleOnChageRating = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleOnChangeRating = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setRating(Number(e.target.value));
     dispatch(movieFilterAction.resetPage());
   };
 
-  const handleOnChageGenre = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleOnChangeGenre = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setGenre(
       genres.find((genre) => genre.name === e.target.value)?.id as number
     );
@@ -42,8 +48,8 @@ const MovieFilter = () => {
     dispatch(movieFilterAction.resetPage());
   };
 
-  const handleOnChageCountry = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setRating(Number(e.target.value));
+  const handleOnChangeLanguage = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setLanguage(e.target.value);
     dispatch(movieFilterAction.resetPage());
   };
 
@@ -57,7 +63,7 @@ const MovieFilter = () => {
               value: genre.name,
               title: genre.name.toUpperCase(),
             }))}
-            onChange={handleOnChageGenre}
+            onChange={handleOnChangeGenre}
           />
         </div>
 
@@ -67,7 +73,7 @@ const MovieFilter = () => {
             type="number"
             placeholder="Year"
             value={String(year)}
-            onChange={handleOnChageYear}
+            onChange={handleOnChangeYear}
             className="w-[100px] rounded-lg text-[20px] text-center "
           />
         </div>
@@ -76,13 +82,19 @@ const MovieFilter = () => {
           <span className={heading3}>Rating : </span>
           <CustomSelect
             options={[9, 8, 7, 6, 5, 4, 3, 2, 1, 0]}
-            onChange={handleOnChageRating}
+            onChange={handleOnChangeRating}
           />
         </div>
 
         <div>
-          <span className={heading3}>Country : </span>
-          <CustomSelect options={[]} onChange={handleOnChageRating} />
+          <span className={heading3}>Langauge : </span>
+          <CustomSelect
+            options={languges.map((language) => ({
+              value: language.iso_639_1,
+              title: language.english_name,
+            }))}
+            onChange={handleOnChangeLanguage}
+          />
         </div>
 
         <button

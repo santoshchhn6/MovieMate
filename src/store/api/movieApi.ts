@@ -159,7 +159,8 @@ export const fetchFilteredMovie = (
   currentPage = 1,
   year: number,
   rating: number,
-  genre: number | null
+  genre: number | null,
+  language: string
 ) => {
   return async (dispatch: appDispatch) => {
     try {
@@ -167,7 +168,7 @@ export const fetchFilteredMovie = (
       const data = await fetchData(
         `/discover/movie/?primary_release_year=${year}&page=${currentPage}&vote_average.gte=${rating}&vote_average.lte=${
           rating ? rating + 1 : null
-        }&with_genres=${genre}&`
+        }&with_genres=${genre}&with_original_language=${language}&`
       );
       if (currentPage === 1) {
         dispatch(movieFilterAction.setMovie(data.results));

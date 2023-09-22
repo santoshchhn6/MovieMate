@@ -108,3 +108,9 @@ export interface OptionType {
   value: string;
   title: string;
 }
+
+export interface LanguageType {
+  iso_639_1: string;
+  english_name: string;
+  name: string;
+}

@@ -8,12 +8,14 @@ import movieDetailSlice from "./movieDetailSlice";
 import categorySlice from "./categorySlice";
 import personSlice from "./personSlice";
 import movieFilterSlice from "./movieFilterSlice";
+import languageSlice from "./languageSlice";
 
 const store = configureStore({
   reducer: {
     app: appSlice.reducer,
     personDetail: personSlice.reducer,
     videoPlayer: videoPlayerSlice.reducer,
+    language: languageSlice.reducer,
     movies: moviesSlice.reducer,
     movieDetail: movieDetailSlice.reducer,
     movieFilter: movieFilterSlice.reducer,

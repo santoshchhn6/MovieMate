@@ -28,11 +28,11 @@ const Banner = () => {
 
   useEffect(() => {
     dispatch(fetchMovieGenre());
-  }, [currentPage, dispatch]);
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(fetchTrendingMovie(currentPage));
-  }, [currentPage, dispatch]);
+  }, [currentPage,dispatch ]);
 
   useEffect(() => {
     const interval = setInterval(() => {
