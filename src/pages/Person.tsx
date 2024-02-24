@@ -1,103 +1,164 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { RootState, appDispatch } from "../store";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPerson, fetchPersonKnownForMovies } from "../store/api/personApi";
-import { content, heading, heading2, heading3, margin } from "../style/style";
-import { getAge, getFormatedDate } from "../utils/date";
+import {
+  content,
+  font1,
+  font2,
+  heading,
+  heading2,
+  heading3,
+  margin,
+  profile_picture,
+} from "../style/style";
+import { getAge } from "../utils/date";
 import ReadMore from "../components/Buttons/ReadMore";
 import MovieListWithSlider from "../components/MovieListWithSlider";
-
-type PersonInfoType = {
-  "Known for": string;
-  Popularity: number;
-  Birthday: string;
-  "Place of birth": string;
-  Deathday: string | null;
-  Gender: string;
-};
+import { MovieProps } from "../type";
 
 const Person = () => {
   const { id } = useParams();
   const dispatch: appDispatch = useDispatch();
-  const { person, knownFor } = useSelector(
+  const { person, knownForMovies } = useSelector(
     (state: RootState) => state.personDetail
   );
 
-  const gender = ["Not Specified", "Female", "Male"];
-  const [personInfo, setPersonInfo] = useState<PersonInfoType | null>(null);
+  const {
+    biography,
+    birthday,
+    deathday,
+    gender,
+    known_for_department,
+    name,
+    place_of_birth,
+    popularity,
+    profile_path,
+  } = person;
 
   useEffect(() => {
     dispatch(fetchPerson(Number(id)));
     dispatch(fetchPersonKnownForMovies(Number(id)));
   }, [dispatch, id]);
 
-  useEffect(() => {
-    setPersonInfo({
-      "Known for": person ? person?.known_for_department : "null",
-      Popularity: person ? person?.popularity : 0,
-      Birthday: getFormatedDate(person ? person?.birthday : "null"),
-      "Place of birth": person ? person?.place_of_birth : "null",
-      Deathday: person ? person?.deathday : null,
-      Gender: gender[person ? person?.gender : 0],
-    });
-  }, [person]);
-
-  console.log({ knownFor });
-
   return (
     <div className={margin}>
+      {/* Upper half */}
       <div className="flex my-5 gap-5">
-        <img
-          src={`https://image.tmdb.org/t/p/w300${person?.profile_path}`}
-          className={`w-[300px] h-[450px] rounded-lg object-contain bg-gray-900`}
+        <ProfilePicture
+          url={`https://image.tmdb.org/t/p/w300${profile_path}`}
         />
-        <div>
-          <p className={heading2}>{person?.name}</p>
-
-          <p className={`font-['OpenSans'] -mt-3 ${heading3}`}>
-            Age {getAge(person ? person?.birthday : "")} years
-          </p>
-
-          <p className={heading}>Biography</p>
-          <p className={`${content}  `}>
-            <ReadMore maxLength={800}>
-              {person ? person?.biography : ""}
-            </ReadMore>
-          </p>
-        </div>
+        <PersonBiography
+          name={name}
+          birthday={birthday}
+          biography={biography}
+        />
       </div>
-
-      {/* <div>
-        <p>Also known as</p>
-        {person?.also_known_as.map((name, i) => (
-          <p key={i}>{name}</p>
-        ))}
-      </div> */}
-
+      {/* Lower Half */}
       <div className="flex my-5 gap-5">
-        <div className=" min-w-[300px] ">
-          {personInfo
-            ? Object.entries(personInfo).map((e, i) => (
-                <div key={i} className="mb-3">
-                  {e[1] ? (
-                    <>
-                      <p className="text-[20px] font-['Poppin-sb']">{e[0]}</p>
-                      <p className="text-[20px] font-['Poppin']">{e[1]}</p>
-                    </>
-                  ) : null}
-                </div>
-              ))
-            : null}
-        </div>
-
-        <div className="w-[100%]">
-          <h2 className={`${heading} mt-0`}>Known For</h2>
-          <MovieListWithSlider data={knownFor} />
-        </div>
+        <PersonInfo
+          known_for_department={known_for_department}
+          popularity={popularity}
+          birthday={birthday}
+          place_of_birth={place_of_birth}
+          deathday={deathday}
+          gender={gender}
+        />
+        <PersonHasInMovies movies={knownForMovies} />
       </div>
     </div>
   );
 };
+
+function ProfilePicture({ url }: { url: string }) {
+  return <img src={url} className={profile_picture} />;
+}
+
+function PersonHasInMovies({ movies }: { movies: MovieProps[] }) {
+  return (
+    <div className="w-[100%]">
+      <h2 className={`${heading} mt-0`}>Known For Movies</h2>
+      <MovieListWithSlider data={movies} />
+    </div>
+  );
+}
+
+function PersonBiography(person: {
+  name: string;
+  birthday: string;
+  biography: string;
+}) {
+  return (
+    <div>
+      <p className={heading2}>{person?.name}</p>
+
+      <p className={`font-['OpenSans'] -mt-3 ${heading3}`}>
+        Age {getAge(person?.birthday)} years
+      </p>
+
+      <p className={heading}>Biography</p>
+      <p className={`${content}  `}>
+        <ReadMore maxLength={800}>{person?.biography}</ReadMore>
+      </p>
+    </div>
+  );
+}
+
+type PersonInfoProps = {
+  known_for_department: string;
+  popularity: number;
+  birthday: string;
+  place_of_birth: string;
+  deathday: string | null;
+  gender: number;
+};
+
+function PersonInfo({
+  known_for_department,
+  popularity,
+  birthday,
+  place_of_birth,
+  deathday,
+  gender,
+}: PersonInfoProps) {
+  return (
+    <div className=" min-w-[300px] ">
+      <div>
+        <p className={`${font1}`}>Known for </p>
+        <p className={`${font2}`}>{known_for_department}</p>
+      </div>
+      <div>
+        <p className={`${font1}`}>Popularity</p>
+        <p className={`${font2}`}>{popularity}</p>
+      </div>
+      <div>
+        <p className={`${font1}`}>Birthday</p>
+        <p className={`${font2}`}>{birthday}</p>
+      </div>
+      {deathday ? (
+        <div>
+          <p className={`${font1}`}>Death Day</p>
+          <p className={`${font2}`}>{deathday}</p>
+        </div>
+      ) : null}
+      <div>
+        <p className={`${font1}`}>Place of birth</p>
+        <p className={`${font2}`}>{place_of_birth}</p>
+      </div>
+      <RederGender gender_id={gender} />
+    </div>
+  );
+}
+
+function RederGender({ gender_id }: { gender_id: number }) {
+  const gender = ["Male", "Female", "unkown"];
+  return (
+    <div>
+      <p className={`${font1}`}>Gender</p>
+      <p className={`${font2}`}>{gender[gender_id]}</p>
+    </div>
+  );
+}
 
 export default Person;

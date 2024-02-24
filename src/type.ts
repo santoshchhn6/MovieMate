@@ -94,7 +94,7 @@ export interface PersonType {
   birthday: string;
   deathday: string | null;
   gender: number;
-  homepage: null;
+  homepage: string | null;
   id: number;
   imdb_id: string;
   known_for_department: string;
@@ -103,6 +103,15 @@ export interface PersonType {
   popularity: number;
   profile_path: number;
 }
+
+type PersonInfoType = {
+  "Known for": string;
+  Popularity: number;
+  Birthday: string;
+  "Place of birth": string;
+  Deathday: string | null;
+  Gender: string;
+};
 
 export interface OptionType {
   value: string;

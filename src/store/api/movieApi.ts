@@ -2,7 +2,7 @@ import { appDispatch } from "..";
 import { searchResultMovieAction } from "../searchMovieSlice";
 import { trendingMovieAction } from "../TrendingMovieSlice";
 import { setVideoId } from "../videoPlayerSlice";
-import { MovieCategoryProps } from "../../utils/type";
+import { MovieCategoryProps } from "../../type";
 import { categoryAction } from "../categorySlice";
 import { movieDetailAction } from "../movieDetailSlice";
 import { moviesAction } from "../moviesSlice";

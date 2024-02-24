@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { MovieListProps, MovieProps } from "../utils/type";
+import { MovieListProps, MovieProps } from "../type";
 
 const initialState: MovieListProps = {
   currentPage: 1,
@@ -16,7 +16,7 @@ const movieFilterSlice = createSlice({
       state.movies = action.payload;
     },
     addMovie(state, action: PayloadAction<MovieProps[]>) {
-      state.movies = [...state.movies,...action.payload];
+      state.movies = [...state.movies, ...action.payload];
     },
     nextPage(state) {
       state.currentPage = state.currentPage + 1;

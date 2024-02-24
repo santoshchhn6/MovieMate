@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import MovieList from "./MovieList";
 import { RootState, appDispatch } from "../store";
 import { useEffect, useState } from "react";
-import { MovieCategoryProps } from "../utils/type";
+import { MovieCategoryProps } from "../type";
 import { fetchMovie } from "../store/api/movieApi";
 import { categoryAction } from "../store/categorySlice";
 import CustomSelect from "./CustomComponent/CustomSelect";
@@ -48,11 +48,11 @@ const MovieCategories = () => {
 
   return (
     <div className={`mt-5`}>
-      <CustomSelect
+      {/* <CustomSelect
         options={categoryOptions}
         onChange={handleOnChange}
         className="w-[240px]"
-      />
+      /> */}
       <MovieList movies={movies} nextPage={nextPage} loading={loading} />
     </div>
   );

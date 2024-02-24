@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { VideoProps } from "../utils/type";
+import { VideoProps } from "../type";
 import { BsPlayCircle } from "react-icons/bs";
 import { appDispatch } from "../store";
 import { setVideoId, showVideoPlayer } from "../store/videoPlayerSlice";

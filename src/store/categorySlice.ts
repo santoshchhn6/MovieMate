@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { MovieCategoryProps, MovieListProps, MovieProps } from "../utils/type";
+import { MovieCategoryProps, MovieListProps, MovieProps } from "../type";
 
 type MoviesState = MovieListProps & {
   category: MovieCategoryProps;

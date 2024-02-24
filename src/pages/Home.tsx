@@ -8,7 +8,7 @@ const Home = () => {
     <>
       <Banner />
       <div className={margin}>
-        <MovieFilter />
+        {/* <MovieFilter /> */}
         <MovieCategories />
       </div>
     </>

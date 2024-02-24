@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { GenreProps} from "../utils/type";
+import { GenreProps } from "../type";
 
 type MoviesState = {
   genres: GenreProps[];
@@ -7,7 +7,6 @@ type MoviesState = {
 
 const initialState: MoviesState = {
   genres: [],
-
 };
 
 const moviesSlice = createSlice({
@@ -17,7 +16,6 @@ const moviesSlice = createSlice({
     addGenres(state, action: PayloadAction<GenreProps[]>) {
       state.genres = action.payload;
     },
-    
   },
 });
 

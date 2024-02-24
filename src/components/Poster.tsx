@@ -19,12 +19,13 @@ const Poster = ({
   width,
   height,
   release_date,
+  vote_average,
 }: Props) => {
   const { scrollToTop } = useScrollToTop();
   return (
     <Link
       to={`/movie/${id}`}
-      className="relative justify-self-center rounded-xl overflow-hidden hover:border-2 hover:border-white"
+      className="relative justify-self-center rounded-xl overflow-hidden hover:scale-110 ease-in-out duration-300"
       style={{
         width: `${width}px`,
         height: `${height}px`,
@@ -41,7 +42,11 @@ const Poster = ({
         }}
       />
 
-      <div
+      <div className="absolute bottom-0 left-0 bg-white rounded-full p-2 border-4 border-blue-600">
+        <span>{vote_average ? vote_average.toFixed(1) : null}</span>
+      </div>
+
+      {/* <div
         className={`absolute p-2 flex flex-col justify-end  bg-slate-950 opacity-0 hover:opacity-80 text-center cursor-pointer`}
         style={{
           minWidth: `${width}px`,
@@ -50,7 +55,7 @@ const Poster = ({
       >
         <p className="text-[20px] ">{title}</p>
         <p className="text-[20px] ">{release_date}</p>
-      </div>
+      </div> */}
     </Link>
   );
 };

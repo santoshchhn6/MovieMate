@@ -5,7 +5,7 @@ import {
   MovieProps,
   ReviewProps,
   VideoProps,
-} from "../utils/type";
+} from "../type";
 
 type MovieState = {
   credits: CreditsProps;

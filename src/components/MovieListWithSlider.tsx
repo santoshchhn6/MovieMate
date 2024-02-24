@@ -1,4 +1,4 @@
-import { MovieProps } from "../utils/type";
+import { MovieProps } from "../type";
 import Poster from "./Poster";
 import Slider from "./Slider";
 

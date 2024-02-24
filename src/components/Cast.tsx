@@ -1,5 +1,5 @@
 import ImageComponent from "./ImageComponent";
-import { CastProps } from "../utils/type";
+import { CastProps } from "../type";
 import { Link } from "react-router-dom";
 
 type Props = {

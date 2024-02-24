@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { LanguageType } from "../utils/type";
+import { LanguageType } from "../type";
 
 type LanguageState = {
   languages: LanguageType[];
 };
 
 const initialState: LanguageState = {
-  languages :[],
+  languages: [],
 };
 
 const languageSlice = createSlice({

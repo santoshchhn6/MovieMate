@@ -8,7 +8,7 @@ import Rating from "./Rating";
 import ReadMore from "./Buttons/ReadMore";
 import ImageComponent from "./ImageComponent";
 import ButtonExit from "./Buttons/ButtonExit";
-import { ReviewProps } from "../utils/type";
+import { ReviewProps } from "../type";
 
 const Reviews = () => {
   const [showAllReviews, setShowAllReviews] = useState<boolean>(false);
