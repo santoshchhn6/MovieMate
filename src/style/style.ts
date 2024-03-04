@@ -6,6 +6,9 @@ export const heading3 = "my-5 font-['Poppin'] text-[24px]";
 export const font1 = "text-[20px] font-['Poppin-sb']";
 export const font2 = "text-[20px] font-['Poppin']";
 
+//Button
+export const button1 =
+  "bg-blue-600 px-2 py-1 rounded-md font-['OpenSans-b'] flex gap-1 items-center";
 //image
 export const profile_picture =
   "w-[300px] h-[450px] rounded-lg object-contain bg-gray-900";

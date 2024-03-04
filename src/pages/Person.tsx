@@ -136,12 +136,12 @@ function PersonInfo({
         <p className={`${font1}`}>Birthday</p>
         <p className={`${font2}`}>{birthday}</p>
       </div>
-      {deathday ? (
+      {deathday && (
         <div>
           <p className={`${font1}`}>Death Day</p>
           <p className={`${font2}`}>{deathday}</p>
         </div>
-      ) : null}
+      )}
       <div>
         <p className={`${font1}`}>Place of birth</p>
         <p className={`${font2}`}>{place_of_birth}</p>
