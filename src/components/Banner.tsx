@@ -15,8 +15,17 @@ import useWindowSize from "../utils/hooks/useWindowSize";
 import loadingImg from "../assets/loading.gif";
 import YoutubePlayer from "./YoutubePlayer";
 import { showVideoPlayer } from "../store/videoPlayerSlice";
-import { content, heading2, margin } from "../style/style";
+import {
+  button1,
+  content,
+  font2,
+  heading1,
+  heading2,
+  margin,
+} from "../style/style";
 import { MovieProps } from "../type";
+import MovieGenre from "./MovieGenre";
+import ReadMore from "./Buttons/ReadMore";
 
 const Banner = () => {
   const { movies, loading, currentPage } = useSelector(
@@ -42,7 +51,7 @@ const Banner = () => {
   }
 
   return (
-    <div className=" h-[600px] overflow-hidden ">
+    <div className=" h-[60vh] overflow-hidden ">
       <ScrollingBanner movies={movies} />
       <YoutubePlayer />
     </div>
@@ -78,7 +87,7 @@ function MoviePoster({ width, movie }: { width: number; movie: MovieProps }) {
   return (
     <div
       style={{ minWidth: `${width}px`, height: "100%" }}
-      className="relative "
+      className="relative"
     >
       <img
         src={`https://image.tmdb.org/t/p/original/${movie?.backdrop_path}`}
@@ -92,17 +101,25 @@ function MoviePoster({ width, movie }: { width: number; movie: MovieProps }) {
 }
 
 function MovieInfo({ movie }: { movie: MovieProps }) {
+  const { genres } = useSelector((state: RootState) => state.genre);
+  const movie_genre = movie?.genre_ids.map((id) =>
+    genres.find((genre) => genre.id === id)
+  );
   return (
-    <div className={`absolute  h-[100%] ${margin}`}>
-      <div className="w-[40%] mt-[40px]">
-        <h1 className={heading2}>{movie.title.toUpperCase()}</h1>
+    <div className={`absolute  ${margin}`}>
+      <div className="w-[40%] mt-[1rem]">
+        <h1 className={heading1}>{movie.title.toUpperCase()}</h1>
         <Rating rating={movie.vote_average} />
-        <p className="text-[20px] my-3 font-['Poppin']">
+        <p className={font2}>
           {getFormatedDate(movie ? movie?.release_date : "")}
         </p>
-        <MovieGenre movie={movie} />
+        <MovieGenre genres={movie_genre} />
 
-        <p className={content}>{movie.overview}</p>
+        <ReadMore
+          children={movie.overview}
+          maxLength={150}
+          className={content}
+        />
         <div className="flex gap-3">
           <TrailerButton id={movie.id} />
           <MoreAboutButton id={movie.id} />
@@ -112,31 +129,11 @@ function MovieInfo({ movie }: { movie: MovieProps }) {
   );
 }
 
-function MovieGenre({ movie }: { movie: MovieProps }) {
-  const genres = useSelector((state: RootState) => state.movies.genres);
-  return (
-    <div className="flex gap-3 text-[18px] font-['SansPro-sb'] my-3 cursor-pointer">
-      {movie.genre_ids?.map((id, index) => (
-        <span
-          key={index}
-          className="border border-blue-600 px-3 rounded-full bg-black/90"
-        >
-          {
-            genres.find(
-              (genre: { id: number; name: string }) => genre.id === id
-            )?.name
-          }
-        </span>
-      ))}
-    </div>
-  );
-}
-
 function TrailerButton({ id }: { id: number }) {
   const dispatch = useDispatch<appDispatch>();
   return (
     <button
-      className="bg-blue-600 px-2 py-1 rounded-md font-['OpenSans-b'] flex gap-1 items-center"
+      className={button1}
       onClick={() => {
         dispatch(fetchMovieTrailer(id));
         dispatch(showVideoPlayer());
@@ -156,10 +153,7 @@ function BackgroundTint() {
 
 function MoreAboutButton({ id }: { id: number }) {
   return (
-    <Link
-      to={`/movie/${id}`}
-      className="bg-blue-600 px-2 py-1 rounded-md font-['OpenSans-b'] flex gap-1 items-center"
-    >
+    <Link to={`/movie/${id}`} className={button1}>
       More about
     </Link>
   );

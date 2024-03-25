@@ -3,9 +3,14 @@ import { ReactNode, useState } from "react";
 interface ReadMoreProps {
   maxLength: number;
   children: ReactNode;
+  className?: string;
 }
 
-const ReadMore: React.FC<ReadMoreProps> = ({ children, maxLength }) => {
+const ReadMore: React.FC<ReadMoreProps> = ({
+  children,
+  maxLength,
+  className,
+}) => {
   const text = children as string;
   const [isReadMore, setIsReadMore] = useState<boolean>(true);
 
@@ -16,7 +21,7 @@ const ReadMore: React.FC<ReadMoreProps> = ({ children, maxLength }) => {
   return (
     <>
       {text.length >= maxLength ? (
-        <p>
+        <p className={`my-[1rem] ${className}`}>
           {isReadMore ? `${text.slice(0, maxLength)}...` : text}
           <span
             onClick={toggleReadMore}
@@ -26,7 +31,7 @@ const ReadMore: React.FC<ReadMoreProps> = ({ children, maxLength }) => {
           </span>
         </p>
       ) : (
-        <p>{text}</p>
+        <p className={className}>{text}</p>
       )}
     </>
   );

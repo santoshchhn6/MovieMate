@@ -5,9 +5,9 @@ import { setVideoId } from "../videoPlayerSlice";
 import { MovieCategoryProps } from "../../type";
 import { categoryAction } from "../categorySlice";
 import { movieDetailAction } from "../movieDetailSlice";
-import { moviesAction } from "../moviesSlice";
 import { fetchData } from "./baseApi";
 import { movieFilterAction } from "../movieFilterSlice";
+import { genreAction } from "../genreSlice";
 
 export const fetchTrendingMovie = (currentPage = 1) => {
   return async (dispatch: appDispatch) => {
@@ -133,7 +133,7 @@ export const fetchMovieGenre = () => {
   return async (dispatch: appDispatch) => {
     try {
       const data = await fetchData("/genre/movie/list?");
-      dispatch(moviesAction.addGenres(data.genres));
+      dispatch(genreAction.addGenres(data.genres));
     } catch (err) {
       console.log(err);
     }

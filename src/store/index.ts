@@ -1,7 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import appSlice from "./app_slice";
 import searchResultMovieSlice from "./searchMovieSlice";
-import moviesSlice from "./moviesSlice";
 import trendingMovieSlice from "./TrendingMovieSlice";
 import videoPlayerSlice from "./videoPlayerSlice";
 import movieDetailSlice from "./movieDetailSlice";
@@ -9,6 +8,7 @@ import categorySlice from "./categorySlice";
 import personSlice from "./personSlice";
 import movieFilterSlice from "./movieFilterSlice";
 import languageSlice from "./languageSlice";
+import genreSlice from "./genreSlice";
 
 const store = configureStore({
   reducer: {
@@ -16,7 +16,7 @@ const store = configureStore({
     personDetail: personSlice.reducer,
     videoPlayer: videoPlayerSlice.reducer,
     language: languageSlice.reducer,
-    movies: moviesSlice.reducer,
+    genre: genreSlice.reducer,
     movieDetail: movieDetailSlice.reducer,
     movieFilter: movieFilterSlice.reducer,
     trending: trendingMovieSlice.reducer,

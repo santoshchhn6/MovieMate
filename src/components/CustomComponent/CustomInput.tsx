@@ -18,7 +18,7 @@ const CustomInput = ({
       value={value}
       onChange={onChange}
       placeholder={placeholder}
-      className={` bg-black/50 border border-blue-600  rounded-full  text-[16px] font-['Poppin'] px-3 py-1 outline-none ${className}`}
+      className={` bg-black/50 border border-blue-600 rounded-full font-['Poppin'] text-[1em]  px-[2em] py-[1em] outline-none ${className}`}
     />
   );
 };

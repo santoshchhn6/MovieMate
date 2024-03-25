@@ -25,6 +25,7 @@ const MovieList = ({ movies, nextPage, loading }: Props) => {
           height={300}
           poster_url={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
           release_date={movie.release_date}
+          vote_average={movie.vote_average}
         />
       ))}
       <div

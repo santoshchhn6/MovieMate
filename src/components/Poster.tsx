@@ -42,9 +42,13 @@ const Poster = ({
         }}
       />
 
-      <div className="absolute bottom-0 left-0 bg-white rounded-full p-2 border-4 border-blue-600">
-        <span>{vote_average ? vote_average.toFixed(1) : null}</span>
-      </div>
+      {vote_average && (
+        <div className="absolute bottom-0 left-0 bg-blue-600/80 rounded-full p-2 border-4 border-white">
+          <span className="text-[20px] font-['Poppin-sb']">
+            {vote_average.toFixed(1)}
+          </span>
+        </div>
+      )}
 
       {/* <div
         className={`absolute p-2 flex flex-col justify-end  bg-slate-950 opacity-0 hover:opacity-80 text-center cursor-pointer`}

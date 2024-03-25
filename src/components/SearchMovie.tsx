@@ -23,14 +23,14 @@ const SearchMovie = () => {
   return (
     <form
       onSubmit={handleSearch}
-      className=" w-[300px] min-w-[300px] px-2 flex "
+      className="  w-[35em] min-w-[15em] p-[2em] flex "
     >
       <CustomInput
         type="text"
         value={input}
         onChange={(e) => setInput(e.target.value)}
         placeholder="Search Movies..."
-        className="w-[100%] pr-10 -mr-8"
+        className="w-[100%] text-[1em] py-[0.5em] px-[1em] -mr-[2em]"
       />
       <button type="submit" className="mr-2">
         <BsSearch />

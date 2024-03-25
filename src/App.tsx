@@ -16,6 +16,7 @@ function App() {
           <Route path="/search" element={<SearchPage />} />
           <Route path="/movie/:id" element={<Movie />} />
           <Route path="/person/:id" element={<Person />} />
+          <Route path="*" element={<h1>Not Page Found</h1>} />
         </Routes>
         <Footer />
       </div>

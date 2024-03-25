@@ -11,7 +11,7 @@ type MovieState = {
   credits: CreditsProps;
   reviews: ReviewProps[];
   videos: VideoProps[];
-  details: MovieInfoProps | null;
+  details: MovieInfoProps;
   recommendations: MovieProps[];
 };
 
@@ -22,7 +22,21 @@ const initialState: MovieState = {
   },
   reviews: [],
   videos: [],
-  details: null,
+  details: {
+    id: 0,
+    title: "",
+    genres: [],
+    vote_average: 0,
+    release_date: "",
+    budget: 0,
+    revenue: 0,
+    runtime: 0,
+    poster_path: "",
+    backdrop_path: "",
+    overview: "",
+    adult: true,
+    tagline: "",
+  },
   recommendations: [],
 };
 

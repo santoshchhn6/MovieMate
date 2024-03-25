@@ -4,7 +4,8 @@ import Rating from "./Rating";
 import { getFormatedDate, getFormatedTime } from "../utils/date";
 import { BsFillPlayFill } from "react-icons/bs";
 import { setVideoId, showVideoPlayer } from "../store/videoPlayerSlice";
-import { content, heading2, heading3, margin } from "../style/style";
+import { content, heading1, heading2, heading3, margin } from "../style/style";
+import MovieGenre from "./MovieGenre";
 
 const MovieBanner = () => {
   const {
@@ -53,7 +54,7 @@ const MovieBanner = () => {
           </div>
 
           <div>
-            <h1 className={heading2}>{movie?.title.toUpperCase()}</h1>
+            <h1 className={heading1}>{movie?.title.toUpperCase()}</h1>
 
             <Rating rating={movie ? movie.vote_average : 0} />
 
@@ -65,16 +66,7 @@ const MovieBanner = () => {
               <span className="font-semibold">{movie?.adult ? "A" : "UA"}</span>
             </div>
 
-            <div className="flex gap-3  text-[20px] font-['SansPro-sb'] mb-5 cursor-pointer">
-              {movie?.genres.map((e) => (
-                <span
-                  key={e.id}
-                  className=" bg-black/50 border-2   border-blue-600 px-3    rounded-full "
-                >
-                  {e.name}
-                </span>
-              ))}
-            </div>
+            <MovieGenre genres={movie.genres} />
 
             <p className={content}>{movie?.overview}</p>
 
@@ -83,12 +75,12 @@ const MovieBanner = () => {
                 <p className="font-['Poppin-sb'] text-[24px]">Director</p>
                 <p className="font-['Poppin'] text-[24px]">{director}</p>
               </div>
-              {writer ? (
+              {writer && (
                 <div>
                   <p className="font-['Poppin-sb'] text-[24px]">Writer</p>
                   <p className="font-['Poppin'] text-[24px]">{writer}</p>
                 </div>
-              ) : null}
+              )}
             </div>
 
             {/* {movie?.budget ? (
