@@ -9,7 +9,7 @@ import Person from "./pages/Person";
 function App() {
   return (
     <Router>
-      <div className=" bg-gray-950 text-white">
+      <div className=" bg-gray-800 text-white">
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />

@@ -25,7 +25,7 @@ const Poster = ({
   return (
     <Link
       to={`/movie/${id}`}
-      className="relative justify-self-center rounded-xl overflow-hidden hover:scale-110 ease-in-out duration-300"
+      className="relative shadow-md justify-self-center rounded-sm overflow-hidden hover:scale-105 ease-in-out duration-300"
       style={{
         width: `${width}px`,
         height: `${height}px`,
@@ -43,8 +43,8 @@ const Poster = ({
       />
 
       {vote_average && (
-        <div className="absolute bottom-0 left-0 bg-blue-600/80 rounded-full p-2 border-4 border-white">
-          <span className="text-[20px] font-['Poppin-sb']">
+        <div className="absolute bottom-0 left-0 bg-blue-600 shadow-sm rounded-full rounded-bl-sm p-2 ">
+          <span className="text-[20px] font-['Poppin']">
             {vote_average.toFixed(1)}
           </span>
         </div>

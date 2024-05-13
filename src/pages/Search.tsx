@@ -19,8 +19,8 @@ const SearchPage = () => {
     dispatch(searchResultMovieAction.nextPage());
   };
   return (
-    <div className={`min-h-[100vh] border border-gray-950 ${margin}`}>
-      <h1 className={`${heading} mb-0`}>Search Result</h1>
+    <div className={`min-h-[100vh] pt-24  ${margin}`}>
+      {/* <h1 className={`${heading} my-0 mb-0`}>Search Result</h1> */}
       <MovieList
         movies={searchResult.movies}
         nextPage={handleNextPage}

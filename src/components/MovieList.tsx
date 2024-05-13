@@ -15,8 +15,9 @@ const MovieList = ({ movies, nextPage, loading }: Props) => {
   );
 
   const renderMoviePosters = () => (
-    <div className="w-[100%] my-5 grid gap-5 grid-cols-[repeat(auto-fit,minmax(200px,1fr))] ease-in-out duration-500">
-      {movies?.map((movie, i) => (
+    // grid-cols-[repeat(auto-fit,minmax(200px,1fr))]
+    <div className="w-fitd my-5 grid gap-5 grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 ease-in-out duration-500 ">
+      {movies?.map((movie) => (
         <Poster
           key={movie.id}
           id={movie.id}
@@ -30,7 +31,7 @@ const MovieList = ({ movies, nextPage, loading }: Props) => {
       ))}
       <div
         onClick={nextPage}
-        className="w-[200px] h-[300px] bg-gray-900 border text-blue-600 border-blue-600 hover:border-white hover:text-white cursor-pointer rounded-xl flex justify-center items-center text-[30px] font-['SansPro-sb']"
+        className="w-[200px] h-[300px] bg-gray-900  text-blue-600 cursor-pointer rounded-sm flex justify-center items-center text-[30px] font-['SansPro-sb'] hover:scale-105 ease-in-out duration-300"
       >
         {loading ? renderSpinner() : <span>More</span>}
       </div>

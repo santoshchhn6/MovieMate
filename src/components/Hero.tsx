@@ -17,17 +17,19 @@ import YoutubePlayer from "./YoutubePlayer";
 import { showVideoPlayer } from "../store/videoPlayerSlice";
 import {
   button1,
+  button2,
   content,
   font2,
   heading1,
   heading2,
   margin,
+  padding,
 } from "../style/style";
 import { MovieProps } from "../type";
 import MovieGenre from "./MovieGenre";
 import ReadMore from "./Buttons/ReadMore";
 
-const Banner = () => {
+const Hero = () => {
   const { movies, loading, currentPage } = useSelector(
     (state: RootState) => state.trending
   );
@@ -51,7 +53,7 @@ const Banner = () => {
   }
 
   return (
-    <div className=" h-[60vh] overflow-hidden ">
+    <div className=" h-[70vh] overflow-hidden ">
       <ScrollingBanner movies={movies} />
       <YoutubePlayer />
     </div>
@@ -106,24 +108,27 @@ function MovieInfo({ movie }: { movie: MovieProps }) {
     genres.find((genre) => genre.id === id)
   );
   return (
-    <div className={`absolute  ${margin}`}>
-      <div className="w-[40%] mt-[1rem]">
-        <h1 className={heading1}>{movie.title.toUpperCase()}</h1>
-        <Rating rating={movie.vote_average} />
-        <p className={font2}>
-          {getFormatedDate(movie ? movie?.release_date : "")}
-        </p>
-        <MovieGenre genres={movie_genre} />
-
-        <ReadMore
-          children={movie.overview}
-          maxLength={150}
-          className={content}
-        />
-        <div className="flex gap-3">
-          <TrailerButton id={movie.id} />
-          <MoreAboutButton id={movie.id} />
+    <div
+      className={`absolute w-full bg-gradient-to-t from-black via-black/50 to-transparent bottom-0 flex justify-center sm:justify-between flex-wrap gap-5 items-end  py-6 mt-[4rem] ${padding}`}
+    >
+      <div>
+        <h1 className={`text-3xl mb-3 font-['Poppin-sb']`}>
+          {movie.title.toUpperCase()}
+        </h1>
+        <div className="flex flex-col sm:flex-row items-center gap-3">
+          <MovieGenre genres={movie_genre} />
+          <span className="hidden sm:inline">|</span>
+          <p className={font2}>
+            {getFormatedDate(movie ? movie?.release_date : "")}
+          </p>
+          <span className="hidden sm:inline">|</span>
+          <Rating rating={movie.vote_average} />
         </div>
+      </div>
+
+      <div className="flex gap-3 ">
+        <TrailerButton id={movie.id} />
+        <MoreAboutButton id={movie.id} />
       </div>
     </div>
   );
@@ -147,16 +152,19 @@ function TrailerButton({ id }: { id: number }) {
 }
 function BackgroundTint() {
   return (
-    <div className="absolute w-[100%] h-[100%] bg-gradient-to-r from-black  via-black/0 via-50%  to-black " />
+    <div className="absolute w-[100%] h-[100%] flex ">
+      <div className="w-1/2 h-full  bg-gradient-to-r from-black  via-transparent to-transparent"></div>
+      <div className="w-1/2 h-full  bg-gradient-to-r from-transparent  via-transparent to-black"></div>
+    </div>
   );
 }
 
 function MoreAboutButton({ id }: { id: number }) {
   return (
-    <Link to={`/movie/${id}`} className={button1}>
+    <Link to={`/movie/${id}`} className={button2}>
       More about
     </Link>
   );
 }
 
-export default Banner;
+export default Hero;

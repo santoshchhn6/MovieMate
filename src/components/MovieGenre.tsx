@@ -1,14 +1,14 @@
 import { GenreProps } from "../type";
 
-const MovieGenre = ({ genres }: { genres: GenreProps[] }) => {
+const MovieGenre = ({ genres }: { genres: (GenreProps | undefined)[] }) => {
   return (
-    <div className="flex flex-wrap gap-3  font-['SansPro-sb'] cursor-pointer">
+    <div className="flex flex-wrap gap-3  font-['SansPro'] cursor-pointer">
       {genres?.map((genre) => (
         <span
-          key={genre.id}
-          className="bg-black/80 border-2 border-blue-600 text-[1em]  px-[1em]  hover:text-blue-600 rounded-full"
+          key={genre?.id}
+          className="bg-blue-500/50 text-[1em]  px-3 py-0.5  rounded-xl hover:bg-blue-500 ease-out duration-100"
         >
-          {genre.name}
+          {genre?.name}
         </span>
       ))}
     </div>

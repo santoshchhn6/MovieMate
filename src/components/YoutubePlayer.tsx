@@ -19,7 +19,7 @@ const YoutubePlayer = () => {
   return (
     <>
       {videoId && show_video_player ? (
-        <div className="fixed  w-[960px] h-[540px]  z-20 top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
+        <div className="fixed  w-[800px] h-[450px]  z-20 top-[50%] left-[50%] translate-x-[-50%] translate-y-[-45%]">
           <div className="flex justify-between items-center w-[100%] h-[40px]  bg-gray-950">
             <span className="ml-5 text-[20px]">Trailer</span>
 
@@ -28,8 +28,8 @@ const YoutubePlayer = () => {
           <YouTube
             videoId={videoId}
             opts={{
-              width: "960",
-              height: "540",
+              width: "800",
+              height: "450",
               playerVars: {
                 autoplay: 0,
               },

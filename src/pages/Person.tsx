@@ -43,7 +43,7 @@ const Person = () => {
   }, [dispatch, id]);
 
   return (
-    <div className={margin}>
+    <div className={`${margin} pt-24`}>
       {/* Upper half */}
       <div className="flex my-5 gap-5">
         <ProfilePicture
